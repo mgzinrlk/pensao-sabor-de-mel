@@ -246,13 +246,7 @@ footer{
 
 <div class="container">
 
-    <div class="section-title">
-        🍴 COMIDAS
-    </div>
-
-    <div id="comidas"></div>
-
-    <div class="section-title">
+        <div class="section-title">
         🥤 BEBIDAS
     </div>
 
@@ -466,18 +460,7 @@ footer{
    DADOS
 ========================================================= */
 
-let comidas = JSON.parse(localStorage.getItem("comidas")) || [
-    {
-        id: Date.now() + 1,
-        nome: "Quentinha Grande",
-        preco: 20
-    },
-    {
-        id: Date.now() + 2,
-        nome: "Quentinha Pequena",
-        preco: 15
-    }
-];
+let comidas = JSON.parse(localStorage.getItem("comidas")) || [];
 
 let bebidas = JSON.parse(localStorage.getItem("bebidas")) || [
     {id:1,nome:"Coca Cola 2LT",preco:15},
@@ -1085,4 +1068,18 @@ function adicionarComida(){
 
     renderAdmin();
 
-    alert("Comida adicionada!"
+    alert("Comida adicionada!");
+
+}
+
+
+/* =========================================================
+   ADMIN - BEBIDAS
+========================================================= */
+
+function adicionarBebida(){
+
+    const nome =
+        document.getElementById(
+            "novaBebidaNome"
+        ).value.tr
