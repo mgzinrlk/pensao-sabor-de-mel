@@ -2,1024 +2,1074 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Cardápio</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Cardápio da Loja</title>
 
 <style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:Arial,Helvetica,sans-serif;
-}
-
+*{box-sizing:border-box}
 body{
-    background:#fff8ed;
-    color:#222;
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#fff8e8;
+  color:#222;
 }
-
-/* ================= HEADER ================= */
-
 header{
-    background:linear-gradient(135deg,#d50000,#ffb800);
-    color:white;
-    padding:30px 18px;
-    text-align:center;
-    box-shadow:0 3px 12px rgba(0,0,0,.15);
+  background:#d90000;
+  color:white;
+  padding:18px 15px;
+  text-align:center;
+  box-shadow:0 2px 8px #999;
 }
-
-header h1{
-    font-size:30px;
-    font-weight:900;
-}
-
-header p{
-    margin-top:7px;
-    font-size:15px;
-}
-
-/* ================= CONTAINER ================= */
-
-.container{
-    width:100%;
-    max-width:650px;
-    margin:auto;
-    padding:18px;
-}
-
-/* ================= TITULOS ================= */
-
-.titulo{
-    text-align:center;
-    color:#c90000;
-    font-size:27px;
-    font-weight:900;
-    margin:10px 0 20px;
-}
-
-.subtitulo{
-    color:#c90000;
-    font-size:21px;
-    font-weight:900;
-    margin-bottom:15px;
-}
-
-/* ================= CARD ================= */
-
+header h1{margin:0;font-size:25px}
+header p{margin:5px 0 0}
+.container{max-width:650px;margin:auto;padding:15px}
+h2{color:#d90000}
 .card{
-    background:white;
-    border-radius:18px;
-    padding:20px;
-    margin-bottom:20px;
-    box-shadow:0 4px 18px rgba(0,0,0,.10);
-    border:1px solid #eee;
+  background:white;
+  border-radius:14px;
+  padding:15px;
+  margin:12px 0;
+  box-shadow:0 2px 8px #ddd;
 }
-
-/* ================= CARDAPIO ================= */
-
-.cardapio-titulo{
-    color:#c90000;
-    font-size:23px;
-    font-weight:900;
-    margin-bottom:12px;
+.item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
 }
-
-.cardapio-texto{
-    white-space:pre-line;
-    line-height:1.7;
-    font-size:17px;
+.item-info{flex:1}
+.item-info strong{font-size:18px}
+.price{
+  color:#d90000;
+  font-weight:bold;
+  margin-top:5px;
 }
-
-/* ================= QUENTINHAS ================= */
-
-.opcao{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    border:2px solid #eee;
-    border-radius:14px;
-    padding:16px;
-    margin-top:12px;
-    cursor:pointer;
-    background:#fff;
-    transition:.2s;
-}
-
-.opcao:hover{
-    border-color:#d50000;
-    transform:translateY(-1px);
-}
-
-.opcao input{
-    width:20px;
-    height:20px;
-    accent-color:#d50000;
-}
-
-.opcao label{
-    flex:1;
-    font-size:17px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.preco{
-    color:#d50000;
-    font-weight:900;
-}
-
-/* ================= BEBIDAS ================= */
-
-.bebida{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    padding:14px 0;
-    border-bottom:1px solid #eee;
-}
-
-.bebida:last-child{
-    border-bottom:none;
-}
-
-.bebida-info{
-    flex:1;
-}
-
-.bebida-nome{
-    font-size:15px;
-    font-weight:bold;
-}
-
-.bebida-preco{
-    color:#d50000;
-    font-weight:900;
-    margin-top:4px;
-}
-
-.bebida-qtd{
-    display:flex;
-    align-items:center;
-    gap:6px;
-}
-
-.bebida-qtd button{
-    width:32px;
-    height:32px;
-    padding:0;
-    margin:0;
-    border-radius:8px;
-    background:#d50000;
-    color:white;
-    font-size:20px;
-}
-
-.bebida-qtd span{
-    min-width:25px;
-    text-align:center;
-    font-weight:bold;
-}
-
-/* ================= BOTÕES ================= */
-
 button{
-    border:none;
-    border-radius:13px;
-    padding:15px;
-    width:100%;
-    font-size:17px;
-    font-weight:900;
-    cursor:pointer;
+  border:0;
+  border-radius:10px;
+  padding:12px 16px;
+  font-weight:bold;
+  cursor:pointer;
 }
-
-.btn-vermelho{
-    background:#d50000;
-    color:white;
+.btn{
+  background:#ffd400;
+  color:#111;
 }
-
-.btn-amarelo{
-    background:#ffbf00;
-    color:#111;
+.btn-red{
+  background:#d90000;
+  color:white;
 }
-
-.btn-vermelho:hover{
-    background:#b80000;
+.btn-green{
+  background:#159447;
+  color:white;
 }
-
-/* ================= PEDIDO ================= */
-
-#pedido,
-#admin{
-    display:none;
+input,select,textarea{
+  width:100%;
+  padding:13px;
+  border:1px solid #ccc;
+  border-radius:9px;
+  margin:6px 0 12px;
+  font-size:16px;
 }
-
-.resumo{
-    background:#fff2c7;
-    border-left:5px solid #d50000;
-    border-radius:10px;
-    padding:15px;
-    margin-bottom:20px;
-    line-height:1.7;
-}
-
+.hidden{display:none!important}
+.center{text-align:center}
 .total{
-    background:#d50000;
-    color:white;
-    border-radius:12px;
-    padding:16px;
-    text-align:center;
-    font-size:22px;
-    font-weight:900;
-    margin:18px 0;
+  font-size:22px;
+  font-weight:bold;
+  color:#d90000;
+  text-align:center;
+  margin:15px 0;
 }
-
-/* ================= FORMULARIO ================= */
-
-label{
-    display:block;
-    font-weight:bold;
-    margin-top:12px;
+.qty{
+  display:flex;
+  align-items:center;
+  gap:8px;
 }
-
-input,
-textarea,
-select{
-    width:100%;
-    padding:14px;
-    margin-top:7px;
-    border:1px solid #ccc;
-    border-radius:10px;
-    font-size:16px;
-    background:white;
+.qty button{
+  padding:6px 11px;
+  background:#eee;
 }
-
-textarea{
-    min-height:90px;
-    resize:vertical;
+.qty span{
+  min-width:25px;
+  text-align:center;
+  font-weight:bold;
 }
-
-/* ================= ADMIN ================= */
-
-.admin-login{
-    background:white;
-    max-width:420px;
-    margin:30px auto;
-    padding:25px;
-    border-radius:18px;
-    box-shadow:0 4px 18px rgba(0,0,0,.12);
-}
-
-.admin-login h2{
-    text-align:center;
-    margin-bottom:20px;
-}
-
-.admin-box{
-    background:white;
-    padding:20px;
-    border-radius:18px;
-    box-shadow:0 4px 18px rgba(0,0,0,.10);
-}
-
-.hidden{
-    display:none!important;
-}
-
-.erro{
-    color:#d50000;
-    text-align:center;
-    margin-top:12px;
-}
-
-.sucesso{
-    color:green;
-    text-align:center;
-    margin-top:12px;
-    font-weight:bold;
-}
-
 .admin-link{
-    display:block;
-    text-align:center;
-    color:#aaa;
-    text-decoration:none;
-    font-size:13px;
-    margin:35px 0 10px;
+  background:none;
+  color:#777;
+  font-size:12px;
+  margin-top:20px;
 }
-
-hr{
-    border:none;
-    border-top:1px solid #ddd;
-    margin:25px 0;
+.tabs{
+  display:flex;
+  gap:7px;
+  overflow:auto;
+  margin-bottom:15px;
 }
-
-/* ================= CARRINHO ================= */
-
-.carrinho-resumo{
-    background:#fff;
-    border-radius:15px;
-    padding:17px;
-    margin-bottom:20px;
-    box-shadow:0 3px 12px rgba(0,0,0,.08);
-}
-
-.carrinho-resumo h3{
-    color:#d50000;
-    margin-bottom:10px;
-}
-
-.item-carrinho{
-    display:flex;
-    justify-content:space-between;
-    padding:7px 0;
-    border-bottom:1px solid #eee;
-}
-
+.tabs button{white-space:nowrap}
+.danger{background:#b00000;color:white}
+hr{border:0;border-top:1px solid #ddd;margin:18px 0}
+.small{font-size:13px;color:#666}
 </style>
 </head>
 
 <body>
 
 <header>
-
-    <h1>🍱 CARDÁPIO DA LOJA</h1>
-
-    <p>Escolha sua refeição e faça seu pedido</p>
-
+  <h1 id="tituloLoja">🍽️ Nosso Cardápio</h1>
+  <p>Escolha suas opções e faça seu pedido</p>
 </header>
 
+<!-- ================= TELA INICIAL ================= -->
+<div id="inicio" class="container">
 
-<div class="container">
+  <h2>📋 Cardápio</h2>
 
+  <div id="cardapio"></div>
 
-<!-- =====================================================
-     TELA INICIAL
-====================================================== -->
+  <button class="btn-red" style="width:100%;font-size:18px"
+          onclick="abrirPedido()">
+    ➕ ADICIONAR PEDIDO
+  </button>
 
-<section id="inicio">
+  <div class="center">
+    <button class="admin-link" onclick="abrirLogin()">
+      🔐 Área Administrativa
+    </button>
+  </div>
+</div>
 
-    <h2 class="titulo">🍽️ Cardápio de Hoje</h2>
+<!-- ================= MONTAR PEDIDO ================= -->
+<div id="pedido" class="container hidden">
 
+  <button class="btn" onclick="voltarInicio()">← Voltar</button>
 
-    <!-- CARDAPIO -->
+  <h2>🛒 Seu Pedido</h2>
 
-    <div class="card">
+  <div class="card">
+    <h3>🍱 Escolha sua quentinha</h3>
 
-        <div class="cardapio-titulo" id="tituloCardapio">
-            Cardápio de hoje
-        </div>
+    <select id="tamanho">
+      <option value="">Selecione</option>
+      <option value="Quentinha Grande">Grande - R$ 21,00</option>
+      <option value="Quentinha Pequena">Pequena - R$ 18,00</option>
+      <option value="Promoção">Promoção - R$ 10,00</option>
+    </select>
 
-        <div class="cardapio-texto" id="textoCardapio">
-Arroz
-Feijão
-Frango
-Salada
-Farofa
-        </div>
+    <input id="qtdQuentinha"
+           type="number"
+           min="1"
+           value="1"
+           placeholder="Quantidade">
 
+    <h3>🍛 Comidas</h3>
+    <div id="comidasPedido"></div>
+
+    <h3>🥤 Bebidas</h3>
+    <div id="bebidasPedido"></div>
+  </div>
+
+  <div class="card">
+    <h3>👤 Seus dados</h3>
+
+    <input id="nome" placeholder="Seu nome">
+
+    <input id="endereco" placeholder="Endereço completo">
+
+    <input id="referencia" placeholder="Ponto de referência (opcional)">
+
+    <select id="pagamento">
+      <option value="">Forma de pagamento</option>
+      <option>Pix</option>
+      <option>Dinheiro</option>
+      <option>Cartão</option>
+    </select>
+
+    <input id="troco"
+           placeholder="Troco para quanto? (se for dinheiro)">
+
+    <textarea id="observacao"
+              placeholder="Observação do pedido"></textarea>
+  </div>
+
+  <div class="card">
+    <div class="total">
+      Total: R$ <span id="total">0,00</span>
     </div>
 
-
-    <!-- QUENTINHAS -->
-
-    <div class="card">
-
-        <h2 class="subtitulo">
-            🍱 Escolha sua quentinha
-        </h2>
-
-
-        <div
-            class="opcao"
-            onclick="selecionarOpcao('Pequena',18,'pequena')"
-        >
-
-            <input
-                type="radio"
-                name="tamanho"
-                id="pequena"
-            >
-
-            <label for="pequena">
-                🍱 Quentinha Pequena
-                <span class="preco">R$ 18,00</span>
-            </label>
-
-        </div>
-
-
-        <div
-            class="opcao"
-            onclick="selecionarOpcao('Grande',21,'grande')"
-        >
-
-            <input
-                type="radio"
-                name="tamanho"
-                id="grande"
-            >
-
-            <label for="grande">
-                🍱 Quentinha Grande
-                <span class="preco">R$ 21,00</span>
-            </label>
-
-        </div>
-
-
-        <div
-            class="opcao"
-            onclick="selecionarOpcao('Promoção',10,'promocao')"
-        >
-
-            <input
-                type="radio"
-                name="tamanho"
-                id="promocao"
-            >
-
-            <label for="promocao">
-                🔥 Promoção
-                <span class="preco">R$ 10,00</span>
-            </label>
-
-        </div>
-
-    </div>
-
-
-    <!-- BEBIDAS -->
-
-    <div class="card">
-
-        <h2 class="subtitulo">
-            🥤 Bebidas
-        </h2>
-
-
-        <div class="bebida">
-
-            <div class="bebida-info">
-                <div class="bebida-nome">
-                    Coca-Cola 2L
-                </div>
-                <div class="bebida-preco">
-                    R$ 15,00
-                </div>
-            </div>
-
-            <div class="bebida-qtd">
-                <button onclick="alterarBebida('coca2l',-1)">−</button>
-                <span id="qtd-coca2l">0</span>
-                <button onclick="alterarBebida('coca2l',1)">+</button>
-            </div>
-
-        </div>
-
-
-        <div class="bebida">
-
-            <div class="bebida-info">
-                <div class="bebida-nome">
-                    Fanta Laranja 2L
-                </div>
-                <div class="bebida-preco">
-                    R$ 12,00
-                </div>
-            </div>
-
-            <div class="bebida-qtd">
-                <button onclick="alterarBebida('fanta2l',-1)">−</button>
-                <span id="qtd-fanta2l">0</span>
-                <button onclick="alterarBebida('fanta2l',1)">+</button>
-            </div>
-
-        </div>
-
-
-        <div class="bebida">
-
-            <div class="bebida-info">
-                <div class="bebida-nome">
-                    Tobi 2L
-                </div>
-                <div class="bebida-preco">
-                    R$ 7,00
-                </div>
-            </div>
-
-            <div class="bebida-qtd">
-                <button onclick="alterarBebida('tobi2l',-1)">−</button>
-                <span id="qtd-tobi2l">0</span>
-                <button onclick="alterarBebida('tobi2l',1)">+</button>
-            </div>
-
-        </div>
-
-
-        <div class="bebida">
-
-            <div class="bebida-info">
-                <div class="bebida-nome">
-                    Coca-Cola Lata
-                </div>
-                <div class="bebida-preco">
-                    R$ 6,00
-                </div>
-            </div>
-
-            <div class="bebida-qtd">
-                <button onclick="alterarBebida('cocalata',-1)">−</button>
-                <span id="qtd-cocalata">0</span>
-                <button onclick="alterarBebida('cocalata',1)">+</button>
-            </div>
-
-        </div>
-
-
-        <div class="bebida">
-
-            <div class="bebida-info">
-                <div class="bebida-nome">
-                    Guaraná Antarctica Lata
-                </div>
-                <div class="bebida-preco">
-                    R$ 6,00
-                </div>
-            </div>
-
-            <div class="bebida-qtd">
-                <button onclick="alterarBebida('guarana-lata',-1)">−</button>
-                <span id="qtd-guarana-lata">0</span>
-                <button onclick="alterarBebida('guarana-lata',1)">+</button>
-            </div>
-
-        </div>
-
-
-        <div class="bebida">
-
-            <div class="bebida-info">
-                <div class="bebida-nome">
-                    Fanta Laranja Lata
-                </div>
-                <div class="bebida-preco">
-                    R$ 6,00
-                </div>
-            </div>
-
-            <div class="bebida-qtd">
-                <button onclick="alterarBebida('fanta-lata',-1)">−</button>
-                <span id="qtd-fanta-lata">0</span>
-                <button onclick="alterarBebida('fanta-lata',1)">+</button>
-            </div>
-
-        </div>
-
-
-        <div class="bebida">
-
-            <div class="bebida-info">
-                <div class="bebida-nome">
-                    Coca-Cola 600ml
-                </div>
-                <div class="bebida-preco">
-                    R$ 8,00
-                </div>
-            </div>
-
-            <div class="bebida-qtd">
-                <button onclick="alterarBebida('coca600',-1)">−</button>
-                <span id="qtd-coca600">0</span>
-                <button onclick="alterarBebida('coca600',1)">+</button>
-            </div>
-
-        </div>
-
-
-        <div class="bebida">
-
-            <div class="bebida-info">
-                <div class="bebida-nome">
-                    Ativ Plus Uva
-                </div>
-                <div class="bebida-preco">
-                    R$ 4,00
-                </div>
-            </div>
-
-            <div class="bebida-qtd">
-                <button onclick="alterarBebida('ativuva',-1)">−</button>
-                <span id="qtd-ativuva">0</span>
-                <button onclick="alterarBebida('ativuva',1)">+</button>
-            </div>
-
-        </div>
-
-
-        <div class="bebida">
-
-            <div class="bebida-info">
-                <div class="bebida-nome">
-                    Ativ Citrus
-                </div>
-                <div class="bebida-preco">
-                    R$ 4,00
-                </div>
-            </div>
-
-            <div class="bebida-qtd">
-                <button onclick="alterarBebida('ativcitrus',-1)">−</button>
-                <span id="qtd-ativcitrus">0</span>
-                <button onclick="alterarBebida('ativcitrus',1)">+</button>
-            </div>
-
-        </div>
-
-
-        <div class="bebida">
-
-            <div class="bebida-info">
-                <div class="bebida-nome">
-                    Ativton
-                </div>
-                <div class="bebida-preco">
-                    R$ 4,00
-                </div>
-            </div>
-
-            <div class="bebida-qtd">
-                <button onclick="alterarBebida('ativton',-1)">−</button>
-                <span id="qtd-ativton">0</span>
-                <button onclick="alterarBebida('ativton',1)">+</button>
-            </div>
-
-        </div>
-
-
-        <div class="bebida">
-
-            <div class="bebida-info">
-                <div class="bebida-nome">
-                    Guaraná Antarctica 1L
-                </div>
-                <div class="bebida-preco">
-                    R$ 8,00
-                </div>
-            </div>
-
-            <div class="bebida-qtd">
-                <button onclick="alterarBebida('guarana1l',-1)">−</button>
-                <span id="qtd-guarana1l">0</span>
-                <button onclick="alterarBebida('guarana1l',1)">+</button>
-            </div>
-
-        </div>
-
-
-        <div class="bebida">
-
-            <div class="bebida-info">
-                <div class="bebida-nome">
-                    Guaraviton
-                </div>
-                <div class="bebida-preco">
-                    R$ 5,00
-                </div>
-            </div>
-
-            <div class="bebida-qtd">
-                <button onclick="alterarBebida('guaraviton',-1)">−</button>
-                <span id="qtd-guaraviton">0</span>
-                <button onclick="alterarBebida('guaraviton',1)">+</button>
-            </div>
-
-        </div>
-
-
-        <div class="bebida">
-
-            <div class="bebida-info">
-                <div class="bebida-nome">
-                    Guaravita
-                </div>
-                <div class="bebida-preco">
-                    R$ 2,50
-                </div>
-            </div>
-
-            <div class="bebida-qtd">
-                <button onclick="alterarBebida('guaravita',-1)">−</button>
-                <span id="qtd-guaravita">0</span>
-                <button onclick="alterarBebida('guaravita',1)">+</button>
-            </div>
-
-        </div>
-
-
-        <div class="bebida">
-
-            <div class="bebida-info">
-                <div class="bebida-nome">
-                    YKO
-                </div>
-                <div class="bebida-preco">
-                    R$ 2,50
-                </div>
-            </div>
-
-            <div class="bebida-qtd">
-                <button onclick="alterarBebida('yko',-1)">−</button>
-                <span id="qtd-yko">0</span>
-                <button onclick="alterarBebida('yko',1)">+</button>
-            </div>
-
-        </div>
-
-
-        <div class="bebida">
-
-            <div class="bebida-info">
-                <div class="bebida-nome">
-                    Água com gás
-                </div>
-                <div class="bebida-preco">
-                    R$ 2,50
-                </div>
-            </div>
-
-            <div class="bebida-qtd">
-                <button onclick="alterarBebida('agua-gas',-1)">−</button>
-                <span id="qtd-agua-gas">0</span>
-                <button onclick="alterarBebida('agua-gas',1)">+</button>
-            </div>
-
-        </div>
-
-
-        <div class="bebida">
-
-            <div class="bebida-info">
-                <div class="bebida-nome">
-                    Água sem gás
-                </div>
-                <div class="bebida-preco">
-                    R$ 2,50
-                </div>
-            </div>
-
-            <div class="bebida-qtd">
-                <button onclick="alterarBebida('agua-sem-gas',-1)">−</button>
-                <span id="qtd-agua-sem-gas">0</span>
-                <button onclick="alterarBebida('agua-sem-gas',1)">+</button>
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- RESUMO -->
-
-    <div class="carrinho-resumo">
-
-        <h3>🛒 Seu pedido</h3>
-
-        <div id="resumoCarrinho">
-            Nenhum item selecionado.
-        </div>
-
-    </div>
-
-
-    <button
-        class="btn-vermelho"
-        onclick="abrirPedido()"
-    >
-        🛒 CONTINUAR PEDIDO
+    <button class="btn-green"
+            style="width:100%;font-size:18px"
+            onclick="finalizarPedido()">
+      ✅ CONFIRMAR PEDIDO PELO WHATSAPP
+    </button>
+  </div>
+
+</div>
+
+<!-- ================= LOGIN ADM ================= -->
+<div id="login" class="container hidden">
+
+  <div class="card">
+    <h2>🔐 Área Administrativa</h2>
+
+    <input id="senhaLogin"
+           type="password"
+           placeholder="Senha">
+
+    <button class="btn-red"
+            style="width:100%"
+            onclick="entrarAdmin()">
+      ENTRAR
     </button>
 
-</section>
+    <button class="btn"
+            style="width:100%;margin-top:8px"
+            onclick="voltarInicio()">
+      Voltar
+    </button>
+  </div>
 
+</div>
 
-<!-- =====================================================
-     FINALIZAR PEDIDO
-====================================================== -->
+<!-- ================= ADM ================= -->
+<div id="admin" class="container hidden">
 
-<section id="pedido">
+  <button class="btn" onclick="voltarInicio()">← Sair</button>
 
-    <h2 class="titulo">
-        🛒 Finalizar Pedido
-    </h2>
+  <h2>⚙️ Painel Administrativo</h2>
 
+  <div class="tabs">
+    <button class="btn" onclick="mostrarAba('produtos')">🍛 Cardápio</button>
+    <button class="btn" onclick="mostrarAba('bebidas')">🥤 Bebidas</button>
+    <button class="btn" onclick="mostrarAba('senha')">🔑 Senha</button>
+  </div>
+
+  <!-- PRODUTOS -->
+  <div id="abaProdutos">
 
     <div class="card">
+      <h3>➕ Adicionar comida</h3>
 
-        <div
-            class="resumo"
-            id="resumoPedido"
-        ></div>
+      <input id="novoNome" placeholder="Nome da comida">
+
+      <input id="novoPreco"
+             type="number"
+             step="0.01"
+             placeholder="Preço">
+
+      <button class="btn-green"
+              style="width:100%"
+              onclick="adicionarComida()">
+        ADICIONAR
+      </button>
+    </div>
+
+    <div id="listaAdminComidas"></div>
+
+  </div>
+
+  <!-- BEBIDAS -->
+  <div id="abaBebidas" class="hidden">
+
+    <div class="card">
+      <h3>➕ Adicionar bebida</h3>
+
+      <input id="novaBebida"
+             placeholder="Nome da bebida">
+
+      <input id="precoBebida"
+             type="number"
+             step="0.01"
+             placeholder="Preço">
+
+      <button class="btn-green"
+              style="width:100%"
+              onclick="adicionarBebida()">
+        ADICIONAR
+      </button>
+    </div>
+
+    <div id="listaAdminBebidas"></div>
+
+  </div>
+
+  <!-- SENHA -->
+  <div id="abaSenha" class="hidden">
+
+    <div class="card">
+      <h3>🔑 Alterar senha do ADM</h3>
+
+      <input id="senhaAtual"
+             type="password"
+             placeholder="Senha atual">
+
+      <input id="novaSenha"
+             type="password"
+             placeholder="Nova senha">
+
+      <input id="confirmaSenha"
+             type="password"
+             placeholder="Confirmar nova senha">
+
+      <button class="btn-red"
+              style="width:100%"
+              onclick="alterarSenha()">
+        ALTERAR SENHA
+      </button>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+/* =====================================================
+   CONFIGURAÇÕES
+===================================================== */
+
+const WHATSAPP = "5521974967664";
+
+/*
+  Senha inicial do painel ADM:
+  1234
+
+  Depois você pode alterar dentro do próprio painel.
+*/
+
+let senhaADM = localStorage.getItem("senhaADM") || "1234";
 
 
-        <label>👤 Nome</label>
+/* =====================================================
+   CARDÁPIO PADRÃO
+===================================================== */
 
-        <input
-            type="text"
-            id="nome"
-            placeholder="Digite seu nome"
-        >
+let comidas = JSON.parse(
+  localStorage.getItem("comidas")
+) || [
+  {id:1,nome:"Arroz",preco:0},
+  {id:2,nome:"Feijão",preco:0},
+  {id:3,nome:"Frango",preco:0},
+  {id:4,nome:"Carne",preco:0}
+];
 
-
-        <label>📍 Endereço</label>
-
-        <textarea
-            id="endereco"
-            placeholder="Digite seu endereço completo"
-        ></textarea>
-
-
-        <label>💳 Forma de pagamento</label>
-
-        <select id="pagamento">
-
-            <option value="">
-                Selecione
-            </option>
-
-            <option value="Pix">
-                Pix
-            </option>
-
-            <option value="Dinheiro">
-                Dinheiro
-            </option>
-
-            <option value="Cartão">
-                Cartão
-            </option>
-
-        </select>
+let bebidas = JSON.parse(
+  localStorage.getItem("bebidas")
+) || [
+  {id:1,nome:"Coca-Cola 2L",preco:15},
+  {id:2,nome:"Fanta Laranja 2L",preco:12},
+  {id:3,nome:"Tobi 2L",preco:7},
+  {id:4,nome:"Coca-Cola Lata",preco:6},
+  {id:5,nome:"Guaraná Antarctica Lata",preco:6},
+  {id:6,nome:"Fanta Laranja Lata",preco:6},
+  {id:7,nome:"Coca-Cola 600ml",preco:8},
+  {id:8,nome:"Activ Plus Uva",preco:0}
+];
 
 
-        <label>📝 Observação</label>
+/* =====================================================
+   SALVAR
+===================================================== */
 
-        <textarea
-            id="observacao"
-            placeholder="Ex: sem cebola, entregar na portaria..."
-        ></textarea>
+function salvar(){
+
+  localStorage.setItem(
+    "comidas",
+    JSON.stringify(comidas)
+  );
+
+  localStorage.setItem(
+    "bebidas",
+    JSON.stringify(bebidas)
+  );
+
+}
 
 
-        <div
-            class="total"
-            id="totalPedido"
-        >
-            TOTAL: R$ 0,00
+/* =====================================================
+   FORMATAÇÃO
+===================================================== */
+
+function dinheiro(valor){
+  return Number(valor || 0)
+    .toFixed(2)
+    .replace(".",",");
+}
+
+
+/* =====================================================
+   TELA INICIAL
+===================================================== */
+
+function carregarCardapio(){
+
+  const div = document.getElementById("cardapio");
+
+  div.innerHTML = "";
+
+  comidas.forEach(item => {
+
+    div.innerHTML += `
+      <div class="card">
+        <div class="item">
+          <div class="item-info">
+            <strong>${escapeHTML(item.nome)}</strong>
+            ${
+              item.preco > 0
+              ? `<div class="price">R$ ${dinheiro(item.preco)}</div>`
+              : `<div class="small">Incluído na quentinha</div>`
+            }
+          </div>
         </div>
+      </div>
+    `;
+
+  });
+
+}
 
 
-        <button
-            class="btn-vermelho"
-            onclick="enviarWhatsApp()"
-        >
-            📲 ENVIAR PEDIDO PELO WHATSAPP
-        </button>
+/* =====================================================
+   PEDIDO
+===================================================== */
+
+let pedidoComidas = {};
+let pedidoBebidas = {};
 
 
-        <button
-            class="btn-amarelo"
-            onclick="voltarInicio()"
-        >
-            ← Voltar para o cardápio
-        </button>
+function abrirPedido(){
 
-    </div>
+  document.getElementById("inicio")
+    .classList.add("hidden");
 
-</section>
+  document.getElementById("pedido")
+    .classList.remove("hidden");
 
+  pedidoComidas = {};
+  pedidoBebidas = {};
 
-<!-- =====================================================
-     ADMIN
-====================================================== -->
+  carregarComidasPedido();
+  carregarBebidasPedido();
 
-<section id="admin">
+  calcularTotal();
 
-    <h2 class="titulo">
-        ⚙️ Área Administrativa
-    </h2>
+}
 
 
-    <div
-        id="loginAdmin"
-        class="admin-login"
-    >
+function carregarComidasPedido(){
 
-        <h2>🔐 Administração</h2>
+  const div = document.getElementById("comidasPedido");
+
+  div.innerHTML = "";
+
+  comidas.forEach(item => {
+
+    pedidoComidas[item.id] =
+      pedidoComidas[item.id] || 0;
+
+    div.innerHTML += `
+      <div class="card">
+        <div class="item">
+
+          <div class="item-info">
+            <strong>${escapeHTML(item.nome)}</strong>
+            ${
+              item.preco > 0
+              ? `<div class="price">R$ ${dinheiro(item.preco)}</div>`
+              : ""
+            }
+          </div>
+
+          <div class="qty">
+            <button onclick="alterarComida(${item.id},-1)">−</button>
+
+            <span id="cq${item.id}">
+              ${pedidoComidas[item.id]}
+            </span>
+
+            <button onclick="alterarComida(${item.id},1)">+</button>
+          </div>
+
+        </div>
+      </div>
+    `;
+
+  });
+
+}
 
 
-        <label>Senha</label>
+function carregarBebidasPedido(){
+
+  const div = document.getElementById("bebidasPedido");
+
+  div.innerHTML = "";
+
+  bebidas.forEach(item => {
+
+    pedidoBebidas[item.id] =
+      pedidoBebidas[item.id] || 0;
+
+    div.innerHTML += `
+      <div class="card">
+        <div class="item">
+
+          <div class="item-info">
+            <strong>${escapeHTML(item.nome)}</strong>
+            <div class="price">
+              R$ ${dinheiro(item.preco)}
+            </div>
+          </div>
+
+          <div class="qty">
+            <button onclick="alterarBebida(${item.id},-1)">−</button>
+
+            <span id="bq${item.id}">
+              ${pedidoBebidas[item.id]}
+            </span>
+
+            <button onclick="alterarBebida(${item.id},1)">+</button>
+          </div>
+
+        </div>
+      </div>
+    `;
+
+  });
+
+}
+
+
+function alterarComida(id,valor){
+
+  pedidoComidas[id] =
+    Math.max(
+      0,
+      (pedidoComidas[id] || 0) + valor
+    );
+
+  document.getElementById("cq"+id)
+    .innerText = pedidoComidas[id];
+
+  calcularTotal();
+
+}
+
+
+function alterarBebida(id,valor){
+
+  pedidoBebidas[id] =
+    Math.max(
+      0,
+      (pedidoBebidas[id] || 0) + valor
+    );
+
+  document.getElementById("bq"+id)
+    .innerText = pedidoBebidas[id];
+
+  calcularTotal();
+
+}
+
+
+/* =====================================================
+   TOTAL
+===================================================== */
+
+function calcularTotal(){
+
+  let total = 0;
+
+  const tamanho =
+    document.getElementById("tamanho").value;
+
+  const quantidade =
+    Number(document.getElementById("qtdQuentinha").value || 0);
+
+  if(tamanho === "Quentinha Grande")
+    total += 21 * quantidade;
+
+  if(tamanho === "Quentinha Pequena")
+    total += 18 * quantidade;
+
+  if(tamanho === "Promoção")
+    total += 10 * quantidade;
+
+
+  comidas.forEach(item => {
+
+    total +=
+      (pedidoComidas[item.id] || 0)
+      * Number(item.preco || 0);
+
+  });
+
+
+  bebidas.forEach(item => {
+
+    total +=
+      (pedidoBebidas[item.id] || 0)
+      * Number(item.preco || 0);
+
+  });
+
+
+  document.getElementById("total")
+    .innerText = dinheiro(total);
+
+  return total;
+
+}
+
+
+document.getElementById("tamanho")
+  .addEventListener("change", calcularTotal);
+
+document.getElementById("qtdQuentinha")
+  .addEventListener("input", calcularTotal);
+
+
+/* =====================================================
+   FINALIZAR PEDIDO
+===================================================== */
+
+function finalizarPedido(){
+
+  const nome =
+    document.getElementById("nome").value.trim();
+
+  const endereco =
+    document.getElementById("endereco").value.trim();
+
+  const referencia =
+    document.getElementById("referencia").value.trim();
+
+  const pagamento =
+    document.getElementById("pagamento").value;
+
+  const troco =
+    document.getElementById("troco").value.trim();
+
+  const observacao =
+    document.getElementById("observacao").value.trim();
+
+  const tamanho =
+    document.getElementById("tamanho").value;
+
+  const quantidade =
+    Number(document.getElementById("qtdQuentinha").value || 0);
+
+
+  if(!nome){
+    alert("Digite seu nome.");
+    return;
+  }
+
+  if(!endereco){
+    alert("Digite seu endereço.");
+    return;
+  }
+
+  if(!tamanho){
+    alert("Escolha o tamanho da quentinha.");
+    return;
+  }
+
+  if(!pagamento){
+    alert("Escolha a forma de pagamento.");
+    return;
+  }
+
+  let texto =
+`🍱 *NOVO PEDIDO*
+
+👤 *Cliente:* ${nome}
+
+📍 *Endereço:* ${endereco}`;
+
+  if(referencia)
+    texto += `\n📌 *Referência:* ${referencia}`;
+
+  texto += `
+
+🍱 *QUENTINHAS*
+${quantidade}x ${tamanho}`;
+
+  let temComida = false;
+
+  comidas.forEach(item => {
+
+    const qtd =
+      pedidoComidas[item.id] || 0;
+
+    if(qtd > 0){
+
+      if(!temComida){
+        texto += `\n\n🍛 *COMIDAS*`;
+        temComida = true;
+      }
+
+      texto +=
+        `\n${qtd}x ${item.nome}`;
+
+    }
+
+  });
+
+
+  let temBebida = false;
+
+  bebidas.forEach(item => {
+
+    const qtd =
+      pedidoBebidas[item.id] || 0;
+
+    if(qtd > 0){
+
+      if(!temBebida){
+        texto += `\n\n🥤 *BEBIDAS*`;
+        temBebida = true;
+      }
+
+      texto +=
+        `\n${qtd}x ${item.nome} - R$ ${dinheiro(item.preco * qtd)}`;
+
+    }
+
+  });
+
+
+  texto += `
+
+💳 *Pagamento:* ${pagamento}`;
+
+  if(pagamento === "Dinheiro" && troco)
+    texto += `\n💵 *Troco para:* R$ ${troco}`;
+
+  if(observacao)
+    texto += `\n📝 *Observação:* ${observacao}`;
+
+  texto += `
+
+💰 *TOTAL: R$ ${dinheiro(calcularTotal())}*`;
+
+  texto += `
+
+✅ *PEDIDO CONFIRMADO PELO CARDÁPIO*`;
+
+
+  const url =
+    "https://wa.me/" +
+    WHATSAPP +
+    "?text=" +
+    encodeURIComponent(texto);
+
+  window.location.href = url;
+
+}
+
+
+/* =====================================================
+   LOGIN ADM
+===================================================== */
+
+function abrirLogin(){
+
+  esconderTudo();
+
+  document.getElementById("login")
+    .classList.remove("hidden");
+
+}
+
+
+function entrarAdmin(){
+
+  const senha =
+    document.getElementById("senhaLogin").value;
+
+  if(senha !== senhaADM){
+
+    alert("Senha incorreta.");
+    return;
+
+  }
+
+  esconderTudo();
+
+  document.getElementById("admin")
+    .classList.remove("hidden");
+
+  carregarAdmin();
+
+}
+
+
+/* =====================================================
+   ADMIN
+===================================================== */
+
+function carregarAdmin(){
+
+  carregarAdminComidas();
+  carregarAdminBebidas();
+
+}
+
+
+function carregarAdminComidas(){
+
+  const div =
+    document.getElementById("listaAdminComidas");
+
+  div.innerHTML =
+    "<h3>🍛 Comidas cadastradas</h3>";
+
+  comidas.forEach(item => {
+
+    div.innerHTML += `
+      <div class="card">
 
         <input
-            type="password"
-            id="senhaAdmin"
-            placeholder="Digite sua senha"
-        >
-
-
-        <button
-            class="btn-vermelho"
-            onclick="entrarAdmin()"
-        >
-            Entrar
-        </button>
-
-
-        <p
-            id="erroLogin"
-            class="erro"
-        ></p>
-
-    </div>
-
-
-    <div
-        id="painelAdmin"
-        class="admin-box hidden"
-    >
-
-        <h2>✏️ Editar Cardápio</h2>
-
-        <br>
-
-
-        <label>Título</label>
+          id="nomeC${item.id}"
+          value="${escapeAttr(item.nome)}">
 
         <input
-            type="text"
-            id="adminTitulo"
-        >
-
-
-        <label>Cardápio de hoje</label>
-
-        <textarea
-            id="adminCardapio"
-            rows="10"
-        ></textarea>
-
+          id="precoC${item.id}"
+          type="number"
+          step="0.01"
+          value="${item.preco}">
 
         <button
-            class="btn-vermelho"
-            onclick="salvarCardapio()"
-        >
-            💾 Salvar Cardápio
+          class="btn-green"
+          onclick="salvarComida(${item.id})">
+          💾 SALVAR
         </button>
 
+        <button
+          class="danger"
+          onclick="excluirComida(${item.id})">
+          🗑️ EXCLUIR
+        </button>
 
-        <p
-            id="mensagemAdmin"
-            class="sucesso"
-        ></p>
+      </div>
+    `;
+
+  });
+
+}
 
 
-        <hr>
+function carregarAdminBebidas(){
 
+  const div =
+    document.getElementById("listaAdminBebidas");
 
-        <h2>🔑 Alterar senha</h2>
+  div.innerHTML =
+    "<h3>🥤 Bebidas cadastradas</h3>";
 
-        <br>
+  bebidas.forEach(item => {
 
-
-        <label>Nova senha</label>
+    div.innerHTML += `
+      <div class="card">
 
         <input
-            type="password"
-            id="novaSenha"
-            placeholder="Digite a nova senha"
-        >
+          id="nomeB${item.id}"
+          value="${escapeAttr(item.nome)}">
 
-
-        <button
-            class="btn-amarelo"
-            onclick="alterarSenha()"
-        >
-            Alterar senha
-        </button>
-
+        <input
+          id="precoB${item.id}"
+          type="number"
+          step="0.01"
+          value="${item.preco}">
 
         <button
-            class="btn-vermelho"
-            onclick="sairAdmin()"
-        >
-            Sair da Administração
+          class="btn-green"
+          onclick="salvarBebida(${item.id})">
+          💾 SALVAR
         </button>
 
-    </div>
+        <button
+          class="danger"
+          onclick="excluirBebida(${item.id})">
+          🗑️ EXCLUIR
+        </button>
 
-</section>
+      </div>
+    `;
+
+  });
+
+}
 
 
-<a
-   
+/* =====================================================
+   ADICIONAR COMIDA
+===================================================== */
+
+function adicionarComida(){
+
+  const nome =
+    document.getElementById("novoNome")
+      .value.trim();
+
+  const preco =
+    Number(
+      document.getElementById("novoPreco").value
+    );
+
+
+  if(!nome){
+    alert("Digite o nome da comida.");
+    return;
+  }
+
+  comidas.push({
+    id:Date.now(),
+    nome:nome,
+    preco:preco
+  });
+
+  salvar();
+
+  document.getElementById("novoNome").value="";
+  document.getElementById("novoPreco").value="";
+
+  carregarAdminComidas();
+  carregarCardapio();
+
+}
+
+
+/* =====================================================
+   SALVAR COMIDA
+===================================================== */
+
+function salvarComida(id){
+
+  const item =
+    comidas.find(x => x.id === id);
+
+  item.nome =
+    document.getElementById("nomeC"+id).value;
+
+  item.preco =
+    Number(
+      document.getElementById("precoC"+id).value
+    );
+
+  salvar();
+
+  carregarAdminComidas();
+  carregarCardapio();
+
+  alert("Comida atualizada!");
+
+}
+
+
+/* =====================================================
+   EXCLUIR COMIDA
+===================================================== */
+
+function excluirComida(id){
+
+  if(!confirm("Excluir esta comida?"))
+    return;
+
+  comidas =
+    comidas.filter(x => x.id !== id);
+
+  salvar();
+
+  carregarAdminComidas();
+  carregarCardapio();
+
+}
+
+
+/* =====================================================
+   ADICIONAR BEBIDA
+===================================================== */
+
+function adicionarBebida(){
+
+  const nome =
+    document.getElementById("novaBebida")
+      .value.trim();
+
+  const preco =
+    Number(
+      document.getElementById("precoBebida").value
+    );
+
+
+  if(!nome){
+    alert("Digite o nome da bebida.");
+    return;
+  }
+
+  bebidas.push({
+    id:Date.now(),
+    nome:nome,
+    preco:preco
+  });
+
+  salvar();
+
+  document.getElementById("novaBebida").value="";
+  document.getElementById("precoBebida").value="";
+
+  carregarAdminBebidas();
+
+}
+
+
+/* =====================================================
+   SALVAR BEBIDA
+===================================================== */
+
+function salvarBebida(id){
+
+  const item =
+    bebidas.find(x => x.id === id);
+
+  item.nome =
+    document.getElementById("nomeB"+id).value;
+
+  item.preco =
+    Number(
+      document.getElementById("precoB"+id).value
+    );
+
+  salvar();
+
+  carregarAdminBebidas();
+
+  alert("Bebida atualizada!");
+
+}
+
+
+/* =====================================================
+   EXCLUIR BEBIDA
+===================================================== */
+
+function excluirBebida(id){
+
+  if(!confirm("Excluir esta bebida?"))
+    return;
+
+  bebidas =
+    bebidas.filter(x => x.id !== id);
+
+  salvar();
+
+  carregarAdminBebidas();
+
+}
+
+
+/* =====================================================
+   ALTERAR SENHA
+=================================
