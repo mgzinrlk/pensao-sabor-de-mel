@@ -1,1422 +1,877 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cardápio Online</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cardápio</title>
 
-  <style>
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Arial,sans-serif;
-      background:#fff8ed;
-      color:#222
-    }
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#fff;
+  color:#222
+}
+header{
+  background:linear-gradient(135deg,#e60000,#ffcc00);
+  color:white;
+  padding:22px 15px;
+  text-align:center
+}
+header h1{margin:0;font-size:28px}
+header p{margin:7px 0 0}
 
-    header{
-      background:#c91515;
-      color:white;
-      padding:22px 16px;
-      text-align:center
-    }
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px
+}
 
-    header h1{
-      margin:0 0 6px;
-      font-size:30px
-    }
+button{
+  border:0;
+  border-radius:8px;
+  padding:12px 16px;
+  cursor:pointer;
+  font-weight:bold
+}
 
-    header p{margin:0}
+.adminBtn{
+  background:#222;
+  color:#fff;
+  margin-top:12px
+}
 
-    .wrap{
-      max-width:900px;
-      margin:auto;
-      padding:18px
-    }
+.card{
+  background:#fff;
+  border:1px solid #ddd;
+  border-radius:12px;
+  padding:15px;
+  margin-bottom:15px;
+  box-shadow:0 2px 8px #0001
+}
 
-    .status{
-      padding:12px;
-      border-radius:10px;
-      margin-bottom:15px;
-      background:#fff0c7
-    }
+.card h3{margin:0 0 8px}
+.price{
+  color:#e60000;
+  font-weight:bold;
+  font-size:18px
+}
 
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:14px
-    }
+.buy{
+  background:#e60000;
+  color:white;
+  width:100%;
+  margin-top:10px
+}
 
-    .card{
-      background:white;
-      border-radius:15px;
-      padding:15px;
-      box-shadow:0 3px 12px #0001
-    }
+input,select,textarea{
+  width:100%;
+  padding:12px;
+  margin:6px 0 12px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-size:16px
+}
 
-    .card img{
-      width:100%;
-      height:160px;
-      object-fit:cover;
-      border-radius:12px;
-      background:#eee
-    }
+.hidden{display:none}
 
-    .price{
-      font-size:21px;
-      font-weight:bold;
-      color:#c91515
-    }
+.admin{
+  background:#f5f5f5;
+  padding:20px;
+  border-radius:12px;
+  margin-top:20px
+}
 
-    button{
-      border:0;
-      border-radius:10px;
-      padding:12px 15px;
-      font-weight:bold;
-      cursor:pointer
-    }
+.item{
+  border:1px solid #ddd;
+  padding:12px;
+  border-radius:8px;
+  margin-bottom:10px;
+  background:white
+}
 
-    .yellow{
-      background:#ffd21a;
-      color:#111
-    }
+.item button{
+  margin:4px 2px
+}
 
-    .red{
-      background:#c91515;
-      color:white
-    }
+.red{background:#e60000;color:#fff}
+.yellow{background:#ffcc00;color:#222}
+.dark{background:#222;color:#fff}
 
-    .cart{
-      position:fixed;
-      right:15px;
-      bottom:15px;
-      background:#ffd21a;
-      color:#111;
-      border-radius:50px;
-      padding:15px 20px;
-      box-shadow:0 4px 18px #0003
-    }
+.total{
+  font-size:22px;
+  font-weight:bold;
+  margin:15px 0
+}
 
-    .hidden{
-      display:none!important
-    }
-
-    input,select,textarea{
-      width:100%;
-      padding:12px;
-      margin:6px 0 12px;
-      border:1px solid #ccc;
-      border-radius:9px;
-      font-size:16px
-    }
-
-    label{
-      font-weight:bold
-    }
-
-    .box{
-      background:white;
-      border-radius:15px;
-      padding:18px;
-      margin-top:18px;
-      box-shadow:0 3px 12px #0001
-    }
-
-    .row{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap
-    }
-
-    .row>*{
-      flex:1
-    }
-
-    .item-admin{
-      border:1px solid #ddd;
-      padding:12px;
-      border-radius:10px;
-      margin:8px 0
-    }
-
-    .muted{
-      color:#666
-    }
-
-    .danger{
-      background:#eee;
-      color:#a00
-    }
-
-    #adminBtn{
-      position:fixed;
-      left:12px;
-      bottom:15px;
-      background:#222;
-      color:white;
-      border-radius:50px
-    }
-  </style>
+#status{
+  padding:10px;
+  margin-bottom:15px;
+  border-radius:8px;
+  display:none
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <h1>🍽️ Meu Cardápio</h1>
-  <p>Faça seu pedido de forma rápida</p>
+  <h1 id="storeName">Meu Cardápio</h1>
+  <p id="storeDescription">Faça seu pedido</p>
+  <button class="adminBtn" onclick="openAdmin()">Área Administrativa</button>
 </header>
 
-<main class="wrap">
+<div class="container">
 
-  <div id="status" class="status">
-    Carregando cardápio...
-  </div>
+  <div id="status"></div>
 
-  <section id="menu" class="grid"></section>
+  <!-- CARDÁPIO -->
+  <section id="menuSection">
+    <h2>🍽️ Cardápio</h2>
+    <div id="menu"></div>
+  </section>
 
-  <div id="empty" class="box hidden">
-    Nenhuma refeição publicada no momento.
-  </div>
+  <!-- CARRINHO -->
+  <section id="cartSection" class="hidden">
+    <h2>🛒 Seu pedido</h2>
+    <div id="cart"></div>
 
-</main>
+    <div class="total">
+      Total: R$ <span id="total">0,00</span>
+    </div>
 
-<button
-  id="cartBtn"
-  class="cart"
-  onclick="openCheckout()">
-  🛒 Pedido (<span id="cartCount">0</span>)
-</button>
+    <button class="red" onclick="openCheckout()">Finalizar pedido</button>
+  </section>
 
-<button
-  id="adminBtn"
-  onclick="openAdmin()">
-  ⚙️ Admin
-</button>
+  <!-- CHECKOUT -->
+  <section id="checkout" class="hidden">
+    <div class="card">
+      <h2>📦 Dados do pedido</h2>
 
+      <label>Nome</label>
+      <input id="customerName" placeholder="Seu nome">
 
-<!-- =========================
-     CHECKOUT
-========================= -->
+      <label>Endereço</label>
+      <textarea id="customerAddress" placeholder="Rua, número, bairro..."></textarea>
 
-<div id="checkout" class="box wrap hidden">
+      <label>Forma de pagamento</label>
+      <select id="payment">
+        <option value="">Selecione</option>
+        <option value="Pix">Pix</option>
+        <option value="Dinheiro">Dinheiro</option>
+        <option value="Cartão">Cartão</option>
+      </select>
 
-  <h2>Finalizar pedido</h2>
+      <label>Observação</label>
+      <textarea id="observation" placeholder="Alguma observação?"></textarea>
 
-  <div id="cartList"></div>
+      <button class="red" onclick="sendOrder()">Enviar pedido pelo WhatsApp</button>
+      <button class="dark" onclick="closeCheckout()">Voltar</button>
+    </div>
+  </section>
 
-  <hr>
+  <!-- LOGIN ADM -->
+  <section id="adminLogin" class="admin hidden">
+    <h2>🔐 Área Administrativa</h2>
 
-  <label>Nome</label>
+    <input type="password" id="adminPassword" placeholder="Senha">
 
-  <input
-    id="customerName"
-    placeholder="Seu nome">
+    <button class="red" onclick="loginAdmin()">Entrar</button>
+    <button class="dark" onclick="closeAdmin()">Voltar</button>
+  </section>
 
-  <label>Endereço</label>
+  <!-- PAINEL ADM -->
+  <section id="adminPanel" class="admin hidden">
 
-  <textarea
-    id="customerAddress"
-    placeholder="Rua, número, bairro..."></textarea>
+    <h2>⚙️ Painel Administrativo</h2>
 
-  <label>Forma de pagamento</label>
+    <button class="dark" onclick="logoutAdmin()">Sair</button>
 
-  <select id="payment">
+    <hr>
 
-    <option value="">
-      Escolha...
-    </option>
+    <h3>Configurações da loja</h3>
 
-    <option>
-      Pix
-    </option>
+    <input id="newStoreName" placeholder="Nome da loja">
+    <input id="newDescription" placeholder="Descrição">
 
-    <option>
-      Dinheiro
-    </option>
+    <button class="yellow" onclick="saveStore()">Salvar informações</button>
 
-    <option>
-      Cartão
-    </option>
+    <hr>
 
-  </select>
+    <h3>➕ Adicionar prato</h3>
 
-  <label
-    id="changeLabel"
-    class="hidden">
-    Troco para quanto?
-  </label>
+    <input id="foodName" placeholder="Nome do prato">
+    <input id="foodPrice" type="number" step="0.01" placeholder="Preço">
+    <textarea id="foodDescription" placeholder="Descrição"></textarea>
 
-  <input
-    id="change"
-    class="hidden"
-    placeholder="Ex.: R$ 50,00">
+    <button class="red" onclick="addFood()">Adicionar prato</button>
 
-  <div class="row">
+    <hr>
 
-    <button
-      class="yellow"
-      onclick="closeCheckout()">
-      Voltar
-    </button>
+    <h3>🍽️ Pratos cadastrados</h3>
 
-    <button
-      class="red"
-      onclick="sendWhatsApp()">
-      Enviar pedido no WhatsApp
-    </button>
+    <div id="adminFoods"></div>
 
-  </div>
+    <hr>
 
-</div>
+    <h3>🔑 Alterar senha</h3>
 
+    <input type="password" id="newPassword" placeholder="Nova senha">
 
-<!-- =========================
-     ADMIN
-========================= -->
+    <button class="yellow" onclick="changePassword()">Alterar senha</button>
 
-<div id="admin" class="box wrap hidden">
-
-  <h2>Área administrativa</h2>
-
-  <p class="muted">
-    Cadastre, edite, publique ou remova as refeições.
-  </p>
-
-
-  <div id="loginBox">
-
-    <label>
-      Senha administrativa
-    </label>
-
-    <input
-      id="adminPassword"
-      type="password"
-      placeholder="Senha">
-
-    <button
-      class="red"
-      onclick="loginAdmin()">
-      Entrar
-    </button>
-
-  </div>
-
-
-  <div id="panel" class="hidden">
-
-    <button
-      class="yellow"
-      onclick="logoutAdmin()">
-      Sair
-    </button>
-
-    <button
-      class="yellow"
-      onclick="changePassword()">
-      Mudar senha
-    </button>
-
-
-    <h3>Nova refeição</h3>
-
-    <input
-      id="foodName"
-      placeholder="Nome da refeição">
-
-    <input
-      id="foodPrice"
-      type="number"
-      step="0.01"
-      placeholder="Preço">
-
-    <input
-      id="foodDesc"
-      placeholder="Descrição">
-
-    <input
-      id="foodImage"
-      placeholder="URL da imagem (opcional)">
-
-    <label>
-      <input
-        id="foodPublished"
-        type="checkbox"
-        checked>
-
-      Publicar para clientes
-    </label>
-
-    <br><br>
-
-    <button
-      class="red"
-      onclick="addFood()">
-      Adicionar refeição
-    </button>
-
-
-    <h3>
-      Refeições cadastradas
-    </h3>
-
-    <div id="adminList"></div>
-
-  </div>
+  </section>
 
 </div>
-
 
 <script>
 
-  /* ==========================================
-     SUPABASE
-  ========================================== */
+/* =========================
+   CONFIGURAÇÕES
+========================= */
 
-  const SUPABASE_URL =
-    "https://dnrxkaikqmobsroqngix.supabase.co";
+const SUPABASE_URL =
+"https://dnrxkaikqmobsroqngix.supabase.co";
 
+const SUPABASE_REST =
+SUPABASE_URL + "/rest/v1";
 
-  /*
-     COLE AQUI A CHAVE PUBLICÁVEL DO SUPABASE.
+/*
+ COLOQUE AQUI A ANON KEY DO SUPABASE
+*/
+const SUPABASE_KEY = "COLE_SUA_ANON_KEY_AQUI";
 
-     NÃO COLOQUE A SERVICE_ROLE / SECRET KEY.
-  */
-
-  const SUPABASE_KEY =
-    "COLE_SUA_CHAVE_PUBLICAVEL_AQUI";
-
-
-  /*
-     COLOQUE AQUI O WHATSAPP QUE VAI RECEBER
-     OS PEDIDOS.
-
-     EXEMPLO:
-     5511999999999
-  */
-
-  const WHATSAPP =
-    "5599999999999";
+/*
+ COLOQUE AQUI O NÚMERO DO WHATSAPP
+ SOMENTE NÚMEROS.
+ EXEMPLO:
+ 5521999999999
+*/
+const WHATSAPP = "SEU_NUMERO_AQUI";
 
 
-  const TABLE =
-    "Refeições";
+/* =========================
+   DADOS LOCAIS
+========================= */
+
+let foods = JSON.parse(localStorage.getItem("foods") || "[]");
+
+let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+let store = JSON.parse(
+  localStorage.getItem("store") ||
+  '{"name":"Meu Cardápio","description":"Faça seu pedido"}'
+);
+
+let password =
+localStorage.getItem("adminPassword") || "1234";
 
 
-  let supabase = null;
+/* =========================
+   INICIALIZAÇÃO
+========================= */
 
-  let foods = [];
+document.addEventListener("DOMContentLoaded", () => {
 
-  let cart = [];
+  document.getElementById("storeName").innerText =
+    store.name;
+
+  document.getElementById("storeDescription").innerText =
+    store.description;
+
+  document.getElementById("newStoreName").value =
+    store.name;
+
+  document.getElementById("newDescription").value =
+    store.description;
+
+  renderMenu();
+  renderCart();
+
+});
 
 
-  const $ = id =>
-    document.getElementById(id);
+/* =========================
+   STATUS
+========================= */
+
+function showStatus(text){
+
+  const status =
+    document.getElementById("status");
+
+  status.innerText = text;
+  status.style.display = "block";
+
+  setTimeout(() => {
+    status.style.display = "none";
+  },3000);
+}
 
 
-  /* ==========================================
-     INICIAR SUPABASE
-  ========================================== */
+/* =========================
+   CARDÁPIO
+========================= */
 
-  if(
-    SUPABASE_KEY &&
-    !SUPABASE_KEY.includes(
-      "COLE_SUA_CHAVE"
-    )
-  ){
+function renderMenu(){
 
-    supabase =
-      window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-      );
+  const menu =
+    document.getElementById("menu");
 
+  menu.innerHTML = "";
+
+  if(foods.length === 0){
+
+    menu.innerHTML =
+      "<p>Nenhum prato cadastrado ainda.</p>";
+
+    return;
   }
 
+  foods.forEach(food => {
 
-  /* ==========================================
-     DINHEIRO
-  ========================================== */
+    const div =
+      document.createElement("div");
 
-  function money(value){
+    div.className = "card";
 
-    return Number(
-      value || 0
-    ).toLocaleString(
-      "pt-BR",
-      {
-        style:"currency",
-        currency:"BRL"
-      }
-    );
+    div.innerHTML = `
+      <h3>${escapeHTML(food.name)}</h3>
 
-  }
+      <p>${escapeHTML(food.description || "")}</p>
 
+      <div class="price">
+        R$ ${Number(food.price).toFixed(2).replace(".",",")}
+      </div>
 
-  /* ==========================================
-     STATUS
-  ========================================== */
-
-  function showStatus(
-    text,
-    error=false
-  ){
-
-    $("status").textContent =
-      text;
-
-    $("status").style.background =
-      error
-      ? "#ffd7d7"
-      : "#fff0c7";
-
-  }
-
-
-  /* ==========================================
-     CARREGAR CARDÁPIO
-  ========================================== */
-
-  async function loadFoods(){
-
-    if(!supabase){
-
-      showStatus(
-        "Falta colocar a chave pública do Supabase no código.",
-        true
-      );
-
-      return;
-    }
-
-
-    showStatus(
-      "Carregando cardápio..."
-    );
-
-
-    const {
-      data,
-      error
-    } =
-      await supabase
-      .from(TABLE)
-      .select("*")
-      .eq("publicado",true)
-      .order(
-        "id",
-        {
-          ascending:false
-        }
-      );
-
-
-    if(error){
-
-      console.error(error);
-
-      showStatus(
-        "Erro ao carregar: " +
-        error.message,
-        true
-      );
-
-      return;
-    }
-
-
-    foods =
-      data || [];
-
-
-    renderMenu();
-
-
-    showStatus(
-      "Cardápio carregado."
-    );
-
-  }
-
-
-  /* ==========================================
-     MOSTRAR CARDÁPIO
-  ========================================== */
-
-  function renderMenu(){
-
-    const menu =
-      $("menu");
-
-
-    menu.innerHTML = "";
-
-
-    if(!foods.length){
-
-      $("empty")
-        .classList
-        .remove("hidden");
-
-      return;
-    }
-
-
-    $("empty")
-      .classList
-      .add("hidden");
-
-
-    foods.forEach(food => {
-
-      const card =
-        document.createElement(
-          "article"
-        );
-
-
-      card.className =
-        "card";
-
-
-      card.innerHTML = `
-
-        ${
-          food.imagem
-          ?
-          `<img
-            src="${escapeHtml(food.imagem)}"
-            alt="">`
-          :
-          ""
-        }
-
-        <h3>
-          ${escapeHtml(
-            food.nome ||
-            "Refeição"
-          )}
-        </h3>
-
-        <p class="muted">
-          ${escapeHtml(
-            food.descricao ||
-            ""
-          )}
-        </p>
-
-        <p class="price">
-          ${money(food.preco)}
-        </p>
-
-        <button
-          class="yellow"
-          onclick="addToCart(${Number(food.id)})">
-
-          Adicionar
-
-        </button>
-
-      `;
-
-
-      menu.appendChild(card);
-
-    });
-
-  }
-
-
-  /* ==========================================
-     SEGURANÇA HTML
-  ========================================== */
-
-  function escapeHtml(value){
-
-    return String(
-      value ?? ""
-    )
-    .replaceAll(
-      "&",
-      "&amp;"
-    )
-    .replaceAll(
-      "<",
-      "&lt;"
-    )
-    .replaceAll(
-      ">",
-      "&gt;"
-    )
-    .replaceAll(
-      '"',
-      "&quot;"
-    )
-    .replaceAll(
-      "'",
-      "&#039;"
-    );
-
-  }
-
-
-  /* ==========================================
-     CARRINHO
-  ========================================== */
-
-  function addToCart(id){
-
-    const food =
-      foods.find(
-        x =>
-        Number(x.id) ===
-        Number(id)
-      );
-
-
-    if(!food)
-      return;
-
-
-    const existing =
-      cart.find(
-        x =>
-        Number(x.id) ===
-        Number(id)
-      );
-
-
-    if(existing){
-
-      existing.qty++;
-
-    }else{
-
-      cart.push({
-        ...food,
-        qty:1
-      });
-
-    }
-
-
-    updateCart();
-
-  }
-
-
-  function updateCart(){
-
-    $("cartCount")
-      .textContent =
-      cart.reduce(
-        (total,item) =>
-        total + item.qty,
-        0
-      );
-
-  }
-
-
-  /* ==========================================
-     ABRIR CHECKOUT
-  ========================================== */
-
-  function openCheckout(){
-
-    $("checkout")
-      .classList
-      .remove("hidden");
-
-
-    $("admin")
-      .classList
-      .add("hidden");
-
-
-    renderCart();
-
-
-    window.scrollTo({
-      top:document.body.scrollHeight,
-      behavior:"smooth"
-    });
-
-  }
-
-
-  function closeCheckout(){
-
-    $("checkout")
-      .classList
-      .add("hidden");
-
-
-    window.scrollTo({
-      top:0,
-      behavior:"smooth"
-    });
-
-  }
-
-
-  /* ==========================================
-     MOSTRAR CARRINHO
-  ========================================== */
-
-  function renderCart(){
-
-    const box =
-      $("cartList");
-
-
-    if(!cart.length){
-
-      box.innerHTML =
-        "<p>Nenhum item no pedido.</p>";
-
-      return;
-    }
-
-
-    box.innerHTML =
-      cart.map(
-        (item,index) => `
-
-          <div class="item-admin">
-
-            <b>
-              ${escapeHtml(item.nome)}
-            </b>
-
-            <br>
-
-            ${item.qty}
-            ×
-            ${money(item.preco)}
-
-
-            <div class="row">
-
-              <button
-                onclick="
-                  cart[${index}].qty--;
-
-                  if(
-                    cart[${index}].qty <= 0
-                  ){
-                    cart.splice(${index},1);
-                  }
-
-                  updateCart();
-                  renderCart();
-                ">
-
-                −
-
-              </button>
-
-
-              <button
-                onclick="
-                  cart[${index}].qty++;
-                  updateCart();
-                  renderCart();
-                ">
-
-                +
-
-              </button>
-
-
-              <button
-                class="danger"
-                onclick="
-                  cart.splice(${index},1);
-                  updateCart();
-                  renderCart();
-                ">
-
-                Remover
-
-              </button>
-
-            </div>
-
-          </div>
-
-        `
-      ).join("");
-
-
-    const total =
-      cart.reduce(
-        (sum,item) =>
-        sum +
-        Number(item.preco) *
-        item.qty,
-        0
-      );
-
-
-    box.innerHTML += `
-
-      <h3>
-        Total: ${money(total)}
-      </h3>
-
+      <button class="buy"
+        onclick="addToCart(${food.id})">
+        Adicionar ao pedido
+      </button>
     `;
 
+    menu.appendChild(div);
+
+  });
+
+}
+
+
+/* =========================
+   CARRINHO
+========================= */
+
+function addToCart(id){
+
+  const food =
+    foods.find(f => f.id === id);
+
+  if(!food) return;
+
+  cart.push(food);
+
+  localStorage.setItem(
+    "cart",
+    JSON.stringify(cart)
+  );
+
+  renderCart();
+
+  showStatus("Prato adicionado ao pedido!");
+}
+
+
+function removeFromCart(index){
+
+  cart.splice(index,1);
+
+  localStorage.setItem(
+    "cart",
+    JSON.stringify(cart)
+  );
+
+  renderCart();
+}
+
+
+function renderCart(){
+
+  const section =
+    document.getElementById("cartSection");
+
+  const cartDiv =
+    document.getElementById("cart");
+
+  cartDiv.innerHTML = "";
+
+  if(cart.length === 0){
+
+    section.classList.add("hidden");
+
+    document.getElementById("total").innerText =
+      "0,00";
+
+    return;
   }
 
+  section.classList.remove("hidden");
 
-  /* ==========================================
-     PAGAMENTO
-  ========================================== */
+  let total = 0;
 
-  $("payment")
-    .addEventListener(
-      "change",
-      function(){
+  cart.forEach((item,index) => {
 
-        const isMoney =
-          this.value ===
-          "Dinheiro";
+    total += Number(item.price);
 
+    const div =
+      document.createElement("div");
 
-        $("change")
-          .classList
-          .toggle(
-            "hidden",
-            !isMoney
-          );
+    div.className = "item";
 
+    div.innerHTML = `
+      <strong>${escapeHTML(item.name)}</strong>
+      <br>
+      R$ ${Number(item.price).toFixed(2).replace(".",",")}
+      <br>
+      <button class="red"
+        onclick="removeFromCart(${index})">
+        Remover
+      </button>
+    `;
 
-        $("changeLabel")
-          .classList
-          .toggle(
-            "hidden",
-            !isMoney
-          );
+    cartDiv.appendChild(div);
 
-      }
-    );
+  });
 
+  document.getElementById("total").innerText =
+    total.toFixed(2).replace(".",",");
 
-  /* ==========================================
-     WHATSAPP
-  ========================================== */
-
-  function sendWhatsApp(){
-
-    if(!cart.length){
-
-      alert(
-        "Adicione pelo menos uma refeição."
-      );
-
-      return;
-    }
+}
 
 
-    const name =
-      $("customerName")
-      .value
-      .trim();
+/* =========================
+   CHECKOUT
+========================= */
+
+function openCheckout(){
+
+  if(cart.length === 0){
+
+    showStatus("Adicione algum prato primeiro.");
+
+    return;
+  }
+
+  document.getElementById("checkout")
+    .classList.remove("hidden");
+
+  window.scrollTo({
+    top:document.body.scrollHeight,
+    behavior:"smooth"
+  });
+
+}
 
 
-    const address =
-      $("customerAddress")
-      .value
-      .trim();
+function closeCheckout(){
+
+  document.getElementById("checkout")
+    .classList.add("hidden");
+
+}
 
 
-    const payment =
-      $("payment")
-      .value;
+/* =========================
+   WHATSAPP
+========================= */
 
+function sendOrder(){
 
-    if(
-      !name ||
-      !address ||
-      !payment
-    ){
+  const name =
+    document.getElementById("customerName").value.trim();
 
-      alert(
-        "Preencha nome, endereço e forma de pagamento."
-      );
+  const address =
+    document.getElementById("customerAddress").value.trim();
 
-      return;
-    }
+  const payment =
+    document.getElementById("payment").value;
 
+  const observation =
+    document.getElementById("observation").value.trim();
 
-    const total =
-      cart.reduce(
-        (sum,item) =>
-        sum +
-        Number(item.preco) *
-        item.qty,
-        0
-      );
+  if(!name){
 
+    alert("Digite seu nome.");
 
-    let message =
-      "🍽️ *NOVO PEDIDO*%0A%0A";
+    return;
+  }
 
+  if(!address){
+
+    alert("Digite seu endereço.");
+
+    return;
+  }
+
+  if(!payment){
+
+    alert("Escolha a forma de pagamento.");
+
+    return;
+  }
+
+  let message =
+    "🛵 *NOVO PEDIDO*%0A%0A";
+
+  message +=
+    "👤 *Nome:* " +
+    encodeURIComponent(name) +
+    "%0A";
+
+  message +=
+    "📍 *Endereço:* " +
+    encodeURIComponent(address) +
+    "%0A";
+
+  message +=
+    "💳 *Pagamento:* " +
+    encodeURIComponent(payment) +
+    "%0A%0A";
+
+  message +=
+    "🍽️ *PEDIDO:*%0A";
+
+  let total = 0;
+
+  cart.forEach(item => {
+
+    total += Number(item.price);
 
     message +=
-      "👤 *Nome:* " +
-      encodeURIComponent(name) +
+      "• " +
+      encodeURIComponent(item.name) +
+      " - R$ " +
+      Number(item.price)
+        .toFixed(2)
+        .replace(".",",") +
       "%0A";
 
+  });
+
+  message +=
+    "%0A💰 *TOTAL: R$ " +
+    total.toFixed(2).replace(".",",") +
+    "*%0A";
+
+  if(observation){
 
     message +=
-      "📍 *Endereço:* " +
-      encodeURIComponent(address) +
-      "%0A";
+      "%0A📝 *Observação:* " +
+      encodeURIComponent(observation);
+
+  }
+
+  const url =
+    "https://wa.me/" +
+    WHATSAPP +
+    "?text=" +
+    message;
+
+  window.open(url,"_blank");
+
+}
 
 
-    message +=
-      "💳 *Pagamento:* " +
-      encodeURIComponent(payment) +
-      "%0A";
+/* =========================
+   ADMIN
+========================= */
+
+function openAdmin(){
+
+  document.getElementById("menuSection")
+    .classList.add("hidden");
+
+  document.getElementById("cartSection")
+    .classList.add("hidden");
+
+  document.getElementById("checkout")
+    .classList.add("hidden");
+
+  document.getElementById("adminLogin")
+    .classList.remove("hidden");
+
+}
 
 
-    if(
-      payment === "Dinheiro" &&
-      $("change").value.trim()
-    ){
+function closeAdmin(){
 
-      message +=
-        "💵 *Troco para:* " +
-        encodeURIComponent(
-          $("change").value.trim()
-        ) +
-        "%0A";
+  document.getElementById("adminLogin")
+    .classList.add("hidden");
 
-    }
+  document.getElementById("adminPanel")
+    .classList.add("hidden");
 
+  document.getElementById("menuSection")
+    .classList.remove("hidden");
 
-    message +=
-      "%0A*ITENS:*%0A";
+  renderMenu();
+  renderCart();
+
+}
 
 
-    cart.forEach(item => {
+function loginAdmin(){
 
-      message +=
-        "• " +
-        item.qty +
-        "x " +
-        encodeURIComponent(
-          item.nome
-        ) +
-        " — " +
-        encodeURIComponent(
-          money(
-            Number(item.preco) *
-            item.qty
-          )
-        ) +
-        "%0A";
+  const entered =
+    document.getElementById("adminPassword").value;
 
-    });
+  if(entered !== password){
 
+    alert("Senha incorreta.");
 
-    message +=
-      "%0A💰 *TOTAL: " +
-      encodeURIComponent(
-        money(total)
-      ) +
-      "*";
+    return;
+  }
+
+  document.getElementById("adminLogin")
+    .classList.add("hidden");
+
+  document.getElementById("adminPanel")
+    .classList.remove("hidden");
+
+  renderAdminFoods();
+
+}
 
 
-    window.open(
-      "https://wa.me/" +
-      WHATSAPP +
-      "?text=" +
-      message,
-      "_blank"
+function logoutAdmin(){
+
+  closeAdmin();
+
+}
+
+
+/* =========================
+   ADICIONAR PRATO
+========================= */
+
+function addFood(){
+
+  const name =
+    document.getElementById("foodName")
+      .value.trim();
+
+  const price =
+    parseFloat(
+      document.getElementById("foodPrice").value
     );
 
+  const description =
+    document.getElementById("foodDescription")
+      .value.trim();
+
+  if(!name){
+
+    alert("Digite o nome do prato.");
+
+    return;
   }
 
+  if(isNaN(price) || price <= 0){
 
-  /* ==========================================
-     ADMIN
-  ========================================== */
+    alert("Digite um preço válido.");
 
-  function openAdmin(){
-
-    $("admin")
-      .classList
-      .remove("hidden");
-
-
-    $("checkout")
-      .classList
-      .add("hidden");
-
-
-    window.scrollTo({
-      top:document.body.scrollHeight,
-      behavior:"smooth"
-    });
-
+    return;
   }
 
+  const food = {
 
-  /* ==========================================
-     SENHA
-  ========================================== */
+    id:Date.now(),
 
-  function getPassword(){
+    name:name,
 
-    return (
-      localStorage.getItem(
-        "cardapio_admin_password"
-      )
-      ||
-      "123456"
-    );
+    price:price,
 
+    description:description
+
+  };
+
+  foods.push(food);
+
+  localStorage.setItem(
+    "foods",
+    JSON.stringify(foods)
+  );
+
+  document.getElementById("foodName").value = "";
+  document.getElementById("foodPrice").value = "";
+  document.getElementById("foodDescription").value = "";
+
+  renderMenu();
+  renderAdminFoods();
+
+  showStatus("Prato adicionado!");
+
+}
+
+
+/* =========================
+   ADMIN PRATOS
+========================= */
+
+function renderAdminFoods(){
+
+  const div =
+    document.getElementById("adminFoods");
+
+  div.innerHTML = "";
+
+  if(foods.length === 0){
+
+    div.innerHTML =
+      "<p>Nenhum prato cadastrado.</p>";
+
+    return;
   }
 
+  foods.forEach(food => {
 
-  function loginAdmin(){
+    const item =
+      document.createElement("div");
 
-    const password =
-      $("adminPassword")
-      .value;
+    item.className = "item";
+
+    item.innerHTML = `
+      <strong>${escapeHTML(food.name)}</strong>
+      <br>
+      R$ ${Number(food.price).toFixed(2).replace(".",",")}
+      <br>
+      ${escapeHTML(food.description || "")}
+      <br><br>
+
+      <button class="red"
+        onclick="deleteFood(${food.id})">
+        Excluir
+      </button>
+    `;
+
+    div.appendChild(item);
+
+  });
+
+}
 
 
-    if(
-      password ===
-      getPassword()
-    ){
+function deleteFood(id){
 
-      $("loginBox")
-        .classList
-        .add("hidden");
+  if(!confirm("Excluir este prato?")) return;
+
+  foods =
+    foods.filter(food => food.id !== id);
+
+  localStorage.setItem(
+    "foods",
+    JSON.stringify(foods)
+  );
+
+  renderMenu();
+  renderAdminFoods();
+
+}
 
 
-      $("panel")
-        .classList
-        .remove("hidden");
+/* =========================
+   LOJA
+========================= */
 
+function saveStore(){
 
-      renderAdmin();
+  const name =
+    document.getElementById("newStoreName")
+      .value.trim();
 
-    }else{
+  const description =
+    document.getElementById("newDescription")
+      .value.trim();
 
-      alert(
-        "Senha incorreta."
-      );
+  if(!name){
 
-    }
+    alert("Digite o nome da loja.");
 
+    return;
   }
 
+  store = {
 
-  function logoutAdmin(){
+    name:name,
 
-    $("panel")
-      .classList
-      .add("hidden");
+    description:description
+
+  };
+
+  localStorage.setItem(
+    "store",
+    JSON.stringify(store)
+  );
+
+  document.getElementById("storeName")
+    .innerText = name;
+
+  document.getElementById("storeDescription")
+    .innerText = description;
+
+  showStatus("Informações salvas!");
+
+}
 
 
-    $("loginBox")
-      .classList
-      .remove("hidden");
+/* =========================
+   SENHA
+========================= */
 
+function changePassword(){
 
-    $("adminPassword")
-      .value = "";
+  const newPass =
+    document.getElementById("newPassword")
+      .value.trim();
 
+  if(newPass.length < 4){
+
+    alert("A senha precisa ter pelo menos 4 caracteres.");
+
+    return;
   }
 
+  password = newPass;
 
-  function changePassword(){
+  localStorage.setItem(
+    "adminPassword",
+    password
+  );
 
-    const oldPassword =
-      prompt(
-        "Digite a senha atual:"
-      );
+  document.getElementById("newPassword")
+    .value = "";
 
+  alert("Senha alterada com sucesso!");
 
-    if(
-      oldPassword !==
-      getPassword()
-    ){
+}
 
-      alert(
-        "Senha atual incorreta."
-      );
 
-      return;
-    }
+/* =========================
+   SEGURANÇA HTML
+========================= */
 
+function escapeHTML(text){
 
-    const newPassword =
-      prompt(
-        "Digite a nova senha:"
-      );
+  const div =
+    document.createElement("div");
 
+  div.textContent = text;
 
-    if(
-      !newPassword ||
-      newPassword.length < 4
-    ){
+  return div.innerHTML;
 
-      alert(
-        "A nova senha precisa ter pelo menos 4 caracteres."
-      );
+}
 
-      return;
-    }
+</script>
 
-
-    localStorage.setItem(
-      "cardapio_admin_password",
-      newPassword
-    );
-
-
-    alert(
-      "Senha alterada!"
-    );
-
-  }
-
-
-  /* ==========================================
-     ADICIONAR REFEIÇÃO
-  ========================================== */
-
-  async function addFood(){
-
-    if(!supabase){
-
-      alert(
-        "Configure a chave do Supabase primeiro."
-      );
-
-      return;
-    }
-
-
-    const nome =
-      $("foodName")
-      .value
-      .trim();
-
-
-    const preco =
-      Number(
-        $("foodPrice")
-        .value
-      );
-
-
-    const descricao =
-      $("foodDesc")
-      .value
-      .trim();
-
-
-    const imagem =
-      $("foodImage")
-      .value
-      .trim();
-
-
-    const publicado =
-      $("foodPublished")
-      .checked;
-
-
-    if(
-      !nome ||
-      !preco
-    ){
-
-      alert(
-        "Informe nome e preço."
-      );
-
-      return;
-    }
-
-
-    const payload = {
-
-      nome:
-        nome,
-
-      preco:
-        preco,
-
-      descricao:
-        descricao,
-
-      imagem:
-        imagem,
-
-      publicado:
-        publicado
-
-    };
-
-
-    const {
-      error
-    } =
-      await supabase
-      .from(TABLE)
-      .insert(payload);
-
-
-    if(error){
-
-      console.error(error);
-
-      alert(
-        "Erro ao cadastrar: " +
-        error.message
-      );
-
-      return;
-    }
-
-
-    $("foodName")
-      .value = "";
-
-
-    $("foodPrice")
-      .value = "";
-
-
-    $("foodDesc")
-      .value = "";
-
-
-    $("foodImage")
-      .value = "";
-
-
-    $("foodPublished")
-      .checked = true;
-
-
-    alert(
-      "Refeição cadastrada!"
-    );
-
-
-    await loadFoods();
-
-    await renderAdmin();
-
-  }
-
-
-  /* ==========================================
-     LISTAR ADMIN
-  ========================================== */
-
-  async function renderAdmin(){
-
-    if(!supabase)
-      return;
-
-
-    const {
-      data,
-      error
-    } =
-      await supabase
-      .from(TABLE)
-      .select("*")
-      .order(
-        "id",
-        {
-          ascending:false
-        }
-      );
-
-
-    if(error){
-
-      $("adminList")
-        .innerHTML =
-        "<p>Erro: " +
-        escapeHtml(
-          error.message
-        ) +
-        "</p>";
-
-      return;
-    }
-
-
-    $("adminList")
-      .innerHTML =
-      (data || [])
-      .map(
-        food => `
-
-          <div class="item-admin">
-
-            <b>
-              ${escapeHtml(
-                food.nome
-              )}
-            </b>
-
-            —
-            ${money(food.preco)}
-
-            <br><br>
-
-            <span>
-
-              ${
-                food.publicado
-                ?
-                "🟢 Publicado"
-                :
-                "🔴 Oculto"
-              }
-
-            </span>
-
-            <div class="row">
-
-              <button
-                class="yellow"
-                onclick="
-                  togglePublished(
-                    ${Number(food.id)},
-                    ${!food.publicado}
-                  )
-                ">
-
-                ${
-                  food.publicado
-                  ?
-                  "Ocultar"
-                  :
-                  "Publicar"
-                }
-
-              </button>
-
-
-              <button
-                class="danger"
-                onclick="
-                  deleteFood(
-                    ${Number(food.id)}
-                  )
-                
+</body>
+      </html>
