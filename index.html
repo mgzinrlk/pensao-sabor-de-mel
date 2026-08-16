@@ -223,6 +223,15 @@ Total: R$ <span id="totalPedido">0,00</span>
 
 let pratos=JSON.parse(localStorage.getItem("pratos")||"[]");
 
+if(pratos.length===0){
+pratos=[
+{nome:"Arroz, feijão e frango",descricao:"Arroz, feijão, frango grelhado e salada",preco:15},
+{nome:"Bife acebolado",descricao:"Arroz, feijão, bife acebolado e salada",preco:18},
+{nome:"Frango à milanesa",descricao:"Arroz, feijão, frango à milanesa e salada",preco:17}
+];
+localStorage.setItem("pratos",JSON.stringify(pratos));
+}
+
 let carrinho=JSON.parse(localStorage.getItem("carrinho")||"[]");
 
 let config=JSON.parse(localStorage.getItem("config")||JSON.stringify({
