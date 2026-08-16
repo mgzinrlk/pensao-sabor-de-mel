@@ -2,61 +2,157 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Pensão Sabor de Mel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cardápio de Quentinha</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#f8f0e5;color:#43200f}
-header{background:#fff;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;gap:15px;position:sticky;top:0;z-index:20;box-shadow:0 2px 10px #0002}
-.logo{font-size:26px;font-weight:900;color:#e5281b}
-.logo span{color:#e99a00}
-button{border:0;border-radius:12px;padding:13px 18px;font-size:16px;font-weight:bold;cursor:pointer}
-.btn{background:#ed241b;color:#fff}
-.btn2{background:#fff;color:#df241b;border:2px solid #df241b}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
 
-.hero{padding:80px 7%;min-height:470px;background:linear-gradient(100deg,#623b29,#e9ded0);color:#fff}
-.hero small{color:#ffbd00;font-weight:bold;letter-spacing:4px}
-.hero h1{font-size:54px;max-width:700px;margin:25px 0}
-.hero h1 span{color:#ffc400}
-.hero p{font-size:21px;line-height:1.5;max-width:650px;margin-bottom:30px}
+body {
+  background: #f4f4f4;
+  color: #222;
+  padding-bottom: 40px;
+}
 
-section{padding:55px 6%}
-h2{text-align:center;font-size:38px;margin-bottom:35px}
-.menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
-.card{background:#fff;border-radius:18px;padding:20px;box-shadow:0 5px 20px #0002}
-.card img{width:100%;height:170px;object-fit:cover;border-radius:12px;margin-bottom:15px}
-.card h3{font-size:23px;margin-bottom:8px}
-.card p{color:#765f50;margin-bottom:15px}
-.price{font-size:21px;font-weight:bold;color:#d92319;margin-bottom:15px}
+header {
+  background: #111;
+  color: white;
+  text-align: center;
+  padding: 25px 15px;
+}
 
-.tamanhos{margin:15px 0}
-.tamanho{display:block;border:2px solid #ddd;border-radius:10px;padding:12px;margin:8px 0;background:#fff}
-.tamanho input{width:auto;margin-right:8px}
+header h1 {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
 
-footer{text-align:center;padding:35px;background:#3e1b0b;color:#fff}
-.admin-link{background:none;color:#aaa;font-size:12px;margin-top:12px}
+header p {
+  color: #ddd;
+}
 
-.cart{position:fixed;right:18px;bottom:18px;background:#ed241b;color:#fff;border-radius:50px;padding:16px 22px;z-index:30;box-shadow:0 5px 20px #0005}
+.container {
+  width: 94%;
+  max-width: 650px;
+  margin: 20px auto;
+}
 
-.modal{display:none;position:fixed;inset:0;background:#0009;z-index:100;padding:15px;overflow:auto}
-.box{background:#fff;max-width:700px;margin:25px auto;border-radius:18px;padding:24px}
-.close{float:right;background:#eee;padding:7px 11px}
-input,textarea,select{width:100%;padding:13px;margin:7px 0 14px;border:1px solid #ccc;border-radius:10px;font-size:16px}
-label{font-weight:bold}
-hr{border:0;border-top:1px solid #ddd;margin:25px 0}
-.admin-card{background:#f5eee5;padding:15px;border-radius:12px;margin:10px 0}
-.admin-card button{padding:8px 11px;margin-top:8px;font-size:13px}
-.order-item{padding:12px 0;border-bottom:1px solid #ddd}
-.total{font-size:24px;font-weight:bold;color:#d92319;margin:20px 0}
-.pix{background:#fff5d8;border:2px dashed #d99d00;border-radius:15px;padding:20px;margin-top:20px}
-.pix code{display:block;background:#fff;padding:12px;word-break:break-all;margin:10px 0;border-radius:8px}
-.success{background:#e7f8e7;padding:15px;border-radius:12px;margin-top:15px}
-.empty{text-align:center;padding:30px;font-size:18px}
+.card,
+.pedido {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.08);
+}
 
-@media(max-width:600px){
-.hero h1{font-size:42px}
-.logo{font-size:21px}
+.card h2 {
+  margin-bottom: 8px;
+}
+
+.descricao {
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.preco {
+  font-size: 23px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-add {
+  width: 100%;
+  padding: 14px;
+  background: #111;
+  color: white;
+  font-size: 16px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 13px 0;
+  gap: 10px;
+}
+
+.item-info {
+  flex: 1;
+}
+
+.quantidade {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quantidade button {
+  width: 32px;
+  height: 32px;
+  background: #111;
+  color: white;
+  font-size: 18px;
+}
+
+.total {
+  text-align: right;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-top: 16px;
+  margin-bottom: 6px;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ccc;
+  border-radius: 9px;
+  font-size: 16px;
+}
+
+textarea {
+  min-height: 85px;
+  resize: vertical;
+}
+
+.whatsapp {
+  width: 100%;
+  padding: 15px;
+  margin-top: 20px;
+  background: #25D366;
+  color: white;
+  font-size: 17px;
+}
+
+.aviso {
+  background: #fff3cd;
+  color: #856404;
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 18px;
+  font-size: 14px;
 }
 </style>
 </head>
@@ -64,763 +160,514 @@ hr{border:0;border-top:1px solid #ddd;margin:25px 0}
 <body>
 
 <header>
-<div class="logo">PENSÃO <span>SABOR DE MEL</span></div>
-<button class="btn" onclick="abrirPedido()">🛒 Pedido (<span id="qtd">0</span>)</button>
+  <h1>🍽️ Cardápio</h1>
+  <p>Escolha sua quentinha e faça seu pedido</p>
 </header>
 
-<div class="hero">
-<small>PENSÃO SABOR DE MEL</small>
-<h1>Comida com sabor de <span>casa.</span></h1>
-<p>Uma opção para quem procura uma refeição caprichada em Santa Lúcia.</p>
-<button class="btn" onclick="document.getElementById('refeicoes').scrollIntoView()">Ver refeições</button>
-</div>
+<div class="container">
 
-<section id="refeicoes">
-<h2>🍽️ Refeições de hoje</h2>
-<div id="menu" class="menu"></div>
-</section>
+  <!-- QUENTINHA R$10 -->
 
-<footer>
-Pensão Sabor de Mel<br>
-Santa Lúcia - Duque de Caxias<br>
-<button class="admin-link" onclick="abrirADM()">🔐 Área ADM</button>
-</footer>
+  <div class="card">
+    <h2>🥡 Quentinha Econômica</h2>
+    <p class="descricao">Quentinha econômica</p>
 
-<button class="cart" onclick="abrirPedido()">🛒 Pedido (<span id="qtd2">0</span>)</button>
+    <div class="preco">
+      R$ 10,00
+    </div>
+
+    <button class="btn-add"
+      onclick="adicionar('Quentinha Econômica', 10)">
+      Adicionar ao pedido
+    </button>
+  </div>
 
 
-<!-- LOGIN -->
-<div class="modal" id="loginModal">
-<div class="box">
-<button class="close" onclick="fechar('loginModal')">✕</button>
-<h2>🔐 Área ADM</h2>
+  <!-- QUENTINHA PEQUENA -->
 
-<label>Senha</label>
-<input id="senhaADM" type="password" placeholder="Digite a senha">
+  <div class="card">
+    <h2>🥡 Quentinha Pequena</h2>
+    <p class="descricao">Quentinha pequena</p>
 
-<button class="btn" onclick="entrarADM()">Entrar</button>
+    <div class="preco">
+      R$ 18,00
+    </div>
 
-<p style="margin-top:15px;color:#777">
-Senha inicial: <b>1234</b>
-</p>
-</div>
-</div>
-
-
-<!-- ADM -->
-<div class="modal" id="admModal">
-<div class="box">
-<button class="close" onclick="fechar('admModal')">✕</button>
-
-<h2>⚙️ Painel ADM</h2>
-
-<h3>➕ Cadastrar refeição</h3>
-
-<label>Nome da refeição</label>
-<input id="nomePrato" placeholder="Ex: Frango assado">
-
-<label>Descrição</label>
-<textarea id="descPrato" placeholder="Descrição da refeição"></textarea>
-
-<label>Tipo de preço</label>
-<select id="tipoPrato" onchange="mostrarPrecos()">
-<option value="tamanhos">Grande / Pequena</option>
-<option value="promocao">Promoção - Quentinha R$ 10</option>
-</select>
-
-<div id="precosTamanho">
-
-<label>Preço Grande</label>
-<input id="precoGrande" type="number" value="21" step="0.01">
-
-<label>Preço Pequena</label>
-<input id="precoPequena" type="number" value="18" step="0.01">
-
-</div>
-
-<div id="precoPromocao" style="display:none">
-
-<label>Preço da quentinha</label>
-<input id="precoQuentinha" type="number" value="10" step="0.01">
-
-</div>
-
-<label>Imagem (opcional)</label>
-<input id="imgPrato" placeholder="Link da imagem">
-
-<button class="btn" onclick="salvarPrato()">Cadastrar refeição</button>
-
-<hr>
-
-<h3>💳 Pix</h3>
-
-<label>Nome do recebedor</label>
-<input id="pixNome" placeholder="Nome">
-
-<label>Chave Pix</label>
-<input id="pixChave" placeholder="Sua chave Pix">
-
-<label>Cidade</label>
-<input id="pixCidade" value="DUQUE DE CAXIAS">
-
-<button class="btn" onclick="salvarPix()">Salvar Pix</button>
-
-<hr>
-
-<h3>📱 WhatsApp</h3>
-
-<label>Número</label>
-<input id="whatsapp" value="5521974967664">
-
-<button class="btn" onclick="salvarWhats()">Salvar WhatsApp</button>
-
-<hr>
-
-<h3>🍽️ Refeições cadastradas</h3>
-<div id="listaADM"></div>
-
-<hr>
-
-<h3>🔑 Alterar senha</h3>
-<input id="novaSenha" type="password" placeholder="Nova senha">
-<button class="btn2" onclick="alterarSenha()">Alterar senha</button>
-
-</div>
-</div>
+    <button class="btn-add"
+      onclick="adicionar('Quentinha Pequena', 18)">
+      Adicionar ao pedido
+    </button>
+  </div>
 
 
-<!-- PEDIDO -->
-<div class="modal" id="pedidoModal">
-<div class="box">
+  <!-- QUENTINHA GRANDE -->
 
-<button class="close" onclick="fechar('pedidoModal')">✕</button>
+  <div class="card">
+    <h2>🥡 Quentinha Grande</h2>
+    <p class="descricao">Quentinha grande</p>
 
-<h2>🛒 Seu pedido</h2>
+    <div class="preco">
+      R$ 21,00
+    </div>
 
-<div id="itensPedido"></div>
+    <button class="btn-add"
+      onclick="adicionar('Quentinha Grande', 21)">
+      Adicionar ao pedido
+    </button>
+  </div>
 
-<div class="total">
-Total: R$ <span id="totalPedido">0,00</span>
-</div>
 
-<h3>Seus dados</h3>
+  <!-- PEDIDO -->
 
-<input id="clienteNome" placeholder="Seu nome">
+  <div class="pedido">
 
-<input id="clienteEndereco" placeholder="Endereço para entrega">
+    <h2>🛒 Seu pedido</h2>
 
-<input id="clienteObs" placeholder="Observação">
+    <div id="listaPedido">
+      <p>Nenhum item adicionado.</p>
+    </div>
 
-<button class="btn" onclick="gerarPagamento()">Continuar para pagamento</button>
+    <div class="total">
+      Total: R$ <span id="total">0,00</span>
+    </div>
 
-<div id="pagamento"></div>
 
-</div>
+    <h2 style="margin-top:25px;">
+      📋 Dados do cliente
+    </h2>
+
+
+    <label>Nome</label>
+
+    <input
+      type="text"
+      id="nome"
+      placeholder="Digite seu nome"
+    >
+
+
+    <label>Endereço</label>
+
+    <textarea
+      id="endereco"
+      placeholder="Digite seu endereço completo"
+    ></textarea>
+
+
+    <label>Forma de pagamento</label>
+
+    <select id="pagamento">
+
+      <option value="">
+        Selecione uma opção
+      </option>
+
+      <option value="Pix">
+        Pix
+      </option>
+
+      <option value="Dinheiro">
+        Dinheiro
+      </option>
+
+      <option value="Cartão">
+        Cartão
+      </option>
+
+    </select>
+
+
+    <div id="trocoArea" style="display:none;">
+
+      <label>
+        Troco para quanto?
+      </label>
+
+      <input
+        type="number"
+        id="troco"
+        placeholder="Ex: 50"
+      >
+
+    </div>
+
+
+    <div class="aviso">
+      Confira seu pedido e clique no botão abaixo.
+      O pedido será enviado para o WhatsApp.
+    </div>
+
+
+    <button
+      class="whatsapp"
+      onclick="enviarWhatsApp()">
+
+      📲 Confirmar pedido pelo WhatsApp
+
+    </button>
+
+  </div>
+
 </div>
 
 
 <script>
 
-let pratos=JSON.parse(localStorage.getItem("pratos")||"[]");
+/* ==========================================
+   NÚMERO DO WHATSAPP
+   ==========================================
 
-if(pratos.length===0){
-pratos=[
-{nome:"Arroz, feijão e frango",descricao:"Arroz, feijão, frango grelhado e salada",preco:15},
-{nome:"Bife acebolado",descricao:"Arroz, feijão, bife acebolado e salada",preco:18},
-{nome:"Frango à milanesa",descricao:"Arroz, feijão, frango à milanesa e salada",preco:17}
-];
-localStorage.setItem("pratos",JSON.stringify(pratos));
-}
+   COLOQUE O NÚMERO QUE VAI RECEBER OS PEDIDOS.
 
-let carrinho=JSON.parse(localStorage.getItem("carrinho")||"[]");
+   Exemplo:
+   5521999999999
 
-let config=JSON.parse(localStorage.getItem("config")||JSON.stringify({
-pixNome:"",
-pixChave:"",
-pixCidade:"DUQUE DE CAXIAS",
-whatsapp:"5521974967664",
-senha:"1234"
-}));
+   Sem +, espaços ou hífen.
+*/
 
-function dinheiro(v){
-return Number(v).toFixed(2).replace(".",",");
-}
+const NUMERO_WHATSAPP = "5521999999999";
 
-function salvar(){
-localStorage.setItem("pratos",JSON.stringify(pratos));
-localStorage.setItem("carrinho",JSON.stringify(carrinho));
-localStorage.setItem("config",JSON.stringify(config));
-}
 
-function carregar(){
+/* ==========================================
+   PEDIDOS
+   ========================================== */
 
-let menu=document.getElementById("menu");
-menu.innerHTML="";
+let pedido = [];
 
-if(pratos.length===0){
-menu.innerHTML="<div class='empty'>Nenhuma refeição cadastrada hoje.<br><br>Entre na Área ADM para cadastrar.</div>";
-}else{
 
-pratos.forEach((p,i)=>{
+/* ADICIONAR */
 
-let card=document.createElement("div");
-card.className="card";
+function adicionar(nome, preco) {
 
-let escolha="";
+  let item = pedido.find(
+    item => item.nome === nome
+  );
 
-if(p.tipo==="tamanhos"){
+  if (item) {
 
-escolha=`
-<div class="tamanhos">
-<label class="tamanho">
-<input type="radio" name="tamanho${i}" value="pequena">
-Pequena — R$ ${dinheiro(p.pequena)}
-</label>
+    item.quantidade++;
 
-<label class="tamanho">
-<input type="radio" name="tamanho${i}" value="grande" checked>
-Grande — R$ ${dinheiro(p.grande)}
-</label>
-</div>
-`;
+  } else {
 
-}else{
+    pedido.push({
+      nome: nome,
+      preco: preco,
+      quantidade: 1
+    });
 
-escolha=`
-<div class="tamanhos">
-<label class="tamanho">
-<input type="radio" name="tamanho${i}" value="quentinha" checked>
-🥡 Quentinha — R$ ${dinheiro(p.quentinha)}
-</label>
-</div>
-`;
+  }
 
-}
-
-card.innerHTML=`
-${p.img?`<img src="${p.img}" onerror="this.style.display='none'">`:``}
-
-<h3>${p.nome}</h3>
-<p>${p.desc||""}</p>
-
-${escolha}
-
-<button class="btn" onclick="adicionar(${i})">
-Adicionar ao pedido
-</button>
-`;
-
-menu.appendChild(card);
-
-});
-
-}
-
-atualizarQtd();
+  atualizarPedido();
 }
 
 
-function adicionar(i){
+/* AUMENTAR */
 
-let p=pratos[i];
-let tipo;
+function aumentar(nome) {
 
-if(p.tipo==="tamanhos"){
+  let item = pedido.find(
+    item => item.nome === nome
+  );
 
-let escolhido=document.querySelector('input[name="tamanho'+i+'"]:checked');
+  if (item) {
+    item.quantidade++;
+  }
 
-tipo=escolhido?escolhido.value:"grande";
-
-let preco=tipo==="grande"?p.grande:p.pequena;
-
-carrinho.push({
-nome:p.nome,
-tipo:tipo==="grande"?"Grande":"Pequena",
-preco:Number(preco)
-});
-
-}else{
-
-carrinho.push({
-nome:p.nome,
-tipo:"Quentinha",
-preco:Number(p.quentinha)
-});
-
-}
-
-salvar();
-atualizarQtd();
-
-alert("Adicionado ao pedido!");
-
+  atualizarPedido();
 }
 
 
-function atualizarQtd(){
-document.getElementById("qtd").innerText=carrinho.length;
-document.getElementById("qtd2").innerText=carrinho.length;
+/* DIMINUIR */
+
+function diminuir(nome) {
+
+  let item = pedido.find(
+    item => item.nome === nome
+  );
+
+  if (!item) return;
+
+  item.quantidade--;
+
+  if (item.quantidade <= 0) {
+
+    pedido = pedido.filter(
+      i => i.nome !== nome
+    );
+
+  }
+
+  atualizarPedido();
 }
 
 
-function abrirPedido(){
-document.getElementById("pedidoModal").style.display="block";
-mostrarPedido();
-}
+/* ATUALIZAR PEDIDO */
 
+function atualizarPedido() {
 
-function mostrarPedido(){
+  const lista =
+    document.getElementById("listaPedido");
 
-let area=document.getElementById("itensPedido");
+  if (pedido.length === 0) {
 
-if(carrinho.length===0){
+    lista.innerHTML =
+      "<p>Nenhum item adicionado.</p>";
 
-area.innerHTML="<div class='empty'>Seu pedido está vazio.</div>";
-document.getElementById("totalPedido").innerText="0,00";
-return;
+    document.getElementById("total")
+      .innerText = "0,00";
 
-}
-
-let total=0;
-area.innerHTML="";
-
-carrinho.forEach((p,i)=>{
-
-total+=Number(p.preco);
-
-area.innerHTML+=`
-<div class="order-item">
-
-<b>${p.nome}</b><br>
-${p.tipo} — R$ ${dinheiro(p.preco)}
-
-<br><br>
-
-<button onclick="remover(${i})">❌ Remover</button>
-
-</div>
-`;
-
-});
-
-document.getElementById("totalPedido").innerText=dinheiro(total);
-
-}
-
-
-function remover(i){
-carrinho.splice(i,1);
-salvar();
-mostrarPedido();
-atualizarQtd();
-}
-
-
-function abrirADM(){
-document.getElementById("loginModal").style.display="block";
-}
-
-
-function entrarADM(){
-
-if(document.getElementById("senhaADM").value===config.senha){
-
-fechar("loginModal");
-document.getElementById("admModal").style.display="block";
-carregarADM();
-
-}else{
-
-alert("Senha incorreta!");
-
-}
-
-}
-
-
-function mostrarPrecos(){
-
-let tipo=document.getElementById("tipoPrato").value;
-
-document.getElementById("precosTamanho").style.display=
-tipo==="tamanhos"?"block":"none";
-
-document.getElementById("precoPromocao").style.display=
-tipo==="promocao"?"block":"none";
-
-}
-
-
-function salvarPrato(){
-
-let nome=document.getElementById("nomePrato").value.trim();
-let desc=document.getElementById("descPrato").value.trim();
-let tipo=document.getElementById("tipoPrato").value;
-let img=document.getElementById("imgPrato").value.trim();
-
-if(!nome){
-alert("Digite o nome da refeição.");
-return;
-}
-
-let prato={
-nome,
-desc,
-tipo,
-img
-};
-
-if(tipo==="tamanhos"){
-
-prato.grande=Number(document.getElementById("precoGrande").value)||21;
-prato.pequena=Number(document.getElementById("precoPequena").value)||18;
-
-}else{
-
-prato.quentinha=Number(document.getElementById("precoQuentinha").value)||10;
-
-}
-
-pratos.push(prato);
-
-salvar();
-carregar();
-carregarADM();
-
-document.getElementById("nomePrato").value="";
-document.getElementById("descPrato").value="";
-document.getElementById("imgPrato").value="";
-
-alert("Refeição cadastrada!");
-
-}
-
-
-function carregarADM(){
-
-document.getElementById("pixNome").value=config.pixNome;
-document.getElementById("pixChave").value=config.pixChave;
-document.getElementById("pixCidade").value=config.pixCidade;
-document.getElementById("whatsapp").value=config.whatsapp;
-
-let lista=document.getElementById("listaADM");
-
-if(pratos.length===0){
-
-lista.innerHTML="<p>Nenhuma refeição cadastrada.</p>";
-
-}else{
-
-lista.innerHTML="";
-
-pratos.forEach((p,i)=>{
-
-let preco=p.tipo==="tamanhos"
-?`Grande R$ ${dinheiro(p.grande)} | Pequena R$ ${dinheiro(p.pequena)}`
-:`🥡 Quentinha R$ ${dinheiro(p.quentinha)}`;
-
-lista.innerHTML+=`
-
-<div class="admin-card">
-
-<b>${p.nome}</b><br>
-${preco}<br>
-
-<button class="btn2" onclick="excluirPrato(${i})">
-🗑️ Excluir
-</button>
-
-</div>
-
-`;
-
-});
-
-}
-
-}
-
-
-function excluirPrato(i){
-
-if(confirm("Excluir esta refeição?")){
-
-pratos.splice(i,1);
-
-salvar();
-carregar();
-carregarADM();
-
-}
-
-}
-
-
-function salvarPix(){
-
-config.pixNome=document.getElementById("pixNome").value;
-config.pixChave=document.getElementById("pixChave").value;
-config.pixCidade=document.getElementById("pixCidade").value;
-
-salvar();
-
-alert("Pix salvo!");
-
-}
-
-
-function salvarWhats(){
-
-config.whatsapp=document.getElementById("whatsapp").value.replace(/\D/g,"");
-
-salvar();
-
-alert("WhatsApp salvo!");
-
-}
-
-
-function alterarSenha(){
-
-let nova=document.getElementById("novaSenha").value;
-
-if(nova.length<4){
-
-alert("Use pelo menos 4 caracteres.");
-return;
-
-}
-
-config.senha=nova;
-
-salvar();
-
-alert("Senha alterada!");
-
-}
-
-
-function gerarPagamento(){
-
-if(carrinho.length===0){
-
-alert("Seu pedido está vazio.");
-return;
-
-}
-
-if(!config.pixChave){
-
-alert("O estabelecimento ainda não cadastrou o Pix.");
-return;
-
-}
-
-let nome=document.getElementById("clienteNome").value.trim();
-let endereco=document.getElementById("clienteEndereco").value.trim();
-let obs=document.getElementById("clienteObs").value.trim();
-
-if(!nome||!endereco){
-
-alert("Preencha seu nome e endereço.");
-return;
-
-}
-
-let total=carrinho.reduce((s,p)=>s+Number(p.preco),0);
-
-let pedido="";
-
-carrinho.forEach(p=>{
-pedido+=`• ${p.nome} - ${p.tipo} - R$ ${dinheiro(p.preco)}\n`;
-});
-
-let texto=
-`NOVO PEDIDO - PENSÃO SABOR DE MEL
-
-Cliente: ${nome}
-
-Endereço:
-${endereco}
-
-Pedido:
-${pedido}
-
-TOTAL: R$ ${dinheiro(total)}
-
-Observação:
-${obs||"Nenhuma"}
-
-Pagamento: Pix
-
-Após realizar o Pix, enviar o comprovante nesta conversa.`;
-
-let wa="https://wa.me/"+config.whatsapp+"?text="+encodeURIComponent(texto);
-
-document.getElementById("pagamento").innerHTML=`
-
-<div class="pix">
-
-<h3>💳 PAGAMENTO PIX</h3>
-
-<p><b>Valor:</b> R$ ${dinheiro(total)}</p>
-
-<p><b>Recebedor:</b> ${config.pixNome}</p>
-
-<p><b>Chave Pix:</b></p>
-
-<code>${config.pixChave}</code>
-
-<button class="btn2" onclick="copiarPix()">
-📋 Copiar chave Pix
-</button>
-
-</div>
-
-<div class="success">
-
-<b>Depois de pagar:</b><br><br>
-
-Envie seu comprovante pelo WhatsApp.
-
-<br><br>
-
-<a href="${wa}" target="_blank">
-
-<button class="btn">
-📲 Enviar pedido no WhatsApp
-</button>
-
-</a>
-
-</div>
-
-`;
-
-}
-
-
-function copiarPix(){
-
-navigator.clipboard.writeText(config.pixChave);
-
-alert("Chave Pix copiada!");
-
-}
-
-
-function fechar(id){
-document.getElementById(id).style.display="none";
-}
-
-carregar();
-
-</script>
-<script>
-console.log("Site conectado!");
-</script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-const SUPABASE_URL = "https://dnrxkaikqmobsroqngix.supabase.co";
-const SUPABASE_KEY = "sb_publishable_YvBbC-LsrFrx16BZOE0dcg_jCi7zTb6";
-
-const supabaseClient = supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-
-console.log("Supabase conectado!");
-</script>
-  <!-- FORMA DE PAGAMENTO -->
-<div style="margin-top:20px;">
-  <h3>Forma de pagamento</h3>
-
-  <label>
-    <input type="radio" name="pagamento" value="Pix">
-    💠 Pix
-  </label><br>
-
-  <label>
-    <input type="radio" name="pagamento" value="Cartão">
-    💳 Cartão
-  </label><br>
-
-  <label>
-    <input type="radio" name="pagamento" value="Dinheiro">
-    💵 Dinheiro
-  </label>
-</div>
-
-<button onclick="enviarPedidoWhatsApp()" style="
-  margin-top:20px;
-  padding:15px 25px;
-  background:#25D366;
-  color:white;
-  border:0;
-  border-radius:10px;
-  font-size:18px;
-  font-weight:bold;
-">
-  📲 Confirmar pedido pelo WhatsApp
-</button>
-
-<script>
-function enviarPedidoWhatsApp() {
-
-  const nome = document.querySelector('input[placeholder="Nome"]')?.value || "";
-  const endereco = document.querySelector('input[placeholder="Endereço"]')?.value || "";
-  const observacao = document.querySelector('textarea')?.value || "";
-
-  const pagamento = document.querySelector(
-    'input[name="pagamento"]:checked'
-  )?.value;
-
-  if (!pagamento) {
-    alert("Escolha uma forma de pagamento.");
     return;
   }
 
-  // TROQUE PELO NÚMERO DO WHATSAPP DA LOJA
-  const whatsapp = "55SEUNUMEROAQUI";
 
-  // O código abaixo tenta pegar os produtos que estão no carrinho
-  const itens = document.querySelectorAll(".cart-item, .item-carrinho");
+  let html = "";
 
-  let pedido = "";
+  let total = 0;
 
-  itens.forEach(item => {
-    pedido += item.innerText + "\n";
+
+  pedido.forEach(item => {
+
+    let subtotal =
+      item.preco * item.quantidade;
+
+    total += subtotal;
+
+
+    html += `
+
+      <div class="item">
+
+        <div class="item-info">
+
+          <strong>
+            ${item.nome}
+          </strong>
+
+          <br>
+
+          R$ ${item.preco
+            .toFixed(2)
+            .replace(".", ",")}
+
+        </div>
+
+
+        <div class="quantidade">
+
+          <button
+            onclick="diminuir('${item.nome}')">
+            -
+          </button>
+
+
+          <strong>
+            ${item.quantidade}
+          </strong>
+
+
+          <button
+            onclick="aumentar('${item.nome}')">
+            +
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
   });
 
-  const total =
-    document.querySelector(".total")?.innerText ||
-    document.querySelector("#total")?.innerText ||
-    "Valor não informado";
 
-  const mensagem =
-`🛒 *NOVO PEDIDO*
+  lista.innerHTML = html;
 
-👤 *Nome:* ${nome}
 
-📦 *Pedido:*
-${pedido}
+  document.getElementById("total")
+    .innerText =
+      total.toFixed(2).replace(".", ",");
+}
 
-💰 *Total:* ${total}
 
-💳 *Pagamento:* ${pagamento}
+/* PAGAMENTO */
 
-📍 *Endereço:* ${endereco}
+document
+  .getElementById("pagamento")
+  .addEventListener("change", function() {
 
-📝 *Observação:* ${observacao || "Nenhuma"}
+    const troco =
+      document.getElementById("trocoArea");
 
-✅ Pedido realizado pelo site.`;
+    if (this.value === "Dinheiro") {
+
+      troco.style.display = "block";
+
+    } else {
+
+      troco.style.display = "none";
+
+    }
+
+  });
+
+
+/* ENVIAR WHATSAPP */
+
+function enviarWhatsApp() {
+
+  if (pedido.length === 0) {
+
+    alert(
+      "Adicione algum item ao pedido."
+    );
+
+    return;
+  }
+
+
+  const nome =
+    document.getElementById("nome")
+      .value.trim();
+
+
+  const endereco =
+    document.getElementById("endereco")
+      .value.trim();
+
+
+  const pagamento =
+    document.getElementById("pagamento")
+      .value;
+
+
+  const troco =
+    document.getElementById("troco")
+      .value;
+
+
+  if (!nome) {
+
+    alert("Digite seu nome.");
+
+    return;
+  }
+
+
+  if (!endereco) {
+
+    alert("Digite seu endereço.");
+
+    return;
+  }
+
+
+  if (!pagamento) {
+
+    alert(
+      "Selecione a forma de pagamento."
+    );
+
+    return;
+  }
+
+
+  let total = 0;
+
+
+  let mensagem =
+    "✅ *PEDIDO CONFIRMADO*";
+
+
+  mensagem +=
+    "\n\n🍽️ *NOVO PEDIDO*";
+
+
+  mensagem +=
+    "\n━━━━━━━━━━━━━━";
+
+
+  mensagem +=
+    "\n\n👤 *Nome:* " +
+    nome;
+
+
+  mensagem +=
+    "\n📍 *Endereço:* " +
+    endereco;
+
+
+  mensagem +=
+    "\n💳 *Forma de pagamento:* " +
+    pagamento;
+
+
+  if (
+    pagamento === "Dinheiro" &&
+    troco
+  ) {
+
+    mensagem +=
+      "\n💵 *Troco para:* R$ " +
+      Number(troco)
+        .toFixed(2)
+        .replace(".", ",");
+
+  }
+
+
+  mensagem +=
+    "\n\n🛒 *PEDIDO*";
+
+
+  mensagem +=
+    "\n━━━━━━━━━━━━━━";
+
+
+  pedido.forEach(item => {
+
+    let subtotal =
+      item.preco * item.quantidade;
+
+
+    total += subtotal;
+
+
+    mensagem +=
+      "\n🥡 " +
+      item.nome +
+      " x" +
+      item.quantidade +
+      " — R$ " +
+      subtotal
+        .toFixed(2)
+        .replace(".", ",");
+
+  });
+
+
+  mensagem +=
+    "\n\n💰 *TOTAL: R$ " +
+    total
+      .toFixed(2)
+      .replace(".", ",") +
+    "*";
+
+
+  mensagem +=
+    "\n\n✅ *Pedido enviado pelo site.*";
+
 
   const url =
-    "https://wa.me/" + whatsapp +
-    "?text=" + encodeURIComponent(mensagem);
+    "https://wa.me/" +
+    NUMERO_WHATSAPP +
+    "?text=" +
+    encodeURIComponent(mensagem);
+
 
   window.open(url, "_blank");
+
 }
+
 </script>
+
 </body>
-  </html>
+</html>
