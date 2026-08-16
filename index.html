@@ -3,216 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cardápio</title>
-
-<style>
-body{
-font-family:Arial;
-margin:0;
-background:#fff3d1;
-}
-header{
-background:#d90000;
-color:white;
-padding:15px;
-text-align:center;
-}
-h2{
-color:#d90000;
-}
-button{
-background:#d90000;
-color:white;
-border:0;
-padding:10px;
-border-radius:8px;
-cursor:pointer;
-}
-.card{
-background:white;
-margin:10px;
-padding:15px;
-border-radius:10px;
-box-shadow:0 0 5px #aaa;
-}
-#adm{
-display:none;
-padding:15px;
-}
-input{
-padding:10px;
-margin:5px;
-width:90%;
-}
-.amarelo{
-background:#ffc400;
-color:#000;
-}
-</style>
+<title>Pensão Sabor de Mel</title>
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
 <header>
-<h1>🍽️ Meu Restaurante</h1>
+<img src="logo.png" class="logo">
+<h1>Pensão Sabor de Mel</h1>
 <p>Cardápio de hoje 👇</p>
 </header>
 
-<div id="menu"></div>
-
-<h2 style="padding:10px">🛒 Pedido</h2>
-<div id="pedido" class="card"></div>
-
-<button onclick="finalizar()" style="margin:10px">
-Finalizar Pedido
-</button>
-
-<button class="amarelo" onclick="abrirAdm()" style="margin:10px">
-Área ADM
-</button>
-
-
-<div id="adm">
-<h2>Administração</h2>
-
-<input id="comida" placeholder="Nome da comida">
-<button onclick="addComida()">Adicionar comida</button>
-
-<input id="bebida" placeholder="Nome da bebida">
-<button onclick="addBebida()">Adicionar bebida</button>
-
-<input id="pix" placeholder="Chave Pix">
-<button onclick="salvarPix()">Salvar Pix</button>
-
+<section>
+<h2>🍱 Quentinhas</h2>
+<div class="produto">
+<h3>Quentinha Pequena</h3>
+<p>R$ 18,00</p>
+<button onclick="add('Quentinha Pequena')">Adicionar pedido</button>
 </div>
 
+<div class="produto">
+<h3>Quentinha Grande</h3>
+<p>R$ 21,00</p>
+<button onclick="add('Quentinha Grande')">Adicionar pedido</button>
+</div>
 
-<script>
+<h2>🍛 Comidas</h2>
+<div id="comidas"></div>
 
-let comidas=[];
-let bebidas=[];
-let carrinho=[];
-let chavePix="";
+<h2>🥤 Bebidas</h2>
+<div id="bebidas"></div>
+</section>
 
+<section class="pedido">
+<h2>Pedido</h2>
+<ul id="lista"></ul>
+<input id="nome" placeholder="Nome">
+<input id="telefone" placeholder="Telefone">
+<input id="endereco" placeholder="Endereço">
 
-function mostrar(){
+<select id="pagamento">
+<option>Pix</option>
+<option>Dinheiro</option>
+<option>Cartão</option>
+</select>
 
-let html="";
+<button onclick="finalizar()">Enviar pedido</button>
+</section>
 
-html+="<h2>Bebidas</h2>";
-
-bebidas.forEach((b,i)=>{
-html+=`
-<div class="card">
-${b}
-<br>
-<button onclick="addPedido('${b}')">
-Adicionar pedido
-</button>
-</div>`;
-});
-
-
-html+="<h2>Comidas</h2>";
-
-comidas.forEach((c)=>{
-html+=`
-<div class="card">
-${c}
-<br>
-<button onclick="addPedido('${c}')">
-Adicionar pedido
-</button>
-</div>`;
-});
-
-
-document.getElementById("menu").innerHTML=html;
-
-}
-
-
-function addPedido(item){
-
-carrinho.push(item);
-mostrarPedido();
-
-}
-
-
-function mostrarPedido(){
-
-document.getElementById("pedido").innerHTML=
-carrinho.join("<br>");
-
-}
-
-
-function abrirAdm(){
-
-document.getElementById("adm").style.display="block";
-
-}
-
-
-function addComida(){
-
-let x=document.getElementById("comida").value;
-
-if(x){
-comidas.push(x);
-document.getElementById("comida").value="";
-mostrar();
-}
-
-}
-
-
-function addBebida(){
-
-let x=document.getElementById("bebida").value;
-
-if(x){
-bebidas.push(x);
-document.getElementById("bebida").value="";
-mostrar();
-}
-
-}
-
-
-function salvarPix(){
-
-chavePix=document.getElementById("pix").value;
-
-alert("Pix salvo!");
-
-}
-
-
-function finalizar(){
-
-let forma=prompt("Pagamento: Pix ou outro");
-
-if(forma=="Pix" || forma=="pix"){
-
-alert(
-"Chave Pix: "+chavePix+
-"\nEnvie o comprovante no WhatsApp da loja."
-);
-
-}else{
-
-alert("Pedido enviado!");
-
-}
-
-}
-
-
-mostrar();
-
-</script>
-
+<script src="banco.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
