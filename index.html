@@ -710,5 +710,17 @@ carregar();
 <script>
 console.log("Site conectado!");
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://dnrxkaikqmobsroqngix.supabase.co";
+const SUPABASE_KEY = "sb_publishable_YvBbC-LsrFrx16BZOE0dcg_jCi7zTb6";
+
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+console.log("Supabase conectado!");
+</script>  
 </body>
   </html>
