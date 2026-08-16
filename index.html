@@ -2,205 +2,56 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Pensão Sabor de Mel</title>
 
 <style>
-*{box-sizing:border-box}
-body{
- margin:0;
- font-family:Arial,sans-serif;
- background:#fff8ef;
- color:#47200f
-}
-header{
- background:white;
- padding:18px 5%;
- display:flex;
- justify-content:space-between;
- align-items:center;
- position:sticky;
- top:0;
- z-index:10;
- box-shadow:0 2px 10px #0001
-}
-.logo{
- font-size:27px;
- font-weight:900;
- color:#e3261b
-}
-.logo span{color:#f0a000}
-button{
- border:0;
- border-radius:12px;
- padding:14px 20px;
- font-size:16px;
- font-weight:bold;
- cursor:pointer
-}
-.btn{
- background:#ed241b;
- color:white
-}
-.btn2{
- background:#4b210f;
- color:white
-}
-.hero{
- min-height:470px;
- padding:70px 7%;
- display:flex;
- align-items:center;
- background:linear-gradient(100deg,#603820,#eee3d5)
-}
-.hero h1{
- color:white;
- font-size:54px;
- max-width:650px;
- margin:0 0 20px
-}
-.hero h1 span{color:#ffc62e}
-.hero p{
- color:white;
- font-size:22px;
- max-width:650px;
- line-height:1.5
-}
-section{
- padding:50px 7%
-}
-h2{
- font-size:38px;
- margin-top:0
-}
-.grid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
- gap:20px
-}
-.card{
- background:white;
- border-radius:18px;
- overflow:hidden;
- box-shadow:0 4px 18px #0002
-}
-.card img{
- width:100%;
- height:190px;
- object-fit:cover
-}
-.cardbody{padding:20px}
-.price{
- font-size:25px;
- font-weight:bold;
- color:#e3261b;
- margin:15px 0
-}
-.empty{
- text-align:center;
- background:white;
- padding:35px;
- border-radius:15px
-}
-footer{
- background:#421b0b;
- color:white;
- text-align:center;
- padding:30px
-}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f8f1e7;color:#40200f}
+header{background:#fff;padding:20px 6%;display:flex;justify-content:space-between;align-items:center;gap:20px;position:sticky;top:0;z-index:10;box-shadow:0 2px 10px #0001}
+.logo{font-size:27px;font-weight:900;color:#e3261b}
+.logo span{color:#ed9b00}
+button{border:0;border-radius:12px;padding:14px 20px;font-size:16px;font-weight:bold;cursor:pointer}
+.btn{background:#ed241b;color:white}
+.btn2{background:white;color:#d92319;border:2px solid #d92319}
+.hero{padding:90px 7%;min-height:500px;background:linear-gradient(100deg,#613b29,#eadfd0);color:white}
+.hero small{color:#ffbd00;font-weight:bold;letter-spacing:4px}
+.hero h1{font-size:55px;max-width:700px;margin:25px 0}
+.hero h1 span{color:#ffc400}
+.hero p{font-size:21px;max-width:650px;line-height:1.5;margin-bottom:30px}
+section{padding:55px 6%}
+h2{text-align:center;font-size:38px;margin-bottom:35px}
+.menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.card{background:white;border-radius:18px;padding:22px;box-shadow:0 5px 20px #0001}
+.card img{width:100%;height:170px;object-fit:cover;border-radius:12px;margin-bottom:15px}
+.card h3{font-size:23px;margin-bottom:8px}
+.card p{color:#765f50;margin-bottom:15px}
+.price{font-size:22px;font-weight:bold;color:#d92319;margin-bottom:15px}
+.empty{text-align:center;padding:30px;font-size:18px}
+footer{text-align:center;padding:35px;background:#3e1b0b;color:white}
+.admin-link{margin-top:10px;background:none;color:#aaa;font-size:12px}
 
-/* PAINEL */
-#admin{
- display:none;
- min-height:100vh;
- background:#f3f3f3;
- padding:25px 5%
-}
-.adminbox{
- max-width:850px;
- margin:auto
-}
-.panel{
- background:white;
- padding:22px;
- border-radius:15px;
- margin-bottom:20px;
- box-shadow:0 3px 12px #0001
-}
-input,textarea{
- width:100%;
- padding:14px;
- margin:7px 0 14px;
- border:1px solid #ccc;
- border-radius:10px;
- font-size:16px
-}
-label{
- font-weight:bold
-}
-.mealadmin{
- border:1px solid #ddd;
- padding:15px;
- border-radius:12px;
- margin-top:12px
-}
-.delete{
- background:#c00;
- color:white;
- padding:8px 12px;
- border-radius:8px
-}
+.modal{display:none;position:fixed;inset:0;background:#0009;z-index:100;padding:20px;overflow:auto}
+.box{background:white;max-width:700px;margin:30px auto;border-radius:18px;padding:25px}
+.box h2{text-align:left;margin-bottom:20px}
+input,textarea,select{width:100%;padding:14px;margin:7px 0 15px;border:1px solid #ccc;border-radius:10px;font-size:16px}
+label{font-weight:bold}
+.close{float:right;background:#eee;padding:8px 12px}
+.admin-card{background:#f5eee5;padding:15px;border-radius:12px;margin:10px 0;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.admin-actions button{padding:8px 10px;font-size:13px}
+hr{border:0;border-top:1px solid #ddd;margin:25px 0}
 
-/* MODAL */
-.modal{
- display:none;
- position:fixed;
- inset:0;
- background:#0009;
- z-index:100;
- align-items:center;
- justify-content:center;
- padding:20px
-}
-.modalbox{
- background:white;
- max-width:500px;
- width:100%;
- max-height:90vh;
- overflow:auto;
- padding:25px;
- border-radius:18px
-}
-.close{
- float:right;
- background:#eee;
- padding:8px 12px
-}
-.pixbox{
- text-align:center;
- padding:20px;
- background:#fff7e9;
- border-radius:15px
-}
-#qrcode{
- width:230px;
- max-width:100%;
- margin:15px auto;
- display:block
-}
-.copia{
- word-break:break-all;
- background:#eee;
- padding:12px;
- border-radius:8px;
- font-size:12px
-}
+.cart{position:fixed;right:20px;bottom:20px;background:#e9231a;color:white;border-radius:50px;padding:17px 24px;font-weight:bold;z-index:20;box-shadow:0 5px 20px #0004}
 
+.order-item{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #ddd}
+.total{font-size:24px;font-weight:bold;margin:20px 0;color:#d92319}
+.pix{background:#fff5d8;border:2px dashed #d99d00;border-radius:15px;padding:20px;margin:15px 0}
+.pix code{display:block;background:white;padding:12px;word-break:break-all;margin:10px 0;border-radius:8px}
+.success{background:#e7f8e7;padding:15px;border-radius:10px;margin-top:15px}
 @media(max-width:600px){
- .hero h1{font-size:42px}
- .hero{padding:55px 7%}
- header{gap:10px}
- .logo{font-size:21px}
+.hero h1{font-size:42px}
+header{padding:15px 4%}
+.logo{font-size:21px}
 }
 </style>
 </head>
@@ -208,767 +59,582 @@ label{
 <body>
 
 <header>
- <div class="logo">PENSÃO <span>SABOR DE MEL</span></div>
- <button class="btn" onclick="abrirWhatsApp()">WhatsApp</button>
+  <div class="logo">PENSÃO <span>SABOR DE MEL</span></div>
+  <button class="btn" onclick="abrirPedido()">🛒 Meu pedido (<span id="qtd">0</span>)</button>
 </header>
 
-<main id="site">
-
-<section class="hero">
- <div>
+<div class="hero">
+  <small>PENSÃO SABOR DE MEL</small>
   <h1>Comida com sabor de <span>casa.</span></h1>
   <p>Uma opção para quem procura uma refeição caprichada em Santa Lúcia.</p>
-  <button class="btn" onclick="mostrarRefeicoes()">Fazer pedido</button>
- </div>
-</section>
+  <button class="btn" onclick="document.getElementById('refeicoes').scrollIntoView()">Ver refeições</button>
+</div>
 
 <section id="refeicoes">
- <h2>🍽️ Refeições de hoje</h2>
- <div id="lista" class="grid"></div>
+  <h2>🍽️ Refeições de hoje</h2>
+  <div id="menu" class="menu"></div>
 </section>
 
 <footer>
- Pensão Sabor de Mel<br>
- Santa Lúcia - Duque de Caxias
+  <div>Pensão Sabor de Mel</div>
+  <div>Santa Lúcia - Duque de Caxias</div>
+  <button class="admin-link" onclick="abrirADM()">Área ADM</button>
 </footer>
 
-</main>
+<button class="cart" onclick="abrirPedido()">🛒 Pedido (<span id="qtd2">0</span>)</button>
 
 
-<!-- PAINEL ADMIN -->
+<!-- LOGIN ADM -->
+<div class="modal" id="loginModal">
+<div class="box">
+<button class="close" onclick="fechar('loginModal')">✕</button>
+<h2>🔐 Área ADM</h2>
 
-<div id="admin">
-<div class="adminbox">
+<label>Senha do administrador</label>
+<input id="senhaADM" type="password" placeholder="Digite a senha">
 
- <div class="panel">
-  <h1>🔐 Painel da Pensão</h1>
-  <button class="btn2" onclick="voltarSite()">← Voltar para o site</button>
- </div>
+<button class="btn" onclick="entrarADM()">Entrar</button>
 
- <div class="panel">
-  <h2>⚙️ Configurações</h2>
-
-  <label>Chave Pix</label>
-  <input id="pixKey" placeholder="Digite sua chave Pix">
-
-  <label>Nome do recebedor</label>
-  <input id="pixName" placeholder="PENSAO SABOR DE MEL">
-
-  <label>Cidade</label>
-  <input id="pixCity" placeholder="DUQUE DE CAXIAS">
-
-  <label>WhatsApp</label>
-  <input id="whatsapp" placeholder="21974967664">
-
-  <button class="btn" onclick="salvarConfig()">
-   Salvar configurações
-  </button>
- </div>
+<p style="margin-top:15px;color:#777">
+Senha inicial: <b>1234</b>
+</p>
+</div>
+</div>
 
 
- <div class="panel">
-  <h2>🍽️ Cadastrar refeição</h2>
+<!-- PAINEL ADM -->
+<div class="modal" id="admModal">
+<div class="box">
+<button class="close" onclick="fechar('admModal')">✕</button>
 
-  <label>Nome da refeição</label>
-  <input id="mealName" placeholder="Ex: Frango assado">
+<h2>⚙️ Painel ADM</h2>
 
-  <label>Descrição</label>
-  <textarea id="mealDesc" placeholder="Arroz, feijão, frango e salada"></textarea>
+<h3>➕ Cadastrar refeição</h3>
 
-  <label>Preço</label>
-  <input id="mealPrice" type="number" step="0.01" placeholder="20.00">
+<label>Nome da refeição</label>
+<input id="nomePrato" placeholder="Ex: Arroz, feijão e frango">
 
-  <label>Link da foto</label>
-  <input id="mealImage" placeholder="https://...">
+<label>Descrição</label>
+<textarea id="descPrato" placeholder="Descrição da refeição"></textarea>
 
-  <button class="btn" onclick="adicionarRefeicao()">
-   + Cadastrar refeição
-  </button>
- </div>
+<label>Preço</label>
+<input id="precoPrato" type="number" step="0.01" placeholder="15.00">
 
+<label>Imagem (link da imagem, opcional)</label>
+<input id="imgPrato" placeholder="https://...">
 
- <div class="panel">
-  <h2>📋 Refeições cadastradas</h2>
-  <div id="adminMeals"></div>
- </div>
+<button class="btn" onclick="salvarPrato()">Cadastrar refeição</button>
+
+<hr>
+
+<h3>💳 Configuração do Pix</h3>
+
+<label>Nome do recebedor</label>
+<input id="pixNome" placeholder="Nome da pessoa/empresa">
+
+<label>Cidade</label>
+<input id="pixCidade" value="DUQUE DE CAXIAS">
+
+<label>Chave Pix</label>
+<input id="pixChave" placeholder="CPF, telefone, e-mail ou chave aleatória">
+
+<button class="btn" onclick="salvarPix()">Salvar Pix</button>
+
+<hr>
+
+<h3>📱 WhatsApp</h3>
+
+<label>Número do WhatsApp</label>
+<input id="whatsapp" value="5521974967664">
+
+<button class="btn" onclick="salvarWhats()">Salvar WhatsApp</button>
+
+<hr>
+
+<h3>🍽️ Refeições cadastradas</h3>
+<div id="listaADM"></div>
+
+<hr>
+
+<h3>🔑 Alterar senha ADM</h3>
+<input id="novaSenha" type="password" placeholder="Nova senha">
+<button class="btn2" onclick="alterarSenha()">Alterar senha</button>
 
 </div>
 </div>
 
 
-<!-- MODAL DO PEDIDO -->
+<!-- PEDIDO -->
+<div class="modal" id="pedidoModal">
+<div class="box">
+<button class="close" onclick="fechar('pedidoModal')">✕</button>
 
-<div id="pedidoModal" class="modal">
- <div class="modalbox">
+<h2>🛒 Seu pedido</h2>
 
-  <button class="close" onclick="fecharModal()">X</button>
+<div id="itensPedido"></div>
 
-  <h2>🛒 Fazer pedido</h2>
-
-  <div id="pedidoInfo"></div>
-
-  <label>Seu nome</label>
-  <input id="clienteNome" placeholder="Digite seu nome">
-
-  <label>Quantidade</label>
-  <input id="quantidade" type="number" min="1" value="1"
-         onchange="atualizarTotal()">
-
-  <h2 id="totalPedido">Total: R$ 0,00</h2>
-
-  <button class="btn" onclick="gerarPix()">
-   💰 Gerar Pix
-  </button>
-
-  <div id="pixArea"></div>
-
- </div>
+<div class="total">
+Total: R$ <span id="totalPedido">0,00</span>
 </div>
 
+<h3>Seus dados</h3>
 
-<!-- LOGIN ADMIN -->
+<input id="clienteNome" placeholder="Seu nome">
 
-<div id="loginModal" class="modal">
- <div class="modalbox">
+<input id="clienteEndereco" placeholder="Endereço para entrega">
 
-  <h2>🔐 Acesso ao painel</h2>
+<input id="clienteObs" placeholder="Observação do pedido">
 
-  <p>Digite a senha do administrador.</p>
+<button class="btn" onclick="gerarPagamento()">Continuar para pagamento</button>
 
-  <input id="adminSenha" type="password" placeholder="Senha">
+<div id="pagamento"></div>
 
-  <button class="btn" onclick="entrarAdmin()">
-   Entrar
-  </button>
-
- </div>
+</div>
 </div>
 
 
 <script>
 
-/* =========================
-   CONFIGURAÇÃO
-========================= */
+let pratos=JSON.parse(localStorage.getItem("pratos")||"[]");
 
-let config = JSON.parse(
- localStorage.getItem("pensao_config") || "{}"
-);
+let carrinho=JSON.parse(localStorage.getItem("carrinho")||"[]");
 
-let meals = JSON.parse(
- localStorage.getItem("pensao_meals") || "[]"
-);
-
-let pedidoAtual = null;
+let config=JSON.parse(localStorage.getItem("config")||JSON.stringify({
+ pixNome:"",
+ pixCidade:"DUQUE DE CAXIAS",
+ pixChave:"",
+ whatsapp:"5521974967664",
+ senha:"1234"
+}));
 
 
-/* =========================
-   CONFIGURAÇÕES PADRÃO
-========================= */
-
-if(!config.whatsapp){
- config.whatsapp = "21974967664";
-}
-
-if(!config.pixName){
- config.pixName = "PENSAO SABOR DE MEL";
-}
-
-if(!config.pixCity){
- config.pixCity = "DUQUE DE CAXIAS";
+function dinheiro(v){
+ return Number(v).toFixed(2).replace(".",",");
 }
 
 
-/* =========================
-   MOSTRAR REFEIÇÕES
-========================= */
-
-function renderMeals(){
-
- const lista = document.getElementById("lista");
-
- if(meals.length === 0){
-
-  lista.innerHTML =
-  '<div class="empty">Nenhuma refeição cadastrada hoje.</div>';
-
-  return;
- }
-
- lista.innerHTML = meals.map((m,i)=>`
-
-  <div class="card">
-
-   ${
-    m.image
-    ?
-    `<img src="${m.image}" onerror="this.style.display='none'">`
-    :
-    ''
-   }
-
-   <div class="cardbody">
-
-    <h3>${esc(m.name)}</h3>
-
-    <p>${esc(m.desc)}</p>
-
-    <div class="price">
-     R$ ${Number(m.price).toFixed(2).replace(".",",")}
-    </div>
-
-    <button class="btn"
-      onclick="abrirPedido(${i})">
-      Fazer pedido
-    </button>
-
-   </div>
-
-  </div>
- `).join("");
+function salvarTudo(){
+ localStorage.setItem("pratos",JSON.stringify(pratos));
+ localStorage.setItem("carrinho",JSON.stringify(carrinho));
+ localStorage.setItem("config",JSON.stringify(config));
 }
 
 
-/* =========================
-   PAINEL
-========================= */
+function carregar(){
 
-function abrirPainel(){
+ document.getElementById("menu").innerHTML="";
 
- document.getElementById("loginModal").style.display="flex";
+ if(pratos.length===0){
+   document.getElementById("menu").innerHTML=
+   '<div class="empty">Nenhuma refeição cadastrada hoje.<br><br>Entre na Área ADM para adicionar.</div>';
+ }else{
 
-}
+ pratos.forEach((p,i)=>{
 
-function entrarAdmin(){
+ let card=document.createElement("div");
+ card.className="card";
 
- const senha =
- document.getElementById("adminSenha").value;
+ card.innerHTML=`
+ ${p.img?`<img src="${p.img}" onerror="this.style.display='none'">`:``}
+ <h3>${p.nome}</h3>
+ <p>${p.desc}</p>
+ <div class="price">R$ ${dinheiro(p.preco)}</div>
+ <button class="btn" onclick="adicionar(${i})">Adicionar ao pedido</button>
+ `;
 
- /*
-   SENHA INICIAL:
-   123456
+ document.getElementById("menu").appendChild(card);
 
-   Você pode trocar depois no código.
- */
-
- if(senha !== "123456"){
-
-  alert("Senha incorreta.");
-
-  return;
- }
-
- document.getElementById("loginModal").style.display="none";
- document.getElementById("site").style.display="none";
- document.getElementById("admin").style.display="block";
-
- carregarConfig();
- renderAdminMeals();
-}
-
-
-function voltarSite(){
-
- document.getElementById("admin").style.display="none";
- document.getElementById("site").style.display="block";
-
- renderMeals();
-}
-
-
-/* =========================
-   CONFIGURAÇÕES
-========================= */
-
-function carregarConfig(){
-
- document.getElementById("pixKey").value =
- config.pixKey || "";
-
- document.getElementById("pixName").value =
- config.pixName || "";
-
- document.getElementById("pixCity").value =
- config.pixCity || "";
-
- document.getElementById("whatsapp").value =
- config.whatsapp || "";
-
-}
-
-
-function salvarConfig(){
-
- config.pixKey =
- document.getElementById("pixKey").value.trim();
-
- config.pixName =
- document.getElementById("pixName").value.trim()
- || "PENSAO SABOR DE MEL";
-
- config.pixCity =
- document.getElementById("pixCity").value.trim()
- || "DUQUE DE CAXIAS";
-
- config.whatsapp =
- document.getElementById("whatsapp").value.trim();
-
- localStorage.setItem(
-  "pensao_config",
-  JSON.stringify(config)
- );
-
- alert("Configurações salvas!");
-
-}
-
-
-/* =========================
-   CADASTRAR REFEIÇÃO
-========================= */
-
-function adicionarRefeicao(){
-
- const name =
- document.getElementById("mealName").value.trim();
-
- const desc =
- document.getElementById("mealDesc").value.trim();
-
- const price =
- parseFloat(document.getElementById("mealPrice").value);
-
- const image =
- document.getElementById("mealImage").value.trim();
-
- if(!name || !price){
-
-  alert("Preencha o nome e o preço.");
-
-  return;
- }
-
- meals.push({
-  name:name,
-  desc:desc,
-  price:price,
-  image:image
  });
 
- salvarMeals();
+ }
 
- document.getElementById("mealName").value="";
- document.getElementById("mealDesc").value="";
- document.getElementById("mealPrice").value="";
- document.getElementById("mealImage").value="";
+ atualizarQtd();
+}
 
- renderAdminMeals();
+
+function adicionar(i){
+
+ let p=pratos[i];
+
+ carrinho.push({
+  nome:p.nome,
+  preco:Number(p.preco)
+ });
+
+ salvarTudo();
+ atualizarQtd();
+
+ alert("Refeição adicionada ao pedido!");
+
+}
+
+
+function remover(i){
+
+ carrinho.splice(i,1);
+ salvarTudo();
+ mostrarPedido();
+
+}
+
+
+function atualizarQtd(){
+
+ document.getElementById("qtd").innerText=carrinho.length;
+ document.getElementById("qtd2").innerText=carrinho.length;
+
+}
+
+
+function abrirPedido(){
+
+ document.getElementById("pedidoModal").style.display="block";
+ mostrarPedido();
+
+}
+
+
+function mostrarPedido(){
+
+ let area=document.getElementById("itensPedido");
+
+ if(carrinho.length===0){
+
+   area.innerHTML="<div class='empty'>Seu pedido está vazio.</div>";
+   document.getElementById("totalPedido").innerText="0,00";
+   return;
+
+ }
+
+ let total=0;
+
+ area.innerHTML="";
+
+ carrinho.forEach((p,i)=>{
+
+ total+=Number(p.preco);
+
+ area.innerHTML+=`
+ <div class="order-item">
+   <span>${p.nome}</span>
+   <strong>R$ ${dinheiro(p.preco)}
+   <button onclick="remover(${i})">❌</button>
+   </strong>
+ </div>
+ `;
+
+ });
+
+ document.getElementById("totalPedido").innerText=dinheiro(total);
+
+}
+
+
+function abrirADM(){
+ document.getElementById("loginModal").style.display="block";
+}
+
+
+function entrarADM(){
+
+ let senha=document.getElementById("senhaADM").value;
+
+ if(senha===config.senha){
+
+   fechar("loginModal");
+
+   document.getElementById("admModal").style.display="block";
+
+   carregarADM();
+
+ }else{
+
+   alert("Senha incorreta!");
+
+ }
+
+}
+
+
+function carregarADM(){
+
+ document.getElementById("pixNome").value=config.pixNome;
+ document.getElementById("pixCidade").value=config.pixCidade;
+ document.getElementById("pixChave").value=config.pixChave;
+ document.getElementById("whatsapp").value=config.whatsapp;
+
+ let lista=document.getElementById("listaADM");
+
+ if(pratos.length===0){
+
+   lista.innerHTML="<p>Nenhuma refeição cadastrada.</p>";
+
+ }else{
+
+ lista.innerHTML="";
+
+ pratos.forEach((p,i)=>{
+
+ lista.innerHTML+=`
+ <div class="admin-card">
+
+ <div>
+ <b>${p.nome}</b><br>
+ ${p.desc}<br>
+ <strong>R$ ${dinheiro(p.preco)}</strong>
+ </div>
+
+ <div class="admin-actions">
+ <button onclick="editarPrato(${i})">✏️</button>
+ <button onclick="excluirPrato(${i})">🗑️</button>
+ </div>
+
+ </div>
+ `;
+
+ });
+
+ }
+
+}
+
+
+function salvarPrato(){
+
+ let nome=document.getElementById("nomePrato").value.trim();
+ let desc=document.getElementById("descPrato").value.trim();
+ let preco=document.getElementById("precoPrato").value;
+ let img=document.getElementById("imgPrato").value.trim();
+
+ if(!nome || !preco){
+
+   alert("Coloque pelo menos o nome e o preço.");
+   return;
+
+ }
+
+ pratos.push({
+  nome,
+  desc,
+  preco:Number(preco),
+  img
+ });
+
+ salvarTudo();
+ carregar();
+ carregarADM();
+
+ document.getElementById("nomePrato").value="";
+ document.getElementById("descPrato").value="";
+ document.getElementById("precoPrato").value="";
+ document.getElementById("imgPrato").value="";
 
  alert("Refeição cadastrada!");
 
 }
 
 
-function salvarMeals(){
+function excluirPrato(i){
 
- localStorage.setItem(
-  "pensao_meals",
-  JSON.stringify(meals)
- );
+ if(confirm("Excluir esta refeição?")){
 
- renderMeals();
+   pratos.splice(i,1);
 
-}
+   salvarTudo();
+   carregar();
+   carregarADM();
 
-
-function renderAdminMeals(){
-
- const area =
- document.getElementById("adminMeals");
-
- if(meals.length===0){
-
-  area.innerHTML =
-  "<p>Nenhuma refeição cadastrada.</p>";
-
-  return;
  }
 
- area.innerHTML = meals.map((m,i)=>`
-
-  <div class="mealadmin">
-
-   <h3>${esc(m.name)}</h3>
-
-   <p>${esc(m.desc)}</p>
-
-   <strong>
-    R$ ${Number(m.price).toFixed(2).replace(".",",")}
-   </strong>
-
-   <br><br>
-
-   <button class="delete"
-    onclick="excluirRefeicao(${i})">
-    Excluir
-   </button>
-
-  </div>
-
- `).join("");
 }
 
 
-function excluirRefeicao(i){
+function editarPrato(i){
 
- if(!confirm("Excluir esta refeição?")) return;
+ let p=pratos[i];
 
- meals.splice(i,1);
+ let nome=prompt("Nome da refeição:",p.nome);
 
- salvarMeals();
+ if(nome===null)return;
 
- renderAdminMeals();
+ let preco=prompt("Preço:",p.preco);
+
+ if(preco===null)return;
+
+ let desc=prompt("Descrição:",p.desc);
+
+ if(desc===null)return;
+
+ pratos[i]={
+  ...p,
+  nome:nome,
+  preco:Number(preco),
+  desc:desc
+ };
+
+ salvarTudo();
+ carregar();
+ carregarADM();
 
 }
 
 
-/* =========================
-   PEDIDO
-========================= */
+function salvarPix(){
 
-function abrirPedido(i){
+ config.pixNome=document.getElementById("pixNome").value.trim();
+ config.pixCidade=document.getElementById("pixCidade").value.trim();
+ config.pixChave=document.getElementById("pixChave").value.trim();
 
- pedidoAtual = meals[i];
+ salvarTudo();
 
- document.getElementById("pedidoInfo").innerHTML = `
-  <h3>${esc(pedidoAtual.name)}</h3>
-  <p>${esc(pedidoAtual.desc)}</p>
+ alert("Pix salvo!");
+
+}
+
+
+function salvarWhats(){
+
+ let numero=document.getElementById("whatsapp").value.replace(/\D/g,"");
+
+ config.whatsapp=numero;
+
+ salvarTudo();
+
+ alert("WhatsApp salvo!");
+
+}
+
+
+function alterarSenha(){
+
+ let s=document.getElementById("novaSenha").value;
+
+ if(s.length<4){
+
+   alert("A senha precisa ter pelo menos 4 caracteres.");
+   return;
+
+ }
+
+ config.senha=s;
+
+ salvarTudo();
+
+ alert("Senha alterada!");
+
+ document.getElementById("novaSenha").value="";
+
+}
+
+
+function gerarPagamento(){
+
+ if(carrinho.length===0){
+
+   alert("Adicione uma refeição primeiro.");
+   return;
+
+ }
+
+ if(!config.pixChave){
+
+   alert("O estabelecimento ainda não cadastrou a chave Pix.");
+   return;
+
+ }
+
+ let nome=document.getElementById("clienteNome").value.trim();
+ let endereco=document.getElementById("clienteEndereco").value.trim();
+ let obs=document.getElementById("clienteObs").value.trim();
+
+ if(!nome || !endereco){
+
+   alert("Preencha seu nome e endereço.");
+   return;
+
+ }
+
+ let total=carrinho.reduce((s,p)=>s+Number(p.preco),0);
+
+ let resumo=carrinho.map(p=>p.nome).join(", ");
+
+ let texto=
+`NOVO PEDIDO - PENSÃO SABOR DE MEL
+
+Cliente: ${nome}
+Endereço: ${endereco}
+
+Pedido:
+${resumo}
+
+Total: R$ ${dinheiro(total)}
+
+Observação:
+${obs || "Nenhuma"}
+
+Pagamento: Pix
+Após pagar, enviar o comprovante nesta conversa.`;
+
+ let wa="https://wa.me/"+config.whatsapp+"?text="+encodeURIComponent(texto);
+
+ document.getElementById("pagamento").innerHTML=`
+
+ <div class="pix">
+
+ <h3>💳 Pagamento via Pix</h3>
+
+ <p><b>Valor:</b> R$ ${dinheiro(total)}</p>
+
+ <p><b>Recebedor:</b> ${config.pixNome || "Pensão Sabor de Mel"}</p>
+
+ <p><b>Chave Pix:</b></p>
+
+ <code id="chavePix">${config.pixChave}</code>
+
+ <button class="btn2" onclick="copiarPix()">📋 Copiar chave Pix</button>
+
+ <p style="margin-top:15px">
+ Faça o Pix no valor de <b>R$ ${dinheiro(total)}</b>.
+ </p>
+
+ </div>
+
+ <div class="success">
+
+ <b>Depois de pagar:</b><br><br>
+
+ Clique abaixo para enviar o pedido e o comprovante pelo WhatsApp.
+
+ <br><br>
+
+ <a href="${wa}" target="_blank">
+ <button class="btn">📲 Enviar pedido/comprovante no WhatsApp</button>
+ </a>
+
+ </div>
+
  `;
 
- document.getElementById("quantidade").value=1;
+}
 
- document.getElementById("pixArea").innerHTML="";
 
- atualizarTotal();
+function copiarPix(){
 
- document.getElementById("pedidoModal").style.display="flex";
+ navigator.clipboard.writeText(config.pixChave);
+
+ alert("Chave Pix copiada!");
 
 }
 
 
-function fecharModal(){
-
- document.getElementById("pedidoModal").style.display="none";
-
+function fechar(id){
+ document.getElementById(id).style.display="none";
 }
 
 
-function atualizarTotal(){
-
- if(!pedidoAtual)return;
-
- const qtd =
- Number(document.getElementById("quantidade").value) || 1;
-
- const total =
- pedidoAtual.price * qtd;
-
- document.getElementById("totalPedido").innerText =
- "Total: R$ " +
- total.toFixed(2).replace(".",",");
-
-}
-
-
-/* =========================
-   PIX
-========================= */
-
-function gerarPix(){
-
- if(!config.pixKey){
-
-  alert(
-   "O Pix ainda não foi cadastrado. Entre no painel e cadastre sua chave Pix."
-  );
-
-  return;
- }
-
- const nome =
- document.getElementById("clienteNome").value.trim();
-
- if(!nome){
-
-  alert("Digite seu nome.");
-
-  return;
- }
-
- const qtd =
- Number(document.getElementById("quantidade").value) || 1;
-
- const total =
- pedidoAtual.price * qtd;
-
- const payload =
- criarPix(
-  config.pixKey,
-  config.pixName,
-  config.pixCity,
-  total
- );
-
- const qr =
- "https://quickchart.io/qr?size=300&text="
- + encodeURIComponent(payload);
-
- document.getElementById("pixArea").innerHTML = `
-
-  <div class="pixbox">
-
-   <h3>💰 Pague com Pix</h3>
-
-   <img id="qrcode" src="${qr}">
-
-   <p><b>Pix copia e cola:</b></p>
-
-   <div class="copia">${payload}</div>
-
-   <br>
-
-   <button class="btn"
-    onclick="copiarPix('${payload}')">
-    📋 Copiar Pix
-   </button>
-
-   <br><br>
-
-   <button class="btn2"
-    onclick="enviarComprovante()">
-    📱 Enviar comprovante no WhatsApp
-   </button>
-
-  </div>
- `;
-
-}
-
-
-/* =========================
-   COPIAR PIX
-========================= */
-
-function copiarPix(text){
-
- navigator.clipboard.writeText(text);
-
- alert("Pix copiado!");
-
-}
-
-
-/* =========================
-   WHATSAPP
-========================= */
-
-function abrirWhatsApp(){
-
- const numero =
- (config.whatsapp || "21974967664")
- .replace(/\D/g,"");
-
- window.open(
-  "https://wa.me/" + numero,
-  "_blank"
- );
-
-}
-
-
-function enviarComprovante(){
-
- const numero =
- (config.whatsapp || "21974967664")
- .replace(/\D/g,"");
-
- const nome =
- document.getElementById("clienteNome").value;
-
- const qtd =
- document.getElementById("quantidade").value;
-
- const total =
- (pedidoAtual.price * qtd)
- .toFixed(2)
- .replace(".",",");
-
- const texto =
- `Olá! Fiz um pedido pelo site.
-
-Nome: ${nome}
-Pedido: ${pedidoAtual.name}
-Quantidade: ${qtd}
-Total: R$ ${total}
-
-Estou enviando o comprovante do Pix.`;
-
- window.open(
-  "https://wa.me/" +
-  numero +
-  "?text=" +
-  encodeURIComponent(texto),
-  "_blank"
- );
-
-}
-
-
-/* =========================
-   GERADOR PIX
-========================= */
-
-function campo(id,valor){
-
- const tamanho =
- valor.length.toString().padStart(2,"0");
-
- return id + tamanho + valor;
-
-}
-
-function crc16(str){
-
- let crc=0xFFFF;
-
- for(let c=0;c<str.length;c++){
-
-  crc ^= str.charCodeAt(c)<<8;
-
-  for(let i=0;i<8;i++){
-
-   if(crc & 0x8000){
-
-    crc =
-    ((crc<<1)^0x1021)&0xFFFF;
-
-   }else{
-
-    crc =
-    (crc<<1)&0xFFFF;
-
-   }
-
-  }
- }
-
- return crc.toString(16)
-  .toUpperCase()
-  .padStart(4,"0");
-
-}
-
-
-function criarPix(chave,nome,cidade,valor){
-
- nome =
- nome.normalize("NFD")
- .replace(/[\u0300-\u036f]/g,"")
- .toUpperCase()
- .substring(0,25);
-
- cidade =
- cidade.normalize("NFD")
- .replace(/[\u0300-\u036f]/g,"")
- .toUpperCase()
- .substring(0,15);
-
- const merchant =
- campo("00","BR.GOV.BCB.PIX") +
- campo("01",chave);
-
- const mai =
- campo("26",merchant);
-
- let payload =
- campo("00","01") +
- mai +
- campo("52","0000") +
- campo("53","986") +
- campo("54",valor.toFixed(2)) +
- campo("58","BR") +
- campo("59",nome) +
- campo("60",cidade) +
- campo("62",campo("05","***"));
-
- payload += "6304";
-
- payload += crc16(payload);
-
- return payload;
-
-}
-
-
-/* =========================
-   SEGURANÇA DE TEXTO
-========================= */
-
-function esc(text){
-
- return String(text || "")
-  .replace(/&/g,"&amp;")
-  .replace(/</g,"&lt;")
-  .replace(/>/g,"&gt;")
-  .replace(/"/g,"&quot;")
-  .replace(/'/g,"&#039;");
-
-}
-
-
-/* =========================
-   INÍCIO
-========================= */
-
-renderMeals();
-
-
-/*
-  PARA ABRIR O PAINEL:
-  coloque #admin no final do endereço.
-
-  Exemplo:
-  seu-site.vercel.app/#admin
-*/
-
-if(location.hash === "#admin"){
-
- document.getElementById("site").style.display="none";
- abrirPainel();
-
-}
-
-
-/*
-  Clique 5 vezes no logo para abrir o painel.
-*/
-
-let clicks=0;
-
-document.querySelector(".logo").addEventListener("click",()=>{
-
- clicks++;
-
- if(clicks>=5){
-
-  clicks=0;
-  abrirPainel();
-
- }
-
-});
+carregar();
 
 </script>
 
 </body>
-</html>
+ </html>
