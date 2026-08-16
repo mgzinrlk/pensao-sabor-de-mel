@@ -1,666 +1,1422 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cardápio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cardápio Online</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial,sans-serif;
+      background:#fff8ed;
+      color:#222
+    }
 
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#f5f5f5;color:#222}
-header{background:#111;color:#fff;text-align:center;padding:25px 15px}
-.container{max-width:900px;margin:auto;padding:20px}
-h2{margin-bottom:12px}
-.pratos{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
-.prato{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 3px 12px #0002}
-.prato img{width:100%;height:190px;object-fit:cover}
-.info{padding:15px}
-.descricao{color:#666;margin:8px 0}
-.preco{font-size:20px;font-weight:bold;margin:12px 0}
-button{border:0;border-radius:8px;padding:12px 15px;font-weight:bold;cursor:pointer}
-.add{background:#111;color:#fff;width:100%}
-.carrinho,.admin{background:#fff;padding:20px;border-radius:12px;margin-top:25px;box-shadow:0 3px 12px #0002}
-.item{padding:10px 0;border-bottom:1px solid #eee}
-.total{font-size:22px;font-weight:bold;margin:15px 0}
-input,textarea,select{width:100%;padding:12px;margin:6px 0 12px;border:1px solid #ddd;border-radius:8px}
-textarea{min-height:80px}
-.btn{background:#111;color:#fff;margin:4px}
-.publicar{background:#168a32;color:#fff}
-.excluir{background:#d00;color:#fff}
-.escondido{display:none}
-.adminItem{border:1px solid #ddd;border-radius:10px;padding:14px;margin:10px 0}
-.verde{color:green;font-weight:bold}
-.vermelho{color:red;font-weight:bold}
-</style>
+    header{
+      background:#c91515;
+      color:white;
+      padding:22px 16px;
+      text-align:center
+    }
+
+    header h1{
+      margin:0 0 6px;
+      font-size:30px
+    }
+
+    header p{margin:0}
+
+    .wrap{
+      max-width:900px;
+      margin:auto;
+      padding:18px
+    }
+
+    .status{
+      padding:12px;
+      border-radius:10px;
+      margin-bottom:15px;
+      background:#fff0c7
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:14px
+    }
+
+    .card{
+      background:white;
+      border-radius:15px;
+      padding:15px;
+      box-shadow:0 3px 12px #0001
+    }
+
+    .card img{
+      width:100%;
+      height:160px;
+      object-fit:cover;
+      border-radius:12px;
+      background:#eee
+    }
+
+    .price{
+      font-size:21px;
+      font-weight:bold;
+      color:#c91515
+    }
+
+    button{
+      border:0;
+      border-radius:10px;
+      padding:12px 15px;
+      font-weight:bold;
+      cursor:pointer
+    }
+
+    .yellow{
+      background:#ffd21a;
+      color:#111
+    }
+
+    .red{
+      background:#c91515;
+      color:white
+    }
+
+    .cart{
+      position:fixed;
+      right:15px;
+      bottom:15px;
+      background:#ffd21a;
+      color:#111;
+      border-radius:50px;
+      padding:15px 20px;
+      box-shadow:0 4px 18px #0003
+    }
+
+    .hidden{
+      display:none!important
+    }
+
+    input,select,textarea{
+      width:100%;
+      padding:12px;
+      margin:6px 0 12px;
+      border:1px solid #ccc;
+      border-radius:9px;
+      font-size:16px
+    }
+
+    label{
+      font-weight:bold
+    }
+
+    .box{
+      background:white;
+      border-radius:15px;
+      padding:18px;
+      margin-top:18px;
+      box-shadow:0 3px 12px #0001
+    }
+
+    .row{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap
+    }
+
+    .row>*{
+      flex:1
+    }
+
+    .item-admin{
+      border:1px solid #ddd;
+      padding:12px;
+      border-radius:10px;
+      margin:8px 0
+    }
+
+    .muted{
+      color:#666
+    }
+
+    .danger{
+      background:#eee;
+      color:#a00
+    }
+
+    #adminBtn{
+      position:fixed;
+      left:12px;
+      bottom:15px;
+      background:#222;
+      color:white;
+      border-radius:50px
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
-<h1>🍽️ Pensão Sabor de Mel</h1>
-<p>Cardápio e pedidos</p>
+  <h1>🍽️ Meu Cardápio</h1>
+  <p>Faça seu pedido de forma rápida</p>
 </header>
 
-<div class="container">
+<main class="wrap">
 
-<h2>Cardápio</h2>
+  <div id="status" class="status">
+    Carregando cardápio...
+  </div>
 
-<div id="pratos" class="pratos">
-<p>Carregando...</p>
-</div>
+  <section id="menu" class="grid"></section>
 
-<div class="carrinho">
+  <div id="empty" class="box hidden">
+    Nenhuma refeição publicada no momento.
+  </div>
 
-<h2>🛒 Seu pedido</h2>
+</main>
 
-<div id="itens">
-Nenhum item adicionado.
-</div>
-
-<div class="total">
-Total: R$ <span id="total">0,00</span>
-</div>
-
-<input id="nome" placeholder="Seu nome">
-
-<input id="endereco" placeholder="Endereço de entrega">
-
-<select id="pagamento">
-<option value="">Forma de pagamento</option>
-<option value="Pix">Pix</option>
-<option value="Dinheiro">Dinheiro</option>
-<option value="Cartão">Cartão</option>
-</select>
-
-<button class="btn" style="width:100%" onclick="enviarPedido()">
-📱 Enviar pedido pelo WhatsApp
+<button
+  id="cartBtn"
+  class="cart"
+  onclick="openCheckout()">
+  🛒 Pedido (<span id="cartCount">0</span>)
 </button>
 
-</div>
-
-<div class="admin">
-
-<h2>🔐 Área administrativa</h2>
-
-<div id="login">
-
-<input type="password" id="senha" placeholder="Senha">
-
-<button class="btn" onclick="entrar()">
-Entrar
+<button
+  id="adminBtn"
+  onclick="openAdmin()">
+  ⚙️ Admin
 </button>
 
+
+<!-- =========================
+     CHECKOUT
+========================= -->
+
+<div id="checkout" class="box wrap hidden">
+
+  <h2>Finalizar pedido</h2>
+
+  <div id="cartList"></div>
+
+  <hr>
+
+  <label>Nome</label>
+
+  <input
+    id="customerName"
+    placeholder="Seu nome">
+
+  <label>Endereço</label>
+
+  <textarea
+    id="customerAddress"
+    placeholder="Rua, número, bairro..."></textarea>
+
+  <label>Forma de pagamento</label>
+
+  <select id="payment">
+
+    <option value="">
+      Escolha...
+    </option>
+
+    <option>
+      Pix
+    </option>
+
+    <option>
+      Dinheiro
+    </option>
+
+    <option>
+      Cartão
+    </option>
+
+  </select>
+
+  <label
+    id="changeLabel"
+    class="hidden">
+    Troco para quanto?
+  </label>
+
+  <input
+    id="change"
+    class="hidden"
+    placeholder="Ex.: R$ 50,00">
+
+  <div class="row">
+
+    <button
+      class="yellow"
+      onclick="closeCheckout()">
+      Voltar
+    </button>
+
+    <button
+      class="red"
+      onclick="sendWhatsApp()">
+      Enviar pedido no WhatsApp
+    </button>
+
+  </div>
+
 </div>
 
-<div id="painel" class="escondido">
 
-<hr><br>
+<!-- =========================
+     ADMIN
+========================= -->
 
-<h2>Adicionar prato</h2>
+<div id="admin" class="box wrap hidden">
 
-<input id="novoNome" placeholder="Nome do prato">
+  <h2>Área administrativa</h2>
 
-<textarea id="novaDescricao" placeholder="Descrição do prato"></textarea>
+  <p class="muted">
+    Cadastre, edite, publique ou remova as refeições.
+  </p>
 
-<input id="novoPreco" type="number" step="0.01" placeholder="Preço">
 
-<input id="novaImagem" placeholder="URL da imagem">
+  <div id="loginBox">
 
-<button class="btn" onclick="adicionar()">
-➕ Adicionar prato
-</button>
+    <label>
+      Senha administrativa
+    </label>
 
-<br><br>
+    <input
+      id="adminPassword"
+      type="password"
+      placeholder="Senha">
 
-<h2>Gerenciar cardápio</h2>
+    <button
+      class="red"
+      onclick="loginAdmin()">
+      Entrar
+    </button>
 
-<div id="adminPratos"></div>
+  </div>
 
-<br>
 
-<button class="excluir" onclick="sair()">
-Sair
-</button>
+  <div id="panel" class="hidden">
+
+    <button
+      class="yellow"
+      onclick="logoutAdmin()">
+      Sair
+    </button>
+
+    <button
+      class="yellow"
+      onclick="changePassword()">
+      Mudar senha
+    </button>
+
+
+    <h3>Nova refeição</h3>
+
+    <input
+      id="foodName"
+      placeholder="Nome da refeição">
+
+    <input
+      id="foodPrice"
+      type="number"
+      step="0.01"
+      placeholder="Preço">
+
+    <input
+      id="foodDesc"
+      placeholder="Descrição">
+
+    <input
+      id="foodImage"
+      placeholder="URL da imagem (opcional)">
+
+    <label>
+      <input
+        id="foodPublished"
+        type="checkbox"
+        checked>
+
+      Publicar para clientes
+    </label>
+
+    <br><br>
+
+    <button
+      class="red"
+      onclick="addFood()">
+      Adicionar refeição
+    </button>
+
+
+    <h3>
+      Refeições cadastradas
+    </h3>
+
+    <div id="adminList"></div>
+
+  </div>
 
 </div>
-</div>
 
-</div>
 
 <script>
 
-/* =========================================
-   SUPABASE
-   ========================================= */
+  /* ==========================================
+     SUPABASE
+  ========================================== */
 
-const SUPABASE_URL =
-"COLE_AQUI_SUA_PROJECT_URL";
+  const SUPABASE_URL =
+    "https://dnrxkaikqmobsroqngix.supabase.co";
 
-const SUPABASE_KEY =
-"COLE_AQUI_SUA_PUBLISHABLE_KEY";
 
-const supabaseClient =
-supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
-);
+  /*
+     COLE AQUI A CHAVE PUBLICÁVEL DO SUPABASE.
 
+     NÃO COLOQUE A SERVICE_ROLE / SECRET KEY.
+  */
 
-/* =========================================
-   CONFIGURAÇÕES
-   ========================================= */
+  const SUPABASE_KEY =
+    "COLE_SUA_CHAVE_PUBLICAVEL_AQUI";
 
-const SENHA_ADMIN = "123456";
 
-/* COLOQUE AQUI O WHATSAPP QUE RECEBERÁ OS PEDIDOS */
-const WHATSAPP = "5521999999999";
+  /*
+     COLOQUE AQUI O WHATSAPP QUE VAI RECEBER
+     OS PEDIDOS.
 
-let pratos = [];
-let carrinho = [];
+     EXEMPLO:
+     5511999999999
+  */
 
+  const WHATSAPP =
+    "5599999999999";
 
-/* =========================================
-   CARDÁPIO PÚBLICO
-   ========================================= */
 
-async function carregarCardapio(){
+  const TABLE =
+    "Refeições";
 
-const {data,error} =
-await supabaseClient
-.from("refeicoes")
-.select("*")
-.eq("publicado",true)
-.eq("disponivel",true)
-.order("id",{ascending:true});
 
-if(error){
+  let supabase = null;
 
-console.error(error);
+  let foods = [];
 
-document.getElementById("pratos").innerHTML =
-"<p>Não foi possível carregar o cardápio.</p>";
+  let cart = [];
 
-return;
-}
 
-pratos=data || [];
+  const $ = id =>
+    document.getElementById(id);
 
-mostrarCardapio();
 
-}
+  /* ==========================================
+     INICIAR SUPABASE
+  ========================================== */
 
+  if(
+    SUPABASE_KEY &&
+    !SUPABASE_KEY.includes(
+      "COLE_SUA_CHAVE"
+    )
+  ){
 
-function mostrarCardapio(){
+    supabase =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
 
-const area =
-document.getElementById("pratos");
+  }
 
-if(!pratos.length){
 
-area.innerHTML =
-"<p>Nenhum prato publicado no momento.</p>";
+  /* ==========================================
+     DINHEIRO
+  ========================================== */
 
-return;
-}
+  function money(value){
 
-area.innerHTML =
-pratos.map(p=>`
+    return Number(
+      value || 0
+    ).toLocaleString(
+      "pt-BR",
+      {
+        style:"currency",
+        currency:"BRL"
+      }
+    );
 
-<div class="prato">
+  }
 
-${p.imagem ? `
-<img src="${p.imagem}" alt="${p.nome}">
-` : ""}
 
-<div class="info">
+  /* ==========================================
+     STATUS
+  ========================================== */
 
-<h3>${p.nome}</h3>
+  function showStatus(
+    text,
+    error=false
+  ){
 
-<div class="descricao">
-${p.descricao || ""}
-</div>
+    $("status").textContent =
+      text;
 
-<div class="preco">
-R$ ${Number(p.preco).toFixed(2).replace(".",",")}
-</div>
+    $("status").style.background =
+      error
+      ? "#ffd7d7"
+      : "#fff0c7";
 
-<button class="add"
-onclick="adicionarCarrinho(${p.id})">
+  }
 
-Adicionar ao pedido
 
-</button>
+  /* ==========================================
+     CARREGAR CARDÁPIO
+  ========================================== */
 
-</div>
+  async function loadFoods(){
 
-</div>
+    if(!supabase){
 
-`).join("");
+      showStatus(
+        "Falta colocar a chave pública do Supabase no código.",
+        true
+      );
 
-}
+      return;
+    }
 
 
-/* =========================================
-   CARRINHO
-   ========================================= */
+    showStatus(
+      "Carregando cardápio..."
+    );
 
-function adicionarCarrinho(id){
 
-const prato =
-pratos.find(p=>p.id===id);
+    const {
+      data,
+      error
+    } =
+      await supabase
+      .from(TABLE)
+      .select("*")
+      .eq("publicado",true)
+      .order(
+        "id",
+        {
+          ascending:false
+        }
+      );
 
-if(!prato)return;
 
-carrinho.push(prato);
+    if(error){
 
-atualizarCarrinho();
+      console.error(error);
 
-}
+      showStatus(
+        "Erro ao carregar: " +
+        error.message,
+        true
+      );
 
+      return;
+    }
 
-function remover(index){
 
-carrinho.splice(index,1);
+    foods =
+      data || [];
 
-atualizarCarrinho();
 
-}
+    renderMenu();
 
 
-function atualizarCarrinho(){
+    showStatus(
+      "Cardápio carregado."
+    );
 
-const area =
-document.getElementById("itens");
+  }
 
-if(!carrinho.length){
 
-area.innerHTML =
-"Nenhum item adicionado.";
+  /* ==========================================
+     MOSTRAR CARDÁPIO
+  ========================================== */
 
-document.getElementById("total").innerText =
-"0,00";
+  function renderMenu(){
 
-return;
-}
+    const menu =
+      $("menu");
 
-let total=0;
 
-area.innerHTML =
-carrinho.map((p,i)=>{
+    menu.innerHTML = "";
 
-total += Number(p.preco);
 
-return `
+    if(!foods.length){
 
-<div class="item">
+      $("empty")
+        .classList
+        .remove("hidden");
 
-<b>${p.nome}</b>
+      return;
+    }
 
-— R$ ${Number(p.preco)
-.toFixed(2)
-.replace(".",",")}
 
-<button onclick="remover(${i})">
-❌
-</button>
+    $("empty")
+      .classList
+      .add("hidden");
 
-</div>
 
-`;
+    foods.forEach(food => {
 
-}).join("");
+      const card =
+        document.createElement(
+          "article"
+        );
 
-document.getElementById("total").innerText =
-total.toFixed(2).replace(".",",");
 
-}
+      card.className =
+        "card";
 
 
-/* =========================================
-   WHATSAPP
-   ========================================= */
+      card.innerHTML = `
 
-function enviarPedido(){
+        ${
+          food.imagem
+          ?
+          `<img
+            src="${escapeHtml(food.imagem)}"
+            alt="">`
+          :
+          ""
+        }
 
-if(!carrinho.length){
+        <h3>
+          ${escapeHtml(
+            food.nome ||
+            "Refeição"
+          )}
+        </h3>
 
-alert("Adicione um prato ao pedido.");
+        <p class="muted">
+          ${escapeHtml(
+            food.descricao ||
+            ""
+          )}
+        </p>
 
-return;
-}
+        <p class="price">
+          ${money(food.preco)}
+        </p>
 
-const nome =
-document.getElementById("nome").value.trim();
+        <button
+          class="yellow"
+          onclick="addToCart(${Number(food.id)})">
 
-const endereco =
-document.getElementById("endereco").value.trim();
+          Adicionar
 
-const pagamento =
-document.getElementById("pagamento").value;
+        </button>
 
-if(!nome){
+      `;
 
-alert("Digite seu nome.");
 
-return;
-}
+      menu.appendChild(card);
 
-if(!endereco){
+    });
 
-alert("Digite seu endereço.");
+  }
 
-return;
-}
 
-if(!pagamento){
+  /* ==========================================
+     SEGURANÇA HTML
+  ========================================== */
 
-alert("Escolha a forma de pagamento.");
+  function escapeHtml(value){
 
-return;
-}
+    return String(
+      value ?? ""
+    )
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
 
-let total=0;
+  }
 
-let texto =
-"🍽️ *NOVO PEDIDO*%0A%0A";
 
-texto +=
-"👤 *Nome:* "+nome+"%0A";
+  /* ==========================================
+     CARRINHO
+  ========================================== */
 
-texto +=
-"📍 *Endereço:* "+endereco+"%0A";
+  function addToCart(id){
 
-texto +=
-"💳 *Pagamento:* "+pagamento+"%0A%0A";
+    const food =
+      foods.find(
+        x =>
+        Number(x.id) ===
+        Number(id)
+      );
 
-texto +=
-"🛒 *Itens:*%0A";
 
-carrinho.forEach(p=>{
+    if(!food)
+      return;
 
-total += Number(p.preco);
 
-texto +=
-"• "+p.nome+
-" — R$ "+
-Number(p.preco)
-.toFixed(2)
-.replace(".",",")+
-"%0A";
+    const existing =
+      cart.find(
+        x =>
+        Number(x.id) ===
+        Number(id)
+      );
 
-});
 
-texto +=
-"%0A💰 *TOTAL: R$ "+
-total.toFixed(2).replace(".",",")+
-"*";
+    if(existing){
 
-const url =
-"https://wa.me/"+
-WHATSAPP+
-"?text="+texto;
+      existing.qty++;
 
-window.open(url,"_blank");
+    }else{
 
-}
+      cart.push({
+        ...food,
+        qty:1
+      });
 
+    }
 
-/* =========================================
-   LOGIN ADMIN
-   ========================================= */
 
-function entrar(){
+    updateCart();
 
-const senha =
-document.getElementById("senha").value;
+  }
 
-if(senha !== SENHA_ADMIN){
 
-alert("Senha incorreta.");
+  function updateCart(){
 
-return;
-}
+    $("cartCount")
+      .textContent =
+      cart.reduce(
+        (total,item) =>
+        total + item.qty,
+        0
+      );
 
-document
-.getElementById("login")
-.classList.add("escondido");
+  }
 
-document
-.getElementById("painel")
-.classList.remove("escondido");
 
-carregarAdmin();
+  /* ==========================================
+     ABRIR CHECKOUT
+  ========================================== */
 
-}
+  function openCheckout(){
 
+    $("checkout")
+      .classList
+      .remove("hidden");
 
-function sair(){
 
-document
-.getElementById("painel")
-.classList.add("escondido");
+    $("admin")
+      .classList
+      .add("hidden");
 
-document
-.getElementById("login")
-.classList.remove("escondido");
 
-}
+    renderCart();
 
 
-/* =========================================
-   ADMIN
-   ========================================= */
+    window.scrollTo({
+      top:document.body.scrollHeight,
+      behavior:"smooth"
+    });
 
-async function carregarAdmin(){
+  }
 
-const {data,error} =
-await supabaseClient
-.from("refeicoes")
-.select("*")
-.order("id",{ascending:false});
 
-if(error){
+  function closeCheckout(){
 
-console.error(error);
+    $("checkout")
+      .classList
+      .add("hidden");
 
-alert("Erro ao carregar os pratos.");
 
-return;
-}
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    });
 
-const area =
-document.getElementById("adminPratos");
+  }
 
-if(!data.length){
 
-area.innerHTML =
-"<p>Nenhum prato cadastrado.</p>";
+  /* ==========================================
+     MOSTRAR CARRINHO
+  ========================================== */
 
-return;
-}
+  function renderCart(){
 
-area.innerHTML =
-data.map(p=>`
+    const box =
+      $("cartList");
 
-<div class="adminItem">
 
-<h3>${p.nome}</h3>
+    if(!cart.length){
 
-<p>${p.descricao || ""}</p>
+      box.innerHTML =
+        "<p>Nenhum item no pedido.</p>";
 
-<p>
-<strong>
-R$ ${Number(p.preco).toFixed(2).replace(".",",")}
-</strong>
-</p>
+      return;
+    }
 
-<p class="${p.publicado ? "verde":"vermelho"}">
 
-${p.publicado
-? "🟢 PUBLICADO"
-: "🔴 NÃO PUBLICADO"}
+    box.innerHTML =
+      cart.map(
+        (item,index) => `
 
-</p>
+          <div class="item-admin">
 
-<button
-class="publicar"
-onclick="publicar(${p.id},${p.publicado})">
+            <b>
+              ${escapeHtml(item.nome)}
+            </b>
 
-${p.publicado
-? "Despublicar"
-: "Publicar"}
+            <br>
 
-</button>
+            ${item.qty}
+            ×
+            ${money(item.preco)}
 
-<button
-class="excluir"
-onclick="excluirPrato(${p.id})">
 
-Excluir
+            <div class="row">
 
-</button>
+              <button
+                onclick="
+                  cart[${index}].qty--;
 
-</div>
+                  if(
+                    cart[${index}].qty <= 0
+                  ){
+                    cart.splice(${index},1);
+                  }
 
-`).join("");
+                  updateCart();
+                  renderCart();
+                ">
 
-}
+                −
 
+              </button>
 
-/* =========================================
-   ADICIONAR
-   ========================================= */
 
-async function adicionar(){
+              <button
+                onclick="
+                  cart[${index}].qty++;
+                  updateCart();
+                  renderCart();
+                ">
 
-const nome =
-document.getElementById("novoNome").value.trim();
+                +
 
-const descricao =
-document.getElementById("novaDescricao").value.trim();
+              </button>
 
-const preco =
-document.getElementById("novoPreco").value;
 
-const imagem =
-document.getElementById("novaImagem").value.trim();
+              <button
+                class="danger"
+                onclick="
+                  cart.splice(${index},1);
+                  updateCart();
+                  renderCart();
+                ">
 
-if(!nome || !preco){
+                Remover
 
-alert("Preencha o nome e o preço.");
+              </button>
 
-return;
-}
+            </div>
 
-const {error} =
-await supabaseClient
-.from("refeicoes")
-.insert({
+          </div>
 
-nome:nome,
+        `
+      ).join("");
 
-descricao:descricao,
 
-preco:Number(preco),
+    const total =
+      cart.reduce(
+        (sum,item) =>
+        sum +
+        Number(item.preco) *
+        item.qty,
+        0
+      );
 
-imagem:imagem,
 
-disponivel:true,
+    box.innerHTML += `
 
-publicado:false
+      <h3>
+        Total: ${money(total)}
+      </h3>
 
-});
+    `;
 
-if(error){
+  }
 
-console.error(error);
 
-alert("Erro ao adicionar.");
+  /* ==========================================
+     PAGAMENTO
+  ========================================== */
 
-return;
-}
+  $("payment")
+    .addEventListener(
+      "change",
+      function(){
 
-document.getElementById("novoNome").value="";
-document.getElementById("novaDescricao").value="";
-document.getElementById("novoPreco").value="";
-document.getElementById("novaImagem").value="";
+        const isMoney =
+          this.value ===
+          "Dinheiro";
 
-alert("Prato adicionado. Agora clique em PUBLICAR.");
 
-carregarAdmin();
+        $("change")
+          .classList
+          .toggle(
+            "hidden",
+            !isMoney
+          );
 
-}
 
+        $("changeLabel")
+          .classList
+          .toggle(
+            "hidden",
+            !isMoney
+          );
 
-/* =========================================
-   PUBLICAR
-   ========================================= */
+      }
+    );
 
-async function publicar(id,estado){
 
-const {error} =
-await supabaseClient
-.from("refeicoes")
-.update({
-publicado:!estado
-})
-.eq("id",id);
+  /* ==========================================
+     WHATSAPP
+  ========================================== */
 
-if(error){
+  function sendWhatsApp(){
 
-console.error(error);
+    if(!cart.length){
 
-alert("Erro ao publicar.");
+      alert(
+        "Adicione pelo menos uma refeição."
+      );
 
-return;
-}
+      return;
+    }
 
-carregarAdmin();
 
-carregarCardapio();
+    const name =
+      $("customerName")
+      .value
+      .trim();
 
-}
 
+    const address =
+      $("customerAddress")
+      .value
+      .trim();
 
-/* =========================================
-   EXCLUIR
-   ========================================= */
 
-async function excluirPrato(id){
+    const payment =
+      $("payment")
+      .value;
 
-if(!confirm("Excluir este prato?"))return;
 
-const {error} =
-await supabaseClient
-.from("refeicoes")
-.delete()
-.eq("id",id);
+    if(
+      !name ||
+      !address ||
+      !payment
+    ){
 
-if(error){
+      alert(
+        "Preencha nome, endereço e forma de pagamento."
+      );
 
-console.error(error);
+      return;
+    }
 
-alert("Erro ao excluir.");
 
-return;
-}
+    const total =
+      cart.reduce(
+        (sum,item) =>
+        sum +
+        Number(item.preco) *
+        item.qty,
+        0
+      );
 
-carregarAdmin();
 
-carregarCardapio();
+    let message =
+      "🍽️ *NOVO PEDIDO*%0A%0A";
 
-}
 
+    message +=
+      "👤 *Nome:* " +
+      encodeURIComponent(name) +
+      "%0A";
 
-/* =========================================
-   INICIAR
-   ========================================= */
 
-carregarCardapio();
+    message +=
+      "📍 *Endereço:* " +
+      encodeURIComponent(address) +
+      "%0A";
 
-</script>
 
-</body>
-</html>
+    message +=
+      "💳 *Pagamento:* " +
+      encodeURIComponent(payment) +
+      "%0A";
+
+
+    if(
+      payment === "Dinheiro" &&
+      $("change").value.trim()
+    ){
+
+      message +=
+        "💵 *Troco para:* " +
+        encodeURIComponent(
+          $("change").value.trim()
+        ) +
+        "%0A";
+
+    }
+
+
+    message +=
+      "%0A*ITENS:*%0A";
+
+
+    cart.forEach(item => {
+
+      message +=
+        "• " +
+        item.qty +
+        "x " +
+        encodeURIComponent(
+          item.nome
+        ) +
+        " — " +
+        encodeURIComponent(
+          money(
+            Number(item.preco) *
+            item.qty
+          )
+        ) +
+        "%0A";
+
+    });
+
+
+    message +=
+      "%0A💰 *TOTAL: " +
+      encodeURIComponent(
+        money(total)
+      ) +
+      "*";
+
+
+    window.open(
+      "https://wa.me/" +
+      WHATSAPP +
+      "?text=" +
+      message,
+      "_blank"
+    );
+
+  }
+
+
+  /* ==========================================
+     ADMIN
+  ========================================== */
+
+  function openAdmin(){
+
+    $("admin")
+      .classList
+      .remove("hidden");
+
+
+    $("checkout")
+      .classList
+      .add("hidden");
+
+
+    window.scrollTo({
+      top:document.body.scrollHeight,
+      behavior:"smooth"
+    });
+
+  }
+
+
+  /* ==========================================
+     SENHA
+  ========================================== */
+
+  function getPassword(){
+
+    return (
+      localStorage.getItem(
+        "cardapio_admin_password"
+      )
+      ||
+      "123456"
+    );
+
+  }
+
+
+  function loginAdmin(){
+
+    const password =
+      $("adminPassword")
+      .value;
+
+
+    if(
+      password ===
+      getPassword()
+    ){
+
+      $("loginBox")
+        .classList
+        .add("hidden");
+
+
+      $("panel")
+        .classList
+        .remove("hidden");
+
+
+      renderAdmin();
+
+    }else{
+
+      alert(
+        "Senha incorreta."
+      );
+
+    }
+
+  }
+
+
+  function logoutAdmin(){
+
+    $("panel")
+      .classList
+      .add("hidden");
+
+
+    $("loginBox")
+      .classList
+      .remove("hidden");
+
+
+    $("adminPassword")
+      .value = "";
+
+  }
+
+
+  function changePassword(){
+
+    const oldPassword =
+      prompt(
+        "Digite a senha atual:"
+      );
+
+
+    if(
+      oldPassword !==
+      getPassword()
+    ){
+
+      alert(
+        "Senha atual incorreta."
+      );
+
+      return;
+    }
+
+
+    const newPassword =
+      prompt(
+        "Digite a nova senha:"
+      );
+
+
+    if(
+      !newPassword ||
+      newPassword.length < 4
+    ){
+
+      alert(
+        "A nova senha precisa ter pelo menos 4 caracteres."
+      );
+
+      return;
+    }
+
+
+    localStorage.setItem(
+      "cardapio_admin_password",
+      newPassword
+    );
+
+
+    alert(
+      "Senha alterada!"
+    );
+
+  }
+
+
+  /* ==========================================
+     ADICIONAR REFEIÇÃO
+  ========================================== */
+
+  async function addFood(){
+
+    if(!supabase){
+
+      alert(
+        "Configure a chave do Supabase primeiro."
+      );
+
+      return;
+    }
+
+
+    const nome =
+      $("foodName")
+      .value
+      .trim();
+
+
+    const preco =
+      Number(
+        $("foodPrice")
+        .value
+      );
+
+
+    const descricao =
+      $("foodDesc")
+      .value
+      .trim();
+
+
+    const imagem =
+      $("foodImage")
+      .value
+      .trim();
+
+
+    const publicado =
+      $("foodPublished")
+      .checked;
+
+
+    if(
+      !nome ||
+      !preco
+    ){
+
+      alert(
+        "Informe nome e preço."
+      );
+
+      return;
+    }
+
+
+    const payload = {
+
+      nome:
+        nome,
+
+      preco:
+        preco,
+
+      descricao:
+        descricao,
+
+      imagem:
+        imagem,
+
+      publicado:
+        publicado
+
+    };
+
+
+    const {
+      error
+    } =
+      await supabase
+      .from(TABLE)
+      .insert(payload);
+
+
+    if(error){
+
+      console.error(error);
+
+      alert(
+        "Erro ao cadastrar: " +
+        error.message
+      );
+
+      return;
+    }
+
+
+    $("foodName")
+      .value = "";
+
+
+    $("foodPrice")
+      .value = "";
+
+
+    $("foodDesc")
+      .value = "";
+
+
+    $("foodImage")
+      .value = "";
+
+
+    $("foodPublished")
+      .checked = true;
+
+
+    alert(
+      "Refeição cadastrada!"
+    );
+
+
+    await loadFoods();
+
+    await renderAdmin();
+
+  }
+
+
+  /* ==========================================
+     LISTAR ADMIN
+  ========================================== */
+
+  async function renderAdmin(){
+
+    if(!supabase)
+      return;
+
+
+    const {
+      data,
+      error
+    } =
+      await supabase
+      .from(TABLE)
+      .select("*")
+      .order(
+        "id",
+        {
+          ascending:false
+        }
+      );
+
+
+    if(error){
+
+      $("adminList")
+        .innerHTML =
+        "<p>Erro: " +
+        escapeHtml(
+          error.message
+        ) +
+        "</p>";
+
+      return;
+    }
+
+
+    $("adminList")
+      .innerHTML =
+      (data || [])
+      .map(
+        food => `
+
+          <div class="item-admin">
+
+            <b>
+              ${escapeHtml(
+                food.nome
+              )}
+            </b>
+
+            —
+            ${money(food.preco)}
+
+            <br><br>
+
+            <span>
+
+              ${
+                food.publicado
+                ?
+                "🟢 Publicado"
+                :
+                "🔴 Oculto"
+              }
+
+            </span>
+
+            <div class="row">
+
+              <button
+                class="yellow"
+                onclick="
+                  togglePublished(
+                    ${Number(food.id)},
+                    ${!food.publicado}
+                  )
+                ">
+
+                ${
+                  food.publicado
+                  ?
+                  "Ocultar"
+                  :
+                  "Publicar"
+                }
+
+              </button>
+
+
+              <button
+                class="danger"
+                onclick="
+                  deleteFood(
+                    ${Number(food.id)}
+                  )
+                
