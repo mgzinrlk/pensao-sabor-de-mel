@@ -2,114 +2,111 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cardápio</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cardápio de Quentinhas</title>
 
 <style>
 *{box-sizing:border-box}
 body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#fff;
-  color:#222
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#fff8ed;
+    color:#222;
 }
 header{
-  background:linear-gradient(135deg,#e60000,#ffcc00);
-  color:white;
-  padding:22px 15px;
-  text-align:center
+    background:linear-gradient(135deg,#d71919,#ffb000);
+    color:white;
+    padding:22px 16px;
+    text-align:center;
 }
 header h1{margin:0;font-size:28px}
 header p{margin:7px 0 0}
-
 .container{
-  max-width:900px;
-  margin:auto;
-  padding:20px
+    max-width:650px;
+    margin:auto;
+    padding:18px;
 }
-
-button{
-  border:0;
-  border-radius:8px;
-  padding:12px 16px;
-  cursor:pointer;
-  font-weight:bold
-}
-
-.adminBtn{
-  background:#222;
-  color:#fff;
-  margin-top:12px
-}
-
 .card{
-  background:#fff;
-  border:1px solid #ddd;
-  border-radius:12px;
-  padding:15px;
-  margin-bottom:15px;
-  box-shadow:0 2px 8px #0001
+    background:white;
+    border-radius:15px;
+    padding:18px;
+    margin-bottom:16px;
+    box-shadow:0 3px 12px #0001;
 }
-
-.card h3{margin:0 0 8px}
-.price{
-  color:#e60000;
-  font-weight:bold;
-  font-size:18px
+h2{margin-top:0}
+label{
+    display:block;
+    font-weight:bold;
+    margin-top:13px;
 }
-
-.buy{
-  background:#e60000;
-  color:white;
-  width:100%;
-  margin-top:10px
-}
-
 input,select,textarea{
-  width:100%;
-  padding:12px;
-  margin:6px 0 12px;
-  border:1px solid #ccc;
-  border-radius:8px;
-  font-size:16px
+    width:100%;
+    padding:13px;
+    border:1px solid #ddd;
+    border-radius:9px;
+    margin-top:6px;
+    font-size:16px;
 }
-
-.hidden{display:none}
-
-.admin{
-  background:#f5f5f5;
-  padding:20px;
-  border-radius:12px;
-  margin-top:20px
+button{
+    width:100%;
+    border:0;
+    border-radius:10px;
+    padding:14px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:12px;
 }
-
-.item{
-  border:1px solid #ddd;
-  padding:12px;
-  border-radius:8px;
-  margin-bottom:10px;
-  background:white
+.btn{
+    background:#d71919;
+    color:white;
 }
-
-.item button{
-  margin:4px 2px
+.btn2{
+    background:#ffb000;
+    color:#222;
 }
-
-.red{background:#e60000;color:#fff}
-.yellow{background:#ffcc00;color:#222}
-.dark{background:#222;color:#fff}
-
+.price{
+    font-size:19px;
+    font-weight:bold;
+    color:#d71919;
+}
+.option{
+    border:2px solid #eee;
+    border-radius:12px;
+    padding:14px;
+    margin:10px 0;
+}
+.option.selected{
+    border-color:#d71919;
+    background:#fff3f3;
+}
 .total{
-  font-size:22px;
-  font-weight:bold;
-  margin:15px 0
+    font-size:24px;
+    font-weight:bold;
+    text-align:center;
+    margin:18px 0;
 }
-
-#status{
-  padding:10px;
-  margin-bottom:15px;
-  border-radius:8px;
-  display:none
+.hidden{display:none}
+.adminBtn{
+    background:#222;
+    color:white;
+}
+.small{
+    font-size:13px;
+    color:#666;
+}
+.pix{
+    background:#fff7d6;
+    padding:12px;
+    border-radius:10px;
+    margin-top:10px;
+    word-break:break-all;
+}
+.success{
+    background:#e9ffe9;
+    border:1px solid #8ad88a;
+    padding:15px;
+    border-radius:10px;
 }
 </style>
 </head>
@@ -117,761 +114,750 @@ input,select,textarea{
 <body>
 
 <header>
-  <h1 id="storeName">Meu Cardápio</h1>
-  <p id="storeDescription">Faça seu pedido</p>
-  <button class="adminBtn" onclick="openAdmin()">Área Administrativa</button>
+    <h1 id="lojaNome">Quentinhas</h1>
+    <p id="lojaDescricao">Faça seu pedido</p>
 </header>
 
 <div class="container">
 
-  <div id="status"></div>
+<!-- CLIENTE -->
+<div id="clienteArea">
 
-  <!-- CARDÁPIO -->
-  <section id="menuSection">
-    <h2>🍽️ Cardápio</h2>
-    <div id="menu"></div>
-  </section>
+<div class="card">
+<h2>🍱 Escolha sua quentinha</h2>
 
-  <!-- CARRINHO -->
-  <section id="cartSection" class="hidden">
-    <h2>🛒 Seu pedido</h2>
-    <div id="cart"></div>
+<div class="option" id="grande" onclick="selecionarTamanho('grande')">
+    <b>Quentinha Grande</b>
+    <div class="price">R$ 21,00</div>
+</div>
 
-    <div class="total">
-      Total: R$ <span id="total">0,00</span>
-    </div>
+<div class="option" id="pequena" onclick="selecionarTamanho('pequena')">
+    <b>Quentinha Pequena</b>
+    <div class="price">R$ 18,00</div>
+</div>
 
-    <button class="red" onclick="openCheckout()">Finalizar pedido</button>
-  </section>
+<div class="option" id="promocao" onclick="selecionarTamanho('promocao')">
+    <b>🔥 Promoção</b>
+    <div class="price">R$ 10,00</div>
+</div>
 
-  <!-- CHECKOUT -->
-  <section id="checkout" class="hidden">
-    <div class="card">
-      <h2>📦 Dados do pedido</h2>
+<label>Quantidade</label>
+<input type="number" id="quantidade" min="1" value="1" onchange="calcularTotal()">
 
-      <label>Nome</label>
-      <input id="customerName" placeholder="Seu nome">
+<div class="total">
+Total: R$ <span id="total">0,00</span>
+</div>
+</div>
 
-      <label>Endereço</label>
-      <textarea id="customerAddress" placeholder="Rua, número, bairro..."></textarea>
+<div class="card">
+<h2>👤 Seus dados</h2>
 
-      <label>Forma de pagamento</label>
-      <select id="payment">
-        <option value="">Selecione</option>
-        <option value="Pix">Pix</option>
-        <option value="Dinheiro">Dinheiro</option>
-        <option value="Cartão">Cartão</option>
-      </select>
+<label>Nome</label>
+<input id="nome" type="text" placeholder="Seu nome">
 
-      <label>Observação</label>
-      <textarea id="observation" placeholder="Alguma observação?"></textarea>
+<label>Endereço</label>
+<textarea id="endereco" rows="3" placeholder="Rua, número, bairro..."></textarea>
+</div>
 
-      <button class="red" onclick="sendOrder()">Enviar pedido pelo WhatsApp</button>
-      <button class="dark" onclick="closeCheckout()">Voltar</button>
-    </div>
-  </section>
+<div class="card">
+<h2>💳 Forma de pagamento</h2>
 
-  <!-- LOGIN ADM -->
-  <section id="adminLogin" class="admin hidden">
-    <h2>🔐 Área Administrativa</h2>
+<select id="pagamento" onchange="mostrarPix()">
+<option value="">Selecione</option>
+<option value="Pix">Pix</option>
+<option value="Dinheiro">Dinheiro</option>
+<option value="Cartão">Cartão</option>
+</select>
 
-    <input type="password" id="adminPassword" placeholder="Senha">
+<div id="pixInfo" class="pix hidden">
+<b>Pix da loja:</b><br>
+<span id="pixTexto">Não cadastrado</span>
+<br><br>
+Após fazer o Pix, envie o comprovante junto com o pedido no WhatsApp.
+</div>
 
-    <button class="red" onclick="loginAdmin()">Entrar</button>
-    <button class="dark" onclick="closeAdmin()">Voltar</button>
-  </section>
+<div id="trocoArea" class="hidden">
+<label>Troco para quanto?</label>
+<input id="troco" type="text" placeholder="Ex.: R$ 50">
+</div>
+</div>
 
-  <!-- PAINEL ADM -->
-  <section id="adminPanel" class="admin hidden">
+<div class="card">
+<button class="btn" onclick="finalizarPedido()">
+✅ CONFIRMAR PEDIDO E ENVIAR NO WHATSAPP
+</button>
 
-    <h2>⚙️ Painel Administrativo</h2>
-
-    <button class="dark" onclick="logoutAdmin()">Sair</button>
-
-    <hr>
-
-    <h3>Configurações da loja</h3>
-
-    <input id="newStoreName" placeholder="Nome da loja">
-    <input id="newDescription" placeholder="Descrição">
-
-    <button class="yellow" onclick="saveStore()">Salvar informações</button>
-
-    <hr>
-
-    <h3>➕ Adicionar prato</h3>
-
-    <input id="foodName" placeholder="Nome do prato">
-    <input id="foodPrice" type="number" step="0.01" placeholder="Preço">
-    <textarea id="foodDescription" placeholder="Descrição"></textarea>
-
-    <button class="red" onclick="addFood()">Adicionar prato</button>
-
-    <hr>
-
-    <h3>🍽️ Pratos cadastrados</h3>
-
-    <div id="adminFoods"></div>
-
-    <hr>
-
-    <h3>🔑 Alterar senha</h3>
-
-    <input type="password" id="newPassword" placeholder="Nova senha">
-
-    <button class="yellow" onclick="changePassword()">Alterar senha</button>
-
-  </section>
+<p class="small">
+Ao confirmar, o WhatsApp da loja será aberto automaticamente com o pedido preenchido.
+</p>
+</div>
 
 </div>
 
+
+<!-- ADMIN -->
+<div id="adminArea" class="hidden">
+
+<div class="card">
+<h2>🔐 Painel Administrativo</h2>
+
+<label>Nome da loja</label>
+<input id="admNome">
+
+<label>Descrição</label>
+<input id="admDescricao">
+
+<label>WhatsApp da loja</label>
+<input id="admWhatsApp" placeholder="5521999999999">
+
+<p class="small">
+Coloque o número com DDD e código do Brasil, somente números.
+<br>
+Exemplo: 5521999999999
+</p>
+
+<label>Chave Pix</label>
+<input id="admPix" placeholder="Sua chave Pix">
+
+<button class="btn" onclick="salvarConfiguracoes()">
+💾 SALVAR CONFIGURAÇÕES
+</button>
+
+<div id="admMensagem"></div>
+</div>
+
+<div class="card">
+<h2>💰 Preços</h2>
+
+<label>Quentinha Grande</label>
+<input id="admGrande" type="number" value="21">
+
+<label>Quentinha Pequena</label>
+<input id="admPequena" type="number" value="18">
+
+<label>Promoção</label>
+<input id="admPromocao" type="number" value="10">
+
+<button class="btn" onclick="salvarPrecos()">
+💾 SALVAR PREÇOS
+</button>
+</div>
+
+<div class="card">
+<h2>📦 Pedidos</h2>
+<div id="listaPedidos">
+Carregando pedidos...
+</div>
+</div>
+
+<button class="adminBtn" onclick="fecharAdmin()">
+⬅ Voltar para o cardápio
+</button>
+
+</div>
+
+
+<div class="card">
+<button class="adminBtn" onclick="abrirAdmin()">
+⚙️ Área Administrativa
+</button>
+</div>
+
+</div>
+
+
 <script>
 
-/* =========================
-   CONFIGURAÇÕES
-========================= */
+/* =========================================================
+   CONFIGURAÇÃO DO SUPABASE
+   ========================================================= */
 
 const SUPABASE_URL =
 "https://dnrxkaikqmobsroqngix.supabase.co";
 
-const SUPABASE_REST =
-SUPABASE_URL + "/rest/v1";
-
 /*
- COLOQUE AQUI A ANON KEY DO SUPABASE
+ COLOQUE AQUI A MESMA ANON KEY DO SEU SUPABASE.
+ NÃO COLOQUE A SERVICE_ROLE KEY.
 */
-const SUPABASE_KEY = "COLE_SUA_ANON_KEY_AQUI";
-
-/*
- COLOQUE AQUI O NÚMERO DO WHATSAPP
- SOMENTE NÚMEROS.
- EXEMPLO:
- 5521999999999
-*/
-const WHATSAPP = "SEU_NUMERO_AQUI";
+const SUPABASE_KEY =
+"COLE_AQUI_SUA_ANON_KEY";
 
 
-/* =========================
-   DADOS LOCAIS
-========================= */
+/* =========================================================
+   CONFIGURAÇÃO PADRÃO
+   ========================================================= */
 
-let foods = JSON.parse(localStorage.getItem("foods") || "[]");
+let config = {
+    nome: "Quentinhas",
+    descricao: "Faça seu pedido",
+    whatsapp: "",
+    pix: ""
+};
 
-let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+let precos = {
+    grande: 21,
+    pequena: 18,
+    promocao: 10
+};
 
-let store = JSON.parse(
-  localStorage.getItem("store") ||
-  '{"name":"Meu Cardápio","description":"Faça seu pedido"}'
-);
-
-let password =
-localStorage.getItem("adminPassword") || "1234";
-
-
-/* =========================
-   INICIALIZAÇÃO
-========================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  document.getElementById("storeName").innerText =
-    store.name;
-
-  document.getElementById("storeDescription").innerText =
-    store.description;
-
-  document.getElementById("newStoreName").value =
-    store.name;
-
-  document.getElementById("newDescription").value =
-    store.description;
-
-  renderMenu();
-  renderCart();
-
-});
+let tamanhoSelecionado = "";
 
 
-/* =========================
-   STATUS
-========================= */
+/* =========================================================
+   CARREGAR CONFIGURAÇÕES
+   ========================================================= */
 
-function showStatus(text){
+async function carregarDados(){
 
-  const status =
-    document.getElementById("status");
+    try{
 
-  status.innerText = text;
-  status.style.display = "block";
+        const resposta = await fetch(
+            SUPABASE_URL +
+            "/rest/v1/configuracoes?select=*",
+            {
+                headers:{
+                    "apikey":SUPABASE_KEY,
+                    "Authorization":"Bearer "+SUPABASE_KEY
+                }
+            }
+        );
 
-  setTimeout(() => {
-    status.style.display = "none";
-  },3000);
+        if(resposta.ok){
+
+            const dados = await resposta.json();
+
+            if(dados.length > 0){
+
+                const d = dados[0];
+
+                config.nome = d.nome || config.nome;
+                config.descricao = d.descricao || config.descricao;
+                config.whatsapp = d.whatsapp || "";
+                config.pix = d.pix || "";
+
+                precos.grande = Number(d.preco_grande || 21);
+                precos.pequena = Number(d.preco_pequena || 18);
+                precos.promocao = Number(d.preco_promocao || 10);
+            }
+        }
+
+    }catch(e){
+        console.log("Supabase:",e);
+    }
+
+    atualizarTela();
 }
 
 
-/* =========================
-   CARDÁPIO
-========================= */
+/* =========================================================
+   ATUALIZAR TELA
+   ========================================================= */
 
-function renderMenu(){
+function atualizarTela(){
 
-  const menu =
-    document.getElementById("menu");
+    document.getElementById("lojaNome").innerText = config.nome;
+    document.getElementById("lojaDescricao").innerText = config.descricao;
 
-  menu.innerHTML = "";
+    document.getElementById("pixTexto").innerText =
+        config.pix || "Pix ainda não cadastrado.";
 
-  if(foods.length === 0){
+    document.querySelector("#grande .price").innerText =
+        "R$ " + precos.grande.toFixed(2).replace(".",",");
 
-    menu.innerHTML =
-      "<p>Nenhum prato cadastrado ainda.</p>";
+    document.querySelector("#pequena .price").innerText =
+        "R$ " + precos.pequena.toFixed(2).replace(".",",");
 
-    return;
-  }
-
-  foods.forEach(food => {
-
-    const div =
-      document.createElement("div");
-
-    div.className = "card";
-
-    div.innerHTML = `
-      <h3>${escapeHTML(food.name)}</h3>
-
-      <p>${escapeHTML(food.description || "")}</p>
-
-      <div class="price">
-        R$ ${Number(food.price).toFixed(2).replace(".",",")}
-      </div>
-
-      <button class="buy"
-        onclick="addToCart(${food.id})">
-        Adicionar ao pedido
-      </button>
-    `;
-
-    menu.appendChild(div);
-
-  });
-
+    document.querySelector("#promocao .price").innerText =
+        "R$ " + precos.promocao.toFixed(2).replace(".",",");
 }
 
 
-/* =========================
-   CARRINHO
-========================= */
+/* =========================================================
+   SELECIONAR TAMANHO
+   ========================================================= */
 
-function addToCart(id){
+function selecionarTamanho(tamanho){
 
-  const food =
-    foods.find(f => f.id === id);
+    tamanhoSelecionado = tamanho;
 
-  if(!food) return;
+    document.querySelectorAll(".option")
+        .forEach(x => x.classList.remove("selected"));
 
-  cart.push(food);
+    document.getElementById(tamanho)
+        .classList.add("selected");
 
-  localStorage.setItem(
-    "cart",
-    JSON.stringify(cart)
-  );
-
-  renderCart();
-
-  showStatus("Prato adicionado ao pedido!");
+    calcularTotal();
 }
 
 
-function removeFromCart(index){
+/* =========================================================
+   CALCULAR TOTAL
+   ========================================================= */
 
-  cart.splice(index,1);
+function calcularTotal(){
 
-  localStorage.setItem(
-    "cart",
-    JSON.stringify(cart)
-  );
+    const quantidade =
+        Number(document.getElementById("quantidade").value) || 1;
 
-  renderCart();
-}
+    let preco = 0;
 
+    if(tamanhoSelecionado === "grande")
+        preco = precos.grande;
 
-function renderCart(){
+    if(tamanhoSelecionado === "pequena")
+        preco = precos.pequena;
 
-  const section =
-    document.getElementById("cartSection");
+    if(tamanhoSelecionado === "promocao")
+        preco = precos.promocao;
 
-  const cartDiv =
-    document.getElementById("cart");
-
-  cartDiv.innerHTML = "";
-
-  if(cart.length === 0){
-
-    section.classList.add("hidden");
+    const total = preco * quantidade;
 
     document.getElementById("total").innerText =
-      "0,00";
-
-    return;
-  }
-
-  section.classList.remove("hidden");
-
-  let total = 0;
-
-  cart.forEach((item,index) => {
-
-    total += Number(item.price);
-
-    const div =
-      document.createElement("div");
-
-    div.className = "item";
-
-    div.innerHTML = `
-      <strong>${escapeHTML(item.name)}</strong>
-      <br>
-      R$ ${Number(item.price).toFixed(2).replace(".",",")}
-      <br>
-      <button class="red"
-        onclick="removeFromCart(${index})">
-        Remover
-      </button>
-    `;
-
-    cartDiv.appendChild(div);
-
-  });
-
-  document.getElementById("total").innerText =
-    total.toFixed(2).replace(".",",");
-
+        total.toFixed(2).replace(".",",");
 }
 
 
-/* =========================
-   CHECKOUT
-========================= */
+/* =========================================================
+   PAGAMENTO
+   ========================================================= */
 
-function openCheckout(){
+function mostrarPix(){
 
-  if(cart.length === 0){
+    const pagamento =
+        document.getElementById("pagamento").value;
 
-    showStatus("Adicione algum prato primeiro.");
+    document.getElementById("pixInfo")
+        .classList.toggle("hidden", pagamento !== "Pix");
 
-    return;
-  }
-
-  document.getElementById("checkout")
-    .classList.remove("hidden");
-
-  window.scrollTo({
-    top:document.body.scrollHeight,
-    behavior:"smooth"
-  });
-
+    document.getElementById("trocoArea")
+        .classList.toggle("hidden", pagamento !== "Dinheiro");
 }
 
 
-function closeCheckout(){
+/* =========================================================
+   FINALIZAR PEDIDO
+   ========================================================= */
 
-  document.getElementById("checkout")
-    .classList.add("hidden");
+async function finalizarPedido(){
 
+    if(!tamanhoSelecionado){
+        alert("Escolha o tamanho da quentinha.");
+        return;
+    }
+
+    const nome =
+        document.getElementById("nome").value.trim();
+
+    const endereco =
+        document.getElementById("endereco").value.trim();
+
+    const quantidade =
+        Number(document.getElementById("quantidade").value);
+
+    const pagamento =
+        document.getElementById("pagamento").value;
+
+    const troco =
+        document.getElementById("troco").value.trim();
+
+    if(!nome){
+        alert("Digite seu nome.");
+        return;
+    }
+
+    if(!endereco){
+        alert("Digite seu endereço.");
+        return;
+    }
+
+    if(!quantidade || quantidade < 1){
+        alert("Digite uma quantidade válida.");
+        return;
+    }
+
+    if(!pagamento){
+        alert("Escolha a forma de pagamento.");
+        return;
+    }
+
+    if(pagamento === "Pix" && !config.pix){
+        alert("O Pix da loja ainda não foi cadastrado.");
+        return;
+    }
+
+    let nomeTamanho = "";
+    let preco = 0;
+
+    if(tamanhoSelecionado === "grande"){
+        nomeTamanho = "Grande";
+        preco = precos.grande;
+    }
+
+    if(tamanhoSelecionado === "pequena"){
+        nomeTamanho = "Pequena";
+        preco = precos.pequena;
+    }
+
+    if(tamanhoSelecionado === "promocao"){
+        nomeTamanho = "Promoção";
+        preco = precos.promocao;
+    }
+
+    const total = preco * quantidade;
+
+    const numeroPedido =
+        "PED-" +
+        Date.now().toString().slice(-6);
+
+    /*
+      MENSAGEM QUE VAI PARA O WHATSAPP
+    */
+
+    let mensagem =
+`🍱 *PEDIDO CONFIRMADO*
+
+📋 *Número do pedido:* ${numeroPedido}
+
+👤 *Nome:* ${nome}
+
+📍 *Endereço:* ${endereco}
+
+🍱 *Quentinha:* ${nomeTamanho}
+
+🔢 *Quantidade:* ${quantidade}
+
+💰 *Valor unitário:* R$ ${preco.toFixed(2).replace(".",",")}
+
+💵 *TOTAL:* R$ ${total.toFixed(2).replace(".",",")}
+
+💳 *Pagamento:* ${pagamento}`;
+
+    if(pagamento === "Dinheiro" && troco){
+        mensagem +=
+`\n💵 *Troco para:* ${troco}`;
+    }
+
+    if(pagamento === "Pix"){
+        mensagem +=
+`\n\n📲 *PIX REALIZADO*
+\n📎 *Vou enviar o comprovante junto com esta mensagem.*`;
+    }
+
+    mensagem +=
+`\n\n✅ *Pedido confirmado!*
+\n📎 Se for Pix, envie o comprovante junto com esta conversa.`;
+
+    /*
+      SALVAR PEDIDO NO SUPABASE
+    */
+
+    try{
+
+        await fetch(
+            SUPABASE_URL + "/rest/v1/pedidos",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json",
+                    "apikey":SUPABASE_KEY,
+                    "Authorization":"Bearer "+SUPABASE_KEY,
+                    "Prefer":"return=minimal"
+                },
+                body:JSON.stringify({
+                    numero_pedido:numeroPedido,
+                    nome:nome,
+                    endereco:endereco,
+                    tamanho:nomeTamanho,
+                    quantidade:quantidade,
+                    valor_unitario:preco,
+                    total:total,
+                    pagamento:pagamento,
+                    troco:troco || null
+                })
+            }
+        );
+
+    }catch(e){
+        console.log("Erro salvando pedido:",e);
+    }
+
+
+    /*
+      ABRIR WHATSAPP AUTOMATICAMENTE
+    */
+
+    if(!config.whatsapp){
+
+        alert(
+            "O número do WhatsApp da loja ainda não foi cadastrado no ADM."
+        );
+
+        return;
+    }
+
+    const numero =
+        config.whatsapp.replace(/\D/g,"");
+
+    const url =
+        "https://wa.me/" +
+        numero +
+        "?text=" +
+        encodeURIComponent(mensagem);
+
+    window.location.href = url;
 }
 
 
-/* =========================
-   WHATSAPP
-========================= */
+/* =========================================================
+   ÁREA ADMINISTRATIVA
+   ========================================================= */
 
-function sendOrder(){
+function abrirAdmin(){
 
-  const name =
-    document.getElementById("customerName").value.trim();
+    document.getElementById("clienteArea")
+        .classList.add("hidden");
 
-  const address =
-    document.getElementById("customerAddress").value.trim();
+    document.getElementById("adminArea")
+        .classList.remove("hidden");
 
-  const payment =
-    document.getElementById("payment").value;
+    document.querySelector(".adminBtn")
+        ?.parentElement?.classList.add("hidden");
 
-  const observation =
-    document.getElementById("observation").value.trim();
+    document.getElementById("admNome").value =
+        config.nome;
 
-  if(!name){
+    document.getElementById("admDescricao").value =
+        config.descricao;
 
-    alert("Digite seu nome.");
+    document.getElementById("admWhatsApp").value =
+        config.whatsapp;
 
-    return;
-  }
+    document.getElementById("admPix").value =
+        config.pix;
 
-  if(!address){
+    document.getElementById("admGrande").value =
+        precos.grande;
 
-    alert("Digite seu endereço.");
+    document.getElementById("admPequena").value =
+        precos.pequena;
 
-    return;
-  }
+    document.getElementById("admPromocao").value =
+        precos.promocao;
 
-  if(!payment){
-
-    alert("Escolha a forma de pagamento.");
-
-    return;
-  }
-
-  let message =
-    "🛵 *NOVO PEDIDO*%0A%0A";
-
-  message +=
-    "👤 *Nome:* " +
-    encodeURIComponent(name) +
-    "%0A";
-
-  message +=
-    "📍 *Endereço:* " +
-    encodeURIComponent(address) +
-    "%0A";
-
-  message +=
-    "💳 *Pagamento:* " +
-    encodeURIComponent(payment) +
-    "%0A%0A";
-
-  message +=
-    "🍽️ *PEDIDO:*%0A";
-
-  let total = 0;
-
-  cart.forEach(item => {
-
-    total += Number(item.price);
-
-    message +=
-      "• " +
-      encodeURIComponent(item.name) +
-      " - R$ " +
-      Number(item.price)
-        .toFixed(2)
-        .replace(".",",") +
-      "%0A";
-
-  });
-
-  message +=
-    "%0A💰 *TOTAL: R$ " +
-    total.toFixed(2).replace(".",",") +
-    "*%0A";
-
-  if(observation){
-
-    message +=
-      "%0A📝 *Observação:* " +
-      encodeURIComponent(observation);
-
-  }
-
-  const url =
-    "https://wa.me/" +
-    WHATSAPP +
-    "?text=" +
-    message;
-
-  window.open(url,"_blank");
-
+    carregarPedidos();
 }
 
 
-/* =========================
-   ADMIN
-========================= */
+function fecharAdmin(){
 
-function openAdmin(){
+    document.getElementById("adminArea")
+        .classList.add("hidden");
 
-  document.getElementById("menuSection")
-    .classList.add("hidden");
-
-  document.getElementById("cartSection")
-    .classList.add("hidden");
-
-  document.getElementById("checkout")
-    .classList.add("hidden");
-
-  document.getElementById("adminLogin")
-    .classList.remove("hidden");
-
+    document.getElementById("clienteArea")
+        .classList.remove("hidden");
 }
 
 
-function closeAdmin(){
+/* =========================================================
+   SALVAR CONFIGURAÇÕES
+   ========================================================= */
 
-  document.getElementById("adminLogin")
-    .classList.add("hidden");
+async function salvarConfiguracoes(){
 
-  document.getElementById("adminPanel")
-    .classList.add("hidden");
+    const nome =
+        document.getElementById("admNome").value.trim();
 
-  document.getElementById("menuSection")
-    .classList.remove("hidden");
+    const descricao =
+        document.getElementById("admDescricao").value.trim();
 
-  renderMenu();
-  renderCart();
+    const whatsapp =
+        document.getElementById("admWhatsApp").value.trim();
 
+    const pix =
+        document.getElementById("admPix").value.trim();
+
+    if(!nome){
+        alert("Digite o nome da loja.");
+        return;
+    }
+
+    if(!whatsapp){
+        alert("Digite o WhatsApp da loja.");
+        return;
+    }
+
+    config.nome = nome;
+    config.descricao = descricao;
+    config.whatsapp = whatsapp;
+    config.pix = pix;
+
+    const dados = {
+        nome:nome,
+        descricao:descricao,
+        whatsapp:whatsapp,
+        pix:pix,
+        preco_grande:precos.grande,
+        preco_pequena:precos.pequena,
+        preco_promocao:precos.promocao
+    };
+
+    try{
+
+        const resposta = await fetch(
+            SUPABASE_URL + "/rest/v1/configuracoes",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json",
+                    "apikey":SUPABASE_KEY,
+                    "Authorization":"Bearer "+SUPABASE_KEY,
+                    "Prefer":"resolution=merge-duplicates"
+                },
+                body:JSON.stringify(dados)
+            }
+        );
+
+        if(!resposta.ok){
+            throw new Error("Não foi possível salvar.");
+        }
+
+        atualizarTela();
+
+        document.getElementById("admMensagem").innerHTML =
+            '<div class="success">✅ Configurações salvas!</div>';
+
+    }catch(e){
+
+        alert(
+            "Erro ao salvar. Confira a anon key e as permissões do Supabase."
+        );
+
+        console.log(e);
+    }
 }
 
 
-function loginAdmin(){
+/* =========================================================
+   SALVAR PREÇOS
+   ========================================================= */
 
-  const entered =
-    document.getElementById("adminPassword").value;
+async function salvarPrecos(){
 
-  if(entered !== password){
+    precos.grande =
+        Number(document.getElementById("admGrande").value) || 21;
 
-    alert("Senha incorreta.");
+    precos.pequena =
+        Number(document.getElementById("admPequena").value) || 18;
 
-    return;
-  }
+    precos.promocao =
+        Number(document.getElementById("admPromocao").value) || 10;
 
-  document.getElementById("adminLogin")
-    .classList.add("hidden");
+    try{
 
-  document.getElementById("adminPanel")
-    .classList.remove("hidden");
+        await fetch(
+            SUPABASE_URL + "/rest/v1/configuracoes",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json",
+                    "apikey":SUPABASE_KEY,
+                    "Authorization":"Bearer "+SUPABASE_KEY,
+                    "Prefer":"resolution=merge-duplicates"
+                },
+                body:JSON.stringify({
+                    nome:config.nome,
+                    descricao:config.descricao,
+                    whatsapp:config.whatsapp,
+                    pix:config.pix,
+                    preco_grande:precos.grande,
+                    preco_pequena:precos.pequena,
+                    preco_promocao:precos.promocao
+                })
+            }
+        );
 
-  renderAdminFoods();
+        atualizarTela();
 
+        alert("Preços salvos!");
+
+    }catch(e){
+
+        alert("Erro ao salvar os preços.");
+        console.log(e);
+    }
 }
 
 
-function logoutAdmin(){
+/* =========================================================
+   CARREGAR PEDIDOS
+   ========================================================= */
 
-  closeAdmin();
+async function carregarPedidos(){
 
+    const lista =
+        document.getElementById("listaPedidos");
+
+    lista.innerHTML = "Carregando...";
+
+    try{
+
+        const resposta = await fetch(
+            SUPABASE_URL +
+            "/rest/v1/pedidos?select=*&order=created_at.desc",
+            {
+                headers:{
+                    "apikey":SUPABASE_KEY,
+                    "Authorization":"Bearer "+SUPABASE_KEY
+                }
+            }
+        );
+
+        const pedidos = await resposta.json();
+
+        if(!pedidos.length){
+            lista.innerHTML = "Nenhum pedido ainda.";
+            return;
+        }
+
+        lista.innerHTML = "";
+
+        pedidos.forEach(p => {
+
+            const div =
+                document.createElement("div");
+
+            div.className = "option";
+
+            div.innerHTML = `
+                <b>${p.numero_pedido || "Pedido"}</b><br><br>
+
+                👤 ${p.nome}<br>
+                📍 ${p.endereco}<br>
+                🍱 ${p.quantidade}x ${p.tamanho}<br>
+                💳 ${p.pagamento}<br>
+                💰 <b>R$ ${Number(p.total).toFixed(2).replace(".",",")}</b>
+            `;
+
+            lista.appendChild(div);
+        });
+
+    }catch(e){
+
+        lista.innerHTML =
+            "Não foi possível carregar os pedidos.";
+
+        console.log(e);
+    }
 }
 
 
-/* =========================
-   ADICIONAR PRATO
-========================= */
-
-function addFood(){
-
-  const name =
-    document.getElementById("foodName")
-      .value.trim();
-
-  const price =
-    parseFloat(
-      document.getElementById("foodPrice").value
-    );
-
-  const description =
-    document.getElementById("foodDescription")
-      .value.trim();
-
-  if(!name){
-
-    alert("Digite o nome do prato.");
-
-    return;
-  }
-
-  if(isNaN(price) || price <= 0){
-
-    alert("Digite um preço válido.");
-
-    return;
-  }
-
-  const food = {
-
-    id:Date.now(),
-
-    name:name,
-
-    price:price,
-
-    description:description
-
-  };
-
-  foods.push(food);
-
-  localStorage.setItem(
-    "foods",
-    JSON.stringify(foods)
-  );
-
-  document.getElementById("foodName").value = "";
-  document.getElementById("foodPrice").value = "";
-  document.getElementById("foodDescription").value = "";
-
-  renderMenu();
-  renderAdminFoods();
-
-  showStatus("Prato adicionado!");
-
-}
-
-
-/* =========================
-   ADMIN PRATOS
-========================= */
-
-function renderAdminFoods(){
-
-  const div =
-    document.getElementById("adminFoods");
-
-  div.innerHTML = "";
-
-  if(foods.length === 0){
-
-    div.innerHTML =
-      "<p>Nenhum prato cadastrado.</p>";
-
-    return;
-  }
-
-  foods.forEach(food => {
-
-    const item =
-      document.createElement("div");
-
-    item.className = "item";
-
-    item.innerHTML = `
-      <strong>${escapeHTML(food.name)}</strong>
-      <br>
-      R$ ${Number(food.price).toFixed(2).replace(".",",")}
-      <br>
-      ${escapeHTML(food.description || "")}
-      <br><br>
-
-      <button class="red"
-        onclick="deleteFood(${food.id})">
-        Excluir
-      </button>
-    `;
-
-    div.appendChild(item);
-
-  });
-
-}
-
-
-function deleteFood(id){
-
-  if(!confirm("Excluir este prato?")) return;
-
-  foods =
-    foods.filter(food => food.id !== id);
-
-  localStorage.setItem(
-    "foods",
-    JSON.stringify(foods)
-  );
-
-  renderMenu();
-  renderAdminFoods();
-
-}
-
-
-/* =========================
-   LOJA
-========================= */
-
-function saveStore(){
-
-  const name =
-    document.getElementById("newStoreName")
-      .value.trim();
-
-  const description =
-    document.getElementById("newDescription")
-      .value.trim();
-
-  if(!name){
-
-    alert("Digite o nome da loja.");
-
-    return;
-  }
-
-  store = {
-
-    name:name,
-
-    description:description
-
-  };
-
-  localStorage.setItem(
-    "store",
-    JSON.stringify(store)
-  );
-
-  document.getElementById("storeName")
-    .innerText = name;
-
-  document.getElementById("storeDescription")
-    .innerText = description;
-
-  showStatus("Informações salvas!");
-
-}
-
-
-/* =========================
-   SENHA
-========================= */
-
-function changePassword(){
-
-  const newPass =
-    document.getElementById("newPassword")
-      .value.trim();
-
-  if(newPass.length < 4){
-
-    alert("A senha precisa ter pelo menos 4 caracteres.");
-
-    return;
-  }
-
-  password = newPass;
-
-  localStorage.setItem(
-    "adminPassword",
-    password
-  );
-
-  document.getElementById("newPassword")
-    .value = "";
-
-  alert("Senha alterada com sucesso!");
-
-}
-
-
-/* =========================
-   SEGURANÇA HTML
-========================= */
-
-function escapeHTML(text){
-
-  const div =
-    document.createElement("div");
-
-  div.textContent = text;
-
-  return div.innerHTML;
-
-}
+/* =========================================================
+   INICIAR
+   ========================================================= */
+
+carregarDados();
 
 </script>
 
 </body>
-      </html>
+  </html>
