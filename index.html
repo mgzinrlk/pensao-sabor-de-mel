@@ -730,6 +730,97 @@ const supabaseClient = supabase.createClient(
 );
 
 console.log("Supabase conectado!");
-</script>  
+</script>
+  <!-- FORMA DE PAGAMENTO -->
+<div style="margin-top:20px;">
+  <h3>Forma de pagamento</h3>
+
+  <label>
+    <input type="radio" name="pagamento" value="Pix">
+    💠 Pix
+  </label><br>
+
+  <label>
+    <input type="radio" name="pagamento" value="Cartão">
+    💳 Cartão
+  </label><br>
+
+  <label>
+    <input type="radio" name="pagamento" value="Dinheiro">
+    💵 Dinheiro
+  </label>
+</div>
+
+<button onclick="enviarPedidoWhatsApp()" style="
+  margin-top:20px;
+  padding:15px 25px;
+  background:#25D366;
+  color:white;
+  border:0;
+  border-radius:10px;
+  font-size:18px;
+  font-weight:bold;
+">
+  📲 Confirmar pedido pelo WhatsApp
+</button>
+
+<script>
+function enviarPedidoWhatsApp() {
+
+  const nome = document.querySelector('input[placeholder="Nome"]')?.value || "";
+  const endereco = document.querySelector('input[placeholder="Endereço"]')?.value || "";
+  const observacao = document.querySelector('textarea')?.value || "";
+
+  const pagamento = document.querySelector(
+    'input[name="pagamento"]:checked'
+  )?.value;
+
+  if (!pagamento) {
+    alert("Escolha uma forma de pagamento.");
+    return;
+  }
+
+  // TROQUE PELO NÚMERO DO WHATSAPP DA LOJA
+  const whatsapp = "55SEUNUMEROAQUI";
+
+  // O código abaixo tenta pegar os produtos que estão no carrinho
+  const itens = document.querySelectorAll(".cart-item, .item-carrinho");
+
+  let pedido = "";
+
+  itens.forEach(item => {
+    pedido += item.innerText + "\n";
+  });
+
+  const total =
+    document.querySelector(".total")?.innerText ||
+    document.querySelector("#total")?.innerText ||
+    "Valor não informado";
+
+  const mensagem =
+`🛒 *NOVO PEDIDO*
+
+👤 *Nome:* ${nome}
+
+📦 *Pedido:*
+${pedido}
+
+💰 *Total:* ${total}
+
+💳 *Pagamento:* ${pagamento}
+
+📍 *Endereço:* ${endereco}
+
+📝 *Observação:* ${observacao || "Nenhuma"}
+
+✅ Pedido realizado pelo site.`;
+
+  const url =
+    "https://wa.me/" + whatsapp +
+    "?text=" + encodeURIComponent(mensagem);
+
+  window.open(url, "_blank");
+}
+</script>
 </body>
   </html>
