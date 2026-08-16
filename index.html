@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cardápio da Loja</title>
+<title>Cardápio do Dia</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
@@ -22,7 +22,7 @@ body{
 
 header{
   background:#d71920;
-  color:white;
+  color:#fff;
   text-align:center;
   padding:28px 15px;
   border-bottom:6px solid #ffc400;
@@ -44,8 +44,15 @@ header p{
   margin:20px auto;
 }
 
+.titulo{
+  color:#d71920;
+  text-align:center;
+  margin:10px 0 18px;
+  font-size:24px;
+}
+
 .card{
-  background:white;
+  background:#fff;
   padding:20px;
   border-radius:16px;
   margin-bottom:16px;
@@ -60,12 +67,13 @@ header p{
 
 .card p{
   color:#666;
-  margin-bottom:12px;
+  margin-bottom:15px;
+  line-height:1.5;
 }
 
 .preco{
   color:#d71920;
-  font-size:24px;
+  font-size:22px;
   font-weight:900;
   margin-bottom:15px;
 }
@@ -96,6 +104,66 @@ button{
   margin-top:5px;
   border:3px solid #ffc400;
   box-shadow:0 4px 15px rgba(0,0,0,.25);
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  z-index:20;
+  overflow:auto;
+  padding:20px 0;
+}
+
+.modal-content{
+  background:white;
+  width:94%;
+  max-width:600px;
+  margin:auto;
+  border-radius:16px;
+  padding:20px;
+  border-top:7px solid #d71920;
+}
+
+.fechar{
+  float:right;
+  background:#eee;
+  color:#111;
+  padding:8px 12px;
+}
+
+.opcao{
+  background:#fff8e1;
+  border:2px solid #ffd43b;
+  border-radius:12px;
+  padding:15px;
+  margin:10px 0;
+  cursor:pointer;
+}
+
+.opcao:hover{
+  border-color:#d71920;
+}
+
+.opcao strong{
+  color:#d71920;
+  font-size:18px;
+}
+
+.opcao span{
+  display:block;
+  margin-top:5px;
+  font-size:20px;
+  font-weight:bold;
+}
+
+.btn-continuar{
+  width:100%;
+  background:#d71920;
+  color:#fff;
+  margin-top:15px;
+  border:3px solid #ffc400;
 }
 
 .item{
@@ -156,33 +224,7 @@ select{
 
 textarea{
   min-height:80px;
-}
-
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.7);
-  z-index:10;
-  overflow:auto;
-  padding:20px 0;
-}
-
-.modal-content{
-  background:white;
-  width:94%;
-  max-width:600px;
-  margin:auto;
-  border-radius:16px;
-  padding:20px;
-  border-top:7px solid #d71920;
-}
-
-.fechar{
-  float:right;
-  background:#eee;
-  color:#111;
-  padding:8px 12px;
+  resize:vertical;
 }
 
 .confirmar{
@@ -226,10 +268,6 @@ textarea{
   color:#999;
 }
 
-.admin{
-  display:none;
-}
-
 .admin-card{
   background:#fff8e1;
   padding:15px;
@@ -271,10 +309,12 @@ textarea{
 
 <header>
   <h1>🍽️ CARDÁPIO DO DIA</h1>
-  <p>Escolha sua quentinha</p>
+  <p>Escolha seu prato e faça seu pedido</p>
 </header>
 
 <div class="container">
+
+<h2 class="titulo">🍛 Pratos de Hoje</h2>
 
 <div id="cardapio"></div>
 
@@ -283,13 +323,54 @@ textarea{
 </button>
 
 <div class="admin-link">
-<button onclick="abrirLogin()">Área administrativa</button>
+<button onclick="abrirLogin()">
+Área administrativa
+</button>
 </div>
 
 </div>
 
 
-<!-- PEDIDO -->
+<!-- =========================
+     ESCOLHA DA QUENTINHA
+========================= -->
+
+<div class="modal" id="modalQuentinha">
+
+<div class="modal-content">
+
+<button class="fechar" onclick="fecharQuentinha()">✕</button>
+
+<h2>🥡 Escolha sua quentinha</h2>
+
+<p style="margin-top:8px;color:#666">
+Escolha o tamanho do seu pedido:
+</p>
+
+<br>
+
+<div class="opcao" onclick="escolherQuentinha(10)">
+<strong>🥡 Quentinha Econômica</strong>
+<span>R$ 10,00</span>
+</div>
+
+<div class="opcao" onclick="escolherQuentinha(18)">
+<strong>🥡 Quentinha Pequena</strong>
+<span>R$ 18,00</span>
+</div>
+
+<div class="opcao" onclick="escolherQuentinha(21)">
+<strong>🥡 Quentinha Grande</strong>
+<span>R$ 21,00</span>
+</div>
+
+</div>
+</div>
+
+
+<!-- =========================
+     PEDIDO
+========================= -->
 
 <div class="modal" id="modalPedido">
 
@@ -373,7 +454,9 @@ Voltar
 </div>
 
 
-<!-- LOGIN -->
+<!-- =========================
+     LOGIN ADM
+========================= -->
 
 <div class="modal" id="modalLogin">
 
@@ -401,7 +484,9 @@ Cancelar
 </div>
 
 
-<!-- ADMIN -->
+<!-- =========================
+     PAINEL ADM
+========================= -->
 
 <div class="modal" id="modalAdmin">
 
@@ -428,13 +513,13 @@ placeholder="Digite sua chave Pix"
 >
 
 <h3 style="margin-top:20px">
-🍽️ CARDÁPIO
+🍛 PRATOS DO DIA
 </h3>
 
 <div id="adminCardapio"></div>
 
 <button class="salvar" onclick="adicionarPrato()">
-➕ ADICIONAR ITEM
+➕ ADICIONAR PRATO
 </button>
 
 <button class="salvar" onclick="salvarTudo()">
@@ -442,7 +527,8 @@ placeholder="Digite sua chave Pix"
 </button>
 
 <div class="aviso">
-Senha inicial do administrador: <strong>1234</strong>
+Senha inicial do administrador:
+<strong>1234</strong>
 </div>
 
 </div>
@@ -451,26 +537,22 @@ Senha inicial do administrador: <strong>1234</strong>
 
 <script>
 
-/* ===========================
-CONFIGURAÇÃO
-=========================== */
+/* =========================
+   CONFIGURAÇÃO
+========================= */
 
 let config =
 JSON.parse(localStorage.getItem("configLoja"))
 || {
-
   whatsapp:"5521999999999",
-
   pix:"",
-
   senha:"1234"
-
 };
 
 
-/* ===========================
-CARDÁPIO INICIAL
-=========================== */
+/* =========================
+   CARDÁPIO INICIAL
+========================= */
 
 let cardapio =
 JSON.parse(localStorage.getItem("cardapio"))
@@ -478,25 +560,25 @@ JSON.parse(localStorage.getItem("cardapio"))
 
 {
  id:1,
- nome:"Quentinha R$10",
- descricao:"Quentinha econômica",
- preco:10,
- ativo:true
-},
-
-{
- id:2,
- nome:"Quentinha Pequena",
- descricao:"Quentinha pequena",
+ nome:"Frango Assado",
+ descricao:"Arroz, feijão, frango assado e salada",
  preco:18,
  ativo:true
 },
 
 {
- id:3,
- nome:"Quentinha Grande",
- descricao:"Quentinha grande",
+ id:2,
+ nome:"Carne Acebolada",
+ descricao:"Arroz, feijão, carne acebolada e farofa",
  preco:21,
+ ativo:true
+},
+
+{
+ id:3,
+ nome:"Ovo com Acompanhamentos",
+ descricao:"Arroz, feijão, ovo e salada",
+ preco:10,
  ativo:true
 }
 
@@ -505,10 +587,12 @@ JSON.parse(localStorage.getItem("cardapio"))
 
 let carrinho=[];
 
+let pratoSelecionado=null;
 
-/* ===========================
-MOSTRAR CARDÁPIO
-=========================== */
+
+/* =========================
+   MOSTRAR CARDÁPIO
+========================= */
 
 function mostrarCardapio(){
 
@@ -516,25 +600,35 @@ const div=document.getElementById("cardapio");
 
 div.innerHTML="";
 
-cardapio
-.filter(p=>p.ativo)
-.forEach(p=>{
+const ativos=
+cardapio.filter(p=>p.ativo);
+
+if(ativos.length===0){
+
+div.innerHTML=`
+<div class="card">
+<h2>😔 Cardápio indisponível</h2>
+<p>O cardápio de hoje ainda não foi cadastrado.</p>
+</div>
+`;
+
+return;
+}
+
+
+ativos.forEach(p=>{
 
 div.innerHTML+=`
 
 <div class="card">
 
-<h2>🍽️ ${p.nome}</h2>
+<h2>🍛 ${p.nome}</h2>
 
 <p>${p.descricao}</p>
 
-<div class="preco">
-R$ ${p.preco.toFixed(2).replace(".",",")}
-</div>
-
 <button
 class="add"
-onclick="adicionar(${p.id})">
+onclick="abrirQuentinha(${p.id})">
 
 ➕ ADICIONAR PEDIDO
 
@@ -549,43 +643,72 @@ onclick="adicionar(${p.id})">
 }
 
 
-/* ===========================
-ADICIONAR
-=========================== */
+/* =========================
+   ABRIR QUENTINHA
+========================= */
 
-function adicionar(id){
+function abrirQuentinha(id){
 
-const prato=
+pratoSelecionado=
 cardapio.find(p=>p.id===id);
 
-if(!prato)return;
+if(!pratoSelecionado)return;
 
-const item=
-carrinho.find(i=>i.id===id);
+document.getElementById("modalQuentinha")
+.style.display="block";
 
-if(item){
+}
 
-item.qtd++;
 
-}else{
+function fecharQuentinha(){
+
+document.getElementById("modalQuentinha")
+.style.display="none";
+
+}
+
+
+/* =========================
+   ESCOLHER QUENTINHA
+========================= */
+
+function escolherQuentinha(preco){
+
+if(!pratoSelecionado)return;
 
 carrinho.push({
 
-id:prato.id,
-nome:prato.nome,
-preco:prato.preco,
+id:Date.now(),
+
+prato:pratoSelecionado.nome,
+
+descricao:pratoSelecionado.descricao,
+
+tamanho:
+
+preco===10
+? "Econômica"
+: preco===18
+? "Pequena"
+: "Grande",
+
+preco:preco,
+
 qtd:1
 
 });
 
-}
+
+fecharQuentinha();
+
+abrirPedido();
 
 }
 
 
-/* ===========================
-ABRIR PEDIDO
-=========================== */
+/* =========================
+   PEDIDO
+========================= */
 
 function abrirPedido(){
 
@@ -605,9 +728,9 @@ document.getElementById("modalPedido")
 }
 
 
-/* ===========================
-CARRINHO
-=========================== */
+/* =========================
+   CARRINHO
+========================= */
 
 function atualizarCarrinho(){
 
@@ -616,11 +739,10 @@ document.getElementById("listaCarrinho");
 
 div.innerHTML="";
 
-let total=0;
-
 if(carrinho.length===0){
 
-div.innerHTML="<p>Seu pedido está vazio.</p>";
+div.innerHTML=
+"<p>Seu pedido está vazio.</p>";
 
 document.getElementById("total")
 .innerText="0,00";
@@ -629,6 +751,9 @@ return;
 
 }
 
+let total=0;
+
+
 carrinho.forEach(item=>{
 
 let subtotal=
@@ -636,17 +761,26 @@ item.preco*item.qtd;
 
 total+=subtotal;
 
+
 div.innerHTML+=`
 
 <div class="item">
 
 <div class="item-info">
 
-<strong>${item.nome}</strong>
+<strong>
+${item.tamanho}
+</strong>
 
 <br>
 
-R$ ${item.preco.toFixed(2).replace(".",",")}
+🍛 ${item.prato}
+
+<br>
+
+R$ ${item.preco
+.toFixed(2)
+.replace(".",",")}
 
 </div>
 
@@ -670,16 +804,18 @@ R$ ${item.preco.toFixed(2).replace(".",",")}
 
 });
 
+
 document.getElementById("total")
 .innerText=
-total.toFixed(2).replace(".",",");
+total.toFixed(2)
+.replace(".",",");
 
 }
 
 
 function aumentar(id){
 
-let item=
+const item=
 carrinho.find(i=>i.id===id);
 
 if(item)item.qtd++;
@@ -691,7 +827,7 @@ atualizarCarrinho();
 
 function diminuir(id){
 
-let item=
+const item=
 carrinho.find(i=>i.id===id);
 
 if(!item)return;
@@ -710,19 +846,19 @@ atualizarCarrinho();
 }
 
 
-/* ===========================
-PAGAMENTO
-=========================== */
+/* =========================
+   PAGAMENTO
+========================= */
 
 function mostrarPagamento(){
 
-let pagamento=
+const pagamento=
 document.getElementById("pagamento").value;
 
-let pix=
+const pix=
 document.getElementById("pixBox");
 
-let troco=
+const troco=
 document.getElementById("trocoArea");
 
 pix.style.display="none";
@@ -766,38 +902,38 @@ troco.style.display="block";
 }
 
 
-/* ===========================
-FINALIZAR PEDIDO
-=========================== */
+/* =========================
+   FINALIZAR
+========================= */
 
 function finalizarPedido(){
 
 if(carrinho.length===0){
 
-alert("Adicione algum item.");
+alert("Adicione algum pedido.");
 
 return;
 
 }
 
 
-let nome=
+const nome=
 document.getElementById("nome")
 .value.trim();
 
-let endereco=
+const endereco=
 document.getElementById("endereco")
 .value.trim();
 
-let observacao=
+const observacao=
 document.getElementById("observacao")
 .value.trim();
 
-let pagamento=
+const pagamento=
 document.getElementById("pagamento")
 .value;
 
-let troco=
+const troco=
 document.getElementById("troco")
 .value;
 
@@ -810,7 +946,6 @@ return;
 
 }
 
-
 if(!endereco){
 
 alert("Digite seu endereço.");
@@ -819,20 +954,20 @@ return;
 
 }
 
-
 if(!pagamento){
 
-alert("Escolha o pagamento.");
+alert("Escolha a forma de pagamento.");
 
 return;
 
 }
 
 
+/* NÚMERO DO PEDIDO */
+
 let numero=
-Number(
-localStorage.getItem("numeroPedido")
-)||0;
+Number(localStorage.getItem("numeroPedido"))
+||0;
 
 numero++;
 
@@ -842,7 +977,7 @@ numero
 );
 
 
-let numeroPedido=
+const numeroFormatado=
 String(numero).padStart(4,"0");
 
 
@@ -853,36 +988,39 @@ let itens="";
 
 carrinho.forEach(item=>{
 
-let subtotal=
+const subtotal=
 item.preco*item.qtd;
 
 total+=subtotal;
 
-itens+=
-"\n🥡 "+
-item.nome+
-" x"+
-item.qtd+
-" — R$ "+
-subtotal.toFixed(2)
-.replace(".",",");
+
+itens+=`
+
+🥡 ${item.tamanho}
+🍛 ${item.prato}
+Quantidade: ${item.qtd}
+Valor: R$ ${subtotal
+.toFixed(2)
+.replace(".",",")}
+
+`;
 
 });
 
 
 let mensagem=
 
-`✅ *PEDIDO #${numeroPedido}*
+`✅ *PEDIDO #${numeroFormatado}*
 
 👤 *Nome:* ${nome}
 
 📍 *Endereço:* ${endereco}
 
-🛒 *ITENS:*${itens}
+🛒 *PEDIDO:*
+${itens}
 
-📝 *Observação:* ${
-observacao||"Nenhuma"
-}
+📝 *Observação:*
+${observacao||"Nenhuma"}
 
 💳 *Pagamento:* ${pagamento}`;
 
@@ -892,9 +1030,9 @@ pagamento==="Dinheiro" &&
 troco
 ){
 
-mensagem+=
+mensagem+=`
 
-`\n💵 *Troco para:* R$ ${
+💵 *Troco para:* R$ ${
 Number(troco)
 .toFixed(2)
 .replace(".",",")
@@ -903,17 +1041,17 @@ Number(troco)
 }
 
 
-mensagem+=
+mensagem+=`
 
-`\n\n💰 *TOTAL: R$ ${
+💰 *TOTAL: R$ ${
 total.toFixed(2)
 .replace(".",",")
 }*
 
-\n\n📲 *Pedido realizado pelo site.*`;
+📲 *Pedido realizado pelo site.*`;
 
 
-let url=
+const url=
 "https://wa.me/"+
 config.whatsapp+
 "?text="+
@@ -930,9 +1068,9 @@ fecharPedido();
 }
 
 
-/* ===========================
-LOGIN ADMIN
-=========================== */
+/* =========================
+   LOGIN
+========================= */
 
 function abrirLogin(){
 
@@ -952,7 +1090,7 @@ document.getElementById("modalLogin")
 
 function entrarAdmin(){
 
-let senha=
+const senha=
 document.getElementById("senhaAdmin")
 .value;
 
@@ -970,6 +1108,10 @@ abrirAdmin();
 
 }
 
+
+/* =========================
+   ADMIN
+========================= */
 
 function abrirAdmin(){
 
@@ -995,13 +1137,13 @@ document.getElementById("modalAdmin")
 }
 
 
-/* ===========================
-ADMIN CARDÁPIO
-=========================== */
+/* =========================
+   ADMIN CARDÁPIO
+========================= */
 
 function mostrarAdminCardapio(){
 
-let div=
+const div=
 document.getElementById("adminCardapio");
 
 div.innerHTML="";
@@ -1013,7 +1155,7 @@ div.innerHTML+=`
 
 <div class="admin-card">
 
-<label>Nome</label>
+<label>Nome do prato</label>
 
 <input
 value="${p.nome}"
@@ -1024,25 +1166,12 @@ cardapio[${index}].nome=this.value
 
 <label>Descrição</label>
 
-<input
-value="${p.descricao}"
+<textarea
 onchange="
 cardapio[${index}].descricao=this.value
-"
->
+">${p.descricao}</textarea>
 
-<label>Preço</label>
-
-<input
-type="number"
-step="0.01"
-value="${p.preco}"
-onchange="
-cardapio[${index}].preco=Number(this.value)
-"
->
-
-<label>
+<label>Mostrar no site</label>
 
 <input
 type="checkbox"
@@ -1052,15 +1181,13 @@ cardapio[${index}].ativo=this.checked
 "
 >
 
- Mostrar no cardápio
-
-</label>
+<br>
 
 <button
 class="remover"
 onclick="removerPrato(${index})">
 
-🗑️ EXCLUIR
+🗑️ EXCLUIR PRATO
 
 </button>
 
@@ -1073,9 +1200,9 @@ onclick="removerPrato(${index})">
 }
 
 
-/* ===========================
-ADICIONAR ITEM
-=========================== */
+/* =========================
+   ADICIONAR PRATO
+========================= */
 
 function adicionarPrato(){
 
@@ -1085,7 +1212,7 @@ id:Date.now(),
 
 nome:"Novo prato",
 
-descricao:"Descrição",
+descricao:"Descrição do prato",
 
 preco:0,
 
@@ -1098,13 +1225,13 @@ mostrarAdminCardapio();
 }
 
 
-/* ===========================
-REMOVER
-=========================== */
+/* =========================
+   REMOVER PRATO
+========================= */
 
 function removerPrato(index){
 
-if(!confirm("Excluir este item?"))
+if(!confirm("Excluir este prato?"))
 return;
 
 cardapio.splice(index,1);
@@ -1114,9 +1241,9 @@ mostrarAdminCardapio();
 }
 
 
-/* ===========================
-SALVAR
-=========================== */
+/* =========================
+   SALVAR
+========================= */
 
 function salvarTudo(){
 
@@ -1147,9 +1274,9 @@ alert("✅ Alterações salvas!");
 }
 
 
-/* ===========================
-INICIAR
-=========================== */
+/* =========================
+   INICIAR
+========================= */
 
 mostrarCardapio();
 
