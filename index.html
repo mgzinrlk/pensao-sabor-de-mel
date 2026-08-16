@@ -3,136 +3,138 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cardápio</title>
+<title>Cardápio - Fazer Pedido</title>
 
 <style>
 *{box-sizing:border-box}
 body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#f4f4f4;
-    color:#222;
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#fff8e8;
+  color:#222;
 }
 header{
-    background:linear-gradient(90deg,#d71920,#ffcc00);
-    color:#fff;
-    text-align:center;
-    padding:22px 15px;
+  background:linear-gradient(135deg,#d90000,#ffcc00);
+  color:white;
+  padding:20px;
+  text-align:center;
 }
 header h1{margin:0;font-size:28px}
-.container{
-    max-width:700px;
-    margin:auto;
-    background:#fff;
-    min-height:100vh;
-    padding:18px;
-}
-h2{
-    color:#d71920;
-    border-bottom:4px solid #ffcc00;
-    padding-bottom:8px;
-}
+.container{max-width:650px;margin:auto;padding:18px}
 .card{
-    background:#fff;
-    border-radius:16px;
-    padding:17px;
-    margin:13px 0;
-    box-shadow:0 3px 12px #0002;
+  background:white;
+  border-radius:16px;
+  padding:18px;
+  margin-bottom:15px;
+  box-shadow:0 3px 12px #0002;
 }
-.card h3{margin:0 0 8px}
-.price{
-    color:#d71920;
-    font-weight:bold;
-    font-size:19px;
-}
+h2{margin-top:0}
 button{
-    border:0;
-    border-radius:12px;
-    padding:13px 17px;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
+  width:100%;
+  border:0;
+  border-radius:12px;
+  padding:14px;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:10px;
 }
 .btn{
-    width:100%;
-    background:#d71920;
-    color:#fff;
-    margin-top:10px;
+  background:#d90000;
+  color:white;
 }
-.yellow{background:#ffcc00;color:#111}
-.red{background:#d71920;color:#fff}
-.gray{background:#ddd}
+.btn-yellow{
+  background:#ffcc00;
+  color:#222;
+}
+.btn-green{
+  background:#159447;
+  color:white;
+}
 input,select,textarea{
-    width:100%;
-    padding:15px;
-    margin:7px 0;
-    border:1px solid #ccc;
-    border-radius:12px;
-    font-size:16px;
+  width:100%;
+  padding:13px;
+  margin:7px 0;
+  border:1px solid #ccc;
+  border-radius:10px;
+  font-size:16px;
 }
-textarea{min-height:90px}
-.total{
-    font-size:27px;
-    font-weight:bold;
-    color:#d71920;
-    margin:20px 0;
+.item{
+  border:1px solid #ddd;
+  border-radius:12px;
+  padding:13px;
+  margin:10px 0;
+}
+.item-title{
+  font-weight:bold;
+  font-size:18px;
+}
+.price{
+  color:#d90000;
+  font-weight:bold;
 }
 .hidden{display:none!important}
-.adminButton{
-    position:fixed;
-    right:12px;
-    bottom:12px;
-    background:#222;
-    color:#fff;
-    border-radius:50px;
-    z-index:50;
-}
-.modal{
-    position:fixed;
-    inset:0;
-    background:#0009;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:15px;
-    z-index:100;
-}
-.modalBox{
-    width:100%;
-    max-width:550px;
-    max-height:90vh;
-    overflow:auto;
-    background:#fff;
-    border-radius:20px;
-    padding:20px;
-}
-.itemAdmin{
-    border:1px solid #ddd;
-    border-radius:12px;
-    padding:12px;
-    margin:10px 0;
-}
-.itemAdmin button{
-    margin:4px;
-}
 .qty{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    margin-top:10px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.qty button{
+  width:45px;
+  margin:0;
+  padding:8px;
 }
 .qty span{
-    min-width:35px;
-    text-align:center;
-    font-weight:bold;
+  min-width:25px;
+  text-align:center;
+  font-weight:bold;
 }
-.close{
-    float:right;
-    background:#eee;
+.total{
+  font-size:22px;
+  font-weight:bold;
+  color:#d90000;
+  margin-top:15px;
+}
+.pix{
+  background:#fff3c4;
+  border:2px solid #ffcc00;
+  border-radius:12px;
+  padding:15px;
+  margin-top:12px;
+}
+.pix-key{
+  font-size:19px;
+  font-weight:bold;
+  word-break:break-all;
+  color:#b00000;
+}
+.notice{
+  background:#e8f8ed;
+  border-radius:10px;
+  padding:12px;
+  margin-top:10px;
 }
 .small{
-    color:#777;
-    font-size:14px;
+  font-size:13px;
+  color:#666;
+}
+.admin-link{
+  text-align:center;
+  margin-top:20px;
+}
+.admin-link button{
+  background:none;
+  color:#777;
+  font-size:13px;
+  width:auto;
+}
+.remove{
+  background:#eee;
+  color:#900;
+  width:auto;
+  padding:6px 10px;
+  font-size:13px;
+  margin:5px 0 0;
 }
 </style>
 </head>
@@ -140,1035 +142,1101 @@ textarea{min-height:90px}
 <body>
 
 <header>
-    <h1>🍽️ CARDÁPIO</h1>
+  <h1>🍱 Nosso Cardápio</h1>
+  <p>Faça seu pedido</p>
 </header>
 
 <div class="container">
 
-    <!-- QUENTINHAS -->
-    <h2>🥡 Quentinhas</h2>
+  <!-- TELA INICIAL -->
+  <section id="inicio">
 
-    <div id="quentinhas"></div>
+    <div class="card">
+      <h2>🍽️ Cardápio</h2>
+      <p>Escolha suas opções e faça seu pedido.</p>
 
-    <!-- BEBIDAS -->
-    <h2>🥤 Bebidas</h2>
-
-    <div id="bebidas"></div>
-
-    <!-- PEDIDO -->
-    <h2>🛒 Seu pedido</h2>
-
-    <div id="carrinho">
-        <p>Nenhum item adicionado.</p>
+      <button class="btn" onclick="abrirPedido()">
+        ➕ ADICIONAR PEDIDO
+      </button>
     </div>
 
-    <div class="total">
+    <div class="card">
+      <h2>🥤 Bebidas</h2>
+      <div id="bebidasInicio"></div>
+    </div>
+
+    <div class="admin-link">
+      <button onclick="abrirAdmin()">Área administrativa</button>
+    </div>
+
+  </section>
+
+
+  <!-- PEDIDO -->
+  <section id="pedido" class="hidden">
+
+    <div class="card">
+      <h2>🍱 Monte seu pedido</h2>
+      <p class="small">
+        Escolha aqui sua quentinha e as bebidas.
+      </p>
+
+      <h3>Quentinhas</h3>
+      <div id="quentinhas"></div>
+
+      <h3>🥤 Bebidas</h3>
+      <div id="bebidasPedido"></div>
+
+      <div class="total">
         Total: R$ <span id="total">0,00</span>
+      </div>
     </div>
 
-    <!-- DADOS SÓ NO FECHAMENTO -->
-    <h2>📋 Dados do pedido</h2>
 
-    <input id="nome" placeholder="Nome">
+    <!-- DADOS SÓ APARECEM DENTRO DO PEDIDO -->
+    <div class="card">
+      <h2>📋 Seus dados</h2>
 
-    <input id="endereco" placeholder="Endereço">
+      <input id="nome" placeholder="Seu nome">
 
-    <textarea id="observacao"
-        placeholder="Observação do pedido"></textarea>
+      <input id="telefone" placeholder="Seu telefone">
 
-    <select id="pagamento">
-        <option value="">Forma de pagamento</option>
+      <textarea id="endereco" rows="3"
+        placeholder="Endereço para entrega"></textarea>
+
+      <textarea id="observacao" rows="3"
+        placeholder="Observação (opcional)"></textarea>
+    </div>
+
+
+    <div class="card">
+      <h2>💳 Forma de pagamento</h2>
+
+      <select id="pagamento" onchange="alterarPagamento()">
+        <option value="">Selecione</option>
+        <option value="PIX">PIX</option>
         <option value="Dinheiro">Dinheiro</option>
-        <option value="Pix">Pix</option>
         <option value="Cartão">Cartão</option>
-    </select>
+      </select>
 
-    <button class="btn" onclick="enviarPedido()">
-        📲 CONFIRMAR PEDIDO PELO WHATSAPP
+      <div id="pixArea" class="pix hidden">
+
+        <h3>💚 Pagamento via PIX</h3>
+
+        <p>Faça o pagamento usando a chave PIX abaixo:</p>
+
+        <div class="pix-key" id="chavePix">
+          Chave PIX não cadastrada.
+        </div>
+
+        <button class="btn-yellow" onclick="copiarPix()">
+          📋 COPIAR CHAVE PIX
+        </button>
+
+        <div class="notice">
+          <b>⚠️ Depois de realizar o pagamento, envie o comprovante pelo WhatsApp.</b>
+          <br><br>
+          O comprovante deve ser enviado junto com a confirmação do pedido.
+        </div>
+
+      </div>
+    </div>
+
+    <button class="btn-green" onclick="finalizarPedido()">
+      ✅ CONFIRMAR PEDIDO E ENVIAR NO WHATSAPP
     </button>
 
-</div>
+    <button class="btn-yellow" onclick="voltarInicio()">
+      ← VOLTAR
+    </button>
 
-<button class="adminButton" onclick="abrirLogin()">
-    ⚙️ ADM
-</button>
+  </section>
 
 
-<!-- LOGIN -->
-<div id="loginModal" class="modal hidden">
+  <!-- ADMIN -->
+  <section id="admin" class="hidden">
 
-    <div class="modalBox">
+    <div class="card">
+      <h2>🔐 Área Administrativa</h2>
 
-        <button class="close" onclick="fecharLogin()">✕</button>
+      <input id="senhaAdmin"
+             type="password"
+             placeholder="Senha administrativa">
 
-        <h2>🔐 Área Administrativa</h2>
+      <button class="btn" onclick="entrarAdmin()">
+        ENTRAR
+      </button>
 
-        <input
-            id="senha"
-            type="password"
-            placeholder="Senha">
-
-        <button class="btn" onclick="login()">
-            ENTRAR
-        </button>
-
+      <button class="btn-yellow" onclick="voltarInicio()">
+        ← VOLTAR
+      </button>
     </div>
 
-</div>
+  </section>
 
 
-<!-- ADM -->
-<div id="adminModal" class="modal hidden">
+  <!-- PAINEL ADMIN -->
+  <section id="painelAdmin" class="hidden">
 
-    <div class="modalBox">
+    <div class="card">
+      <h2>⚙️ Configurações</h2>
 
-        <button class="close" onclick="fecharAdm()">✕</button>
+      <label>Chave PIX</label>
+      <input id="adminPix"
+             placeholder="Digite a chave PIX">
 
-        <h2>⚙️ Painel ADM</h2>
+      <label>WhatsApp da loja</label>
+      <input id="adminWhats"
+             placeholder="Ex: 5521974967664">
 
-        <h3>🥡 Quentinhas</h3>
-
-        <div class="itemAdmin">
-            <strong>Quentinha Pequena</strong>
-
-            <input id="peqNome">
-            <input id="peqPreco" type="number" step="0.01">
-        </div>
-
-        <div class="itemAdmin">
-            <strong>Quentinha Grande</strong>
-
-            <input id="graNome">
-            <input id="graPreco" type="number" step="0.01">
-        </div>
-
-        <div class="itemAdmin">
-            <strong>Quentinha Promoção</strong>
-
-            <input id="proNome">
-            <input id="proPreco" type="number" step="0.01">
-        </div>
-
-        <button class="btn" onclick="salvarQuentinhas()">
-            💾 SALVAR QUENTINHAS
-        </button>
-
-
-        <h3>🥤 Nova bebida</h3>
-
-        <input
-            id="bebidaNome"
-            placeholder="Nome da bebida">
-
-        <input
-            id="bebidaPreco"
-            type="number"
-            step="0.01"
-            placeholder="Preço">
-
-        <button class="btn" onclick="adicionarBebida()">
-            ➕ CADASTRAR BEBIDA
-        </button>
-
-
-        <h3>🥤 Bebidas cadastradas</h3>
-
-        <div id="listaAdmin"></div>
-
-
-        <button class="btn" onclick="fecharAdm()">
-            SAIR
-        </button>
-
+      <button class="btn" onclick="salvarConfig()">
+        💾 SALVAR CONFIGURAÇÕES
+      </button>
     </div>
+
+
+    <div class="card">
+      <h2>🍱 Quentinhas</h2>
+
+      <div id="adminQuentinhas"></div>
+
+      <hr>
+
+      <input id="novaQNome" placeholder="Nome da quentinha">
+
+      <input id="novaQPreco"
+             type="number"
+             step="0.01"
+             placeholder="Preço">
+
+      <button class="btn" onclick="adicionarQuentinha()">
+        ➕ ADICIONAR QUENTINHA
+      </button>
+    </div>
+
+
+    <div class="card">
+      <h2>🥤 Bebidas</h2>
+
+      <div id="adminBebidas"></div>
+
+      <hr>
+
+      <input id="novaBNome" placeholder="Nome da bebida">
+
+      <input id="novaBPreco"
+             type="number"
+             step="0.01"
+             placeholder="Preço">
+
+      <button class="btn" onclick="adicionarBebida()">
+        ➕ ADICIONAR BEBIDA
+      </button>
+    </div>
+
+
+    <button class="btn-yellow" onclick="voltarInicio()">
+      ← SAIR DO ADMIN
+    </button>
+
+  </section>
 
 </div>
 
 
 <script>
 
-/* =====================================================
-   CONFIGURAÇÕES
-===================================================== */
+const WHATSAPP_PADRAO = "5521974967664";
 
-const WHATSAPP = "5521974967664";
+let dados = JSON.parse(localStorage.getItem("cardapioDados")) || {
 
-const SENHA_ADM = "1234";
+  pix: "",
 
+  whatsapp: WHATSAPP_PADRAO,
 
-/* =====================================================
-   DADOS
-===================================================== */
-
-let quentinhas =
-JSON.parse(localStorage.getItem("quentinhas")) || {
-
-    pequena:{
-        nome:"Quentinha Pequena",
-        preco:18
+  quentinhas: [
+    {
+      id:1,
+      nome:"Quentinha Grande",
+      preco:21
     },
-
-    grande:{
-        nome:"Quentinha Grande",
-        preco:21
+    {
+      id:2,
+      nome:"Quentinha Pequena",
+      preco:18
     },
-
-    promocao:{
-        nome:"Quentinha Promoção",
-        preco:10
+    {
+      id:3,
+      nome:"Promoção",
+      preco:10
     }
+  ],
 
+  bebidas: [
+    {id:1,nome:"Coca Cola 2LT",preco:15},
+    {id:2,nome:"Fanta Laranja 2LT",preco:12},
+    {id:3,nome:"Tobi 2LT",preco:7},
+    {id:4,nome:"Coca Cola Lata",preco:6},
+    {id:5,nome:"Guaraná Antarctica Lata",preco:6},
+    {id:6,nome:"Fanta Laranja Lata",preco:6},
+    {id:7,nome:"Coca Cola 600 ML",preco:8},
+    {id:8,nome:"Activ Plus Uva",preco:0}
+  ]
+};
+
+let pedido = {
+  quentinhas:[],
+  bebidas:[]
 };
 
 
-let bebidas =
-JSON.parse(localStorage.getItem("bebidas")) || [
+function salvarDados(){
+  localStorage.setItem(
+    "cardapioDados",
+    JSON.stringify(dados)
+  );
+}
 
-    {id:1,nome:"Coca Cola 2LT",preco:15},
-
-    {id:2,nome:"Fanta Laranja 2LT",preco:12},
-
-    {id:3,nome:"Tobi 2LT",preco:7},
-
-    {id:4,nome:"Coca Cola Lata",preco:6},
-
-    {id:5,nome:"Guaraná Antarctica Lata",preco:6},
-
-    {id:6,nome:"Fanta Laranja Lata",preco:6},
-
-    {id:7,nome:"Coca Cola 600 ML",preco:8},
-
-    {id:8,nome:"Ativ Plus Uva",preco:0}
-
-];
-
-
-let carrinho=[];
-
-
-/* =====================================================
-   DINHEIRO
-===================================================== */
 
 function dinheiro(valor){
+  return Number(valor || 0)
+    .toFixed(2)
+    .replace(".",",");
+}
 
-    return Number(valor).toLocaleString(
-        "pt-BR",
-        {
-            minimumFractionDigits:2,
-            maximumFractionDigits:2
+
+function mostrar(id){
+  document.getElementById(id).classList.remove("hidden");
+}
+
+
+function esconder(id){
+  document.getElementById(id).classList.add("hidden");
+}
+
+
+function abrirPedido(){
+
+  esconder("inicio");
+  esconder("admin");
+  esconder("painelAdmin");
+
+  mostrar("pedido");
+
+  pedido = {
+    quentinhas:[],
+    bebidas:[]
+  };
+
+  carregarPedido();
+
+  document.getElementById("pixArea")
+    .classList.add("hidden");
+
+  document.getElementById("pagamento").value = "";
+
+  atualizarTotal();
+}
+
+
+function voltarInicio(){
+
+  esconder("pedido");
+  esconder("admin");
+  esconder("painelAdmin");
+
+  mostrar("inicio");
+
+  carregarInicio();
+}
+
+
+function carregarInicio(){
+
+  const div = document.getElementById("bebidasInicio");
+
+  div.innerHTML = "";
+
+  if(!dados.bebidas.length){
+
+    div.innerHTML =
+      "<p>Nenhuma bebida cadastrada.</p>";
+
+    return;
+  }
+
+  dados.bebidas.forEach(b => {
+
+    div.innerHTML += `
+      <div class="item">
+        <div class="item-title">${escapeHTML(b.nome)}</div>
+        ${
+          Number(b.preco) > 0
+          ? `<div class="price">R$ ${dinheiro(b.preco)}</div>`
+          : `<div class="small">Preço não informado</div>`
         }
+      </div>
+    `;
+
+  });
+}
+
+
+function carregarPedido(){
+
+  const q = document.getElementById("quentinhas");
+
+  q.innerHTML = "";
+
+  dados.quentinhas.forEach(item => {
+
+    q.innerHTML += `
+      <div class="item">
+
+        <div class="item-title">
+          ${escapeHTML(item.nome)}
+        </div>
+
+        <div class="price">
+          R$ ${dinheiro(item.preco)}
+        </div>
+
+        <div class="qty">
+
+          <button
+            class="btn-yellow"
+            onclick="alterarQuentinha(${item.id},-1)">
+            −
+          </button>
+
+          <span id="qtdQ${item.id}">0</span>
+
+          <button
+            class="btn"
+            onclick="alterarQuentinha(${item.id},1)">
+            +
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+  });
+
+
+  const b = document.getElementById("bebidasPedido");
+
+  b.innerHTML = "";
+
+  dados.bebidas.forEach(item => {
+
+    b.innerHTML += `
+      <div class="item">
+
+        <div class="item-title">
+          ${escapeHTML(item.nome)}
+        </div>
+
+        ${
+          Number(item.preco)>0
+          ? `<div class="price">
+               R$ ${dinheiro(item.preco)}
+             </div>`
+          : `<div class="small">
+               Preço não informado
+             </div>`
+        }
+
+        <div class="qty">
+
+          <button
+            class="btn-yellow"
+            onclick="alterarBebida(${item.id},-1)">
+            −
+          </button>
+
+          <span id="qtdB${item.id}">0</span>
+
+          <button
+            class="btn"
+            onclick="alterarBebida(${item.id},1)">
+            +
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+  });
+
+}
+
+
+function alterarQuentinha(id, quantidade){
+
+  let item = pedido.quentinhas.find(
+    x => x.id === id
+  );
+
+  if(!item){
+
+    item = {
+      id:id,
+      quantidade:0
+    };
+
+    pedido.quentinhas.push(item);
+  }
+
+  item.quantidade += quantidade;
+
+  if(item.quantidade < 0)
+    item.quantidade = 0;
+
+  const elemento =
+    document.getElementById("qtdQ"+id);
+
+  if(elemento)
+    elemento.textContent = item.quantidade;
+
+  atualizarTotal();
+}
+
+
+function alterarBebida(id, quantidade){
+
+  let item = pedido.bebidas.find(
+    x => x.id === id
+  );
+
+  if(!item){
+
+    item = {
+      id:id,
+      quantidade:0
+    };
+
+    pedido.bebidas.push(item);
+  }
+
+  item.quantidade += quantidade;
+
+  if(item.quantidade < 0)
+    item.quantidade = 0;
+
+  const elemento =
+    document.getElementById("qtdB"+id);
+
+  if(elemento)
+    elemento.textContent = item.quantidade;
+
+  atualizarTotal();
+}
+
+
+function atualizarTotal(){
+
+  let total = 0;
+
+  pedido.quentinhas.forEach(p => {
+
+    const item =
+      dados.quentinhas.find(
+        x => x.id === p.id
+      );
+
+    if(item)
+      total += Number(item.preco) * p.quantidade;
+
+  });
+
+
+  pedido.bebidas.forEach(p => {
+
+    const item =
+      dados.bebidas.find(
+        x => x.id === p.id
+      );
+
+    if(item)
+      total += Number(item.preco) * p.quantidade;
+
+  });
+
+
+  document.getElementById("total")
+    .textContent = dinheiro(total);
+}
+
+
+function alterarPagamento(){
+
+  const pagamento =
+    document.getElementById("pagamento").value;
+
+  const area =
+    document.getElementById("pixArea");
+
+  if(pagamento === "PIX"){
+
+    area.classList.remove("hidden");
+
+    document.getElementById("chavePix")
+      .textContent =
+        dados.pix || "Chave PIX não cadastrada.";
+
+  }else{
+
+    area.classList.add("hidden");
+
+  }
+}
+
+
+function copiarPix(){
+
+  if(!dados.pix){
+
+    alert("A chave PIX ainda não foi cadastrada no painel ADM.");
+    return;
+
+  }
+
+  navigator.clipboard.writeText(dados.pix)
+    .then(() => {
+      alert("Chave PIX copiada!");
+    })
+    .catch(() => {
+      alert("Copie a chave PIX manualmente.");
+    });
+}
+
+
+function finalizarPedido(){
+
+  const nome =
+    document.getElementById("nome").value.trim();
+
+  const telefone =
+    document.getElementById("telefone").value.trim();
+
+  const endereco =
+    document.getElementById("endereco").value.trim();
+
+  const observacao =
+    document.getElementById("observacao").value.trim();
+
+  const pagamento =
+    document.getElementById("pagamento").value;
+
+
+  if(!pedido.quentinhas.some(x => x.quantidade > 0) &&
+     !pedido.bebidas.some(x => x.quantidade > 0)){
+
+    alert("Escolha pelo menos um item.");
+    return;
+  }
+
+
+  if(!nome){
+
+    alert("Digite seu nome.");
+    return;
+  }
+
+
+  if(!telefone){
+
+    alert("Digite seu telefone.");
+    return;
+  }
+
+
+  if(!endereco){
+
+    alert("Digite seu endereço.");
+    return;
+  }
+
+
+  if(!pagamento){
+
+    alert("Escolha a forma de pagamento.");
+    return;
+  }
+
+
+  if(pagamento === "PIX" && !dados.pix){
+
+    alert(
+      "A chave PIX ainda não foi cadastrada pela loja."
     );
 
-}
+    return;
+  }
 
 
-/* =====================================================
-   QUENTINHAS NA TELA
-===================================================== */
+  let total = 0;
 
-function mostrarQuentinhas(){
+  let mensagem =
+`*NOVO PEDIDO* 🍱
 
-    const area =
-        document.getElementById("quentinhas");
+*CLIENTE:*
+Nome: ${nome}
+Telefone: ${telefone}
+Endereço: ${endereco}
 
-    area.innerHTML="";
+*PEDIDO:*`;
 
-    Object.keys(quentinhas).forEach(chave=>{
 
-        const q=quentinhas[chave];
+  pedido.quentinhas.forEach(p => {
 
-        const div=document.createElement("div");
+    if(p.quantidade <= 0) return;
 
-        div.className="card";
+    const item =
+      dados.quentinhas.find(
+        x => x.id === p.id
+      );
 
-        div.innerHTML=`
+    if(!item) return;
 
-            <h3>${q.nome}</h3>
+    const subtotal =
+      Number(item.preco) * p.quantidade;
 
-            <div class="price">
-                R$ ${dinheiro(q.preco)}
-            </div>
+    total += subtotal;
 
-            <button
-                class="btn"
-                onclick="addQuentinha('${chave}')">
+    mensagem +=
+`\n${p.quantidade}x ${item.nome} - R$ ${dinheiro(subtotal)}`;
 
-                ADICIONAR
+  });
 
-            </button>
-        `;
 
-        area.appendChild(div);
+  pedido.bebidas.forEach(p => {
 
-    });
+    if(p.quantidade <= 0) return;
 
-}
+    const item =
+      dados.bebidas.find(
+        x => x.id === p.id
+      );
 
+    if(!item) return;
 
-/* =====================================================
-   ADICIONAR QUENTINHA
-===================================================== */
+    const subtotal =
+      Number(item.preco) * p.quantidade;
 
-function addQuentinha(chave){
+    total += subtotal;
 
-    const q=quentinhas[chave];
+    mensagem +=
+`\n${p.quantidade}x ${item.nome} - R$ ${dinheiro(subtotal)}`;
 
-    let item=carrinho.find(
-        x =>
-        x.tipo==="quentinha" &&
-        x.chave===chave
-    );
+  });
 
-    if(item){
 
-        item.quantidade++;
-
-    }else{
-
-        carrinho.push({
-
-            tipo:"quentinha",
-
-            chave:chave,
-
-            nome:q.nome,
-
-            preco:Number(q.preco),
-
-            quantidade:1
-
-        });
-
-    }
-
-    mostrarCarrinho();
-
-}
-
-
-/* =====================================================
-   BEBIDAS
-===================================================== */
-
-function mostrarBebidas(){
-
-    const area =
-        document.getElementById("bebidas");
-
-    area.innerHTML="";
-
-    bebidas.forEach(b=>{
-
-        const div=document.createElement("div");
-
-        div.className="card";
-
-        let precoTexto =
-            Number(b.preco)>0
-            ? `R$ ${dinheiro(b.preco)}`
-            : "Preço não cadastrado";
-
-        div.innerHTML=`
-
-            <h3>${b.nome}</h3>
-
-            <div class="price">
-                ${precoTexto}
-            </div>
-
-            <button
-                class="btn"
-                onclick="addBebida(${b.id})">
-
-                ADICIONAR
-
-            </button>
-
-        `;
-
-        area.appendChild(div);
-
-    });
-
-}
-
-
-/* =====================================================
-   ADICIONAR BEBIDA
-===================================================== */
-
-function addBebida(id){
-
-    const b =
-        bebidas.find(x=>x.id===id);
-
-    if(!b)return;
-
-    if(Number(b.preco)<=0){
-
-        alert(
-            "Essa bebida ainda não possui preço. " +
-            "Cadastre o valor no ADM."
-        );
-
-        return;
-
-    }
-
-    let item=carrinho.find(
-        x =>
-        x.tipo==="bebida" &&
-        x.id===id
-    );
-
-    if(item){
-
-        item.quantidade++;
-
-    }else{
-
-        carrinho.push({
-
-            tipo:"bebida",
-
-            id:b.id,
-
-            nome:b.nome,
-
-            preco:Number(b.preco),
-
-            quantidade:1
-
-        });
-
-    }
-
-    mostrarCarrinho();
-
-}
-
-
-/* =====================================================
-   CARRINHO
-===================================================== */
-
-function mostrarCarrinho(){
-
-    const area =
-        document.getElementById("carrinho");
-
-    area.innerHTML="";
-
-    if(carrinho.length===0){
-
-        area.innerHTML =
-            "<p>Nenhum item adicionado.</p>";
-
-        document.getElementById("total")
-            .innerText="0,00";
-
-        return;
-
-    }
-
-    let total=0;
-
-    carrinho.forEach((item,index)=>{
-
-        const subtotal =
-            item.preco *
-            item.quantidade;
-
-        total+=subtotal;
-
-        const div =
-            document.createElement("div");
-
-        div.className="card";
-
-        div.innerHTML=`
-
-            <h3>${item.nome}</h3>
-
-            <div>
-                R$ ${dinheiro(item.preco)}
-                cada
-            </div>
-
-            <div class="qty">
-
-                <button
-                    class="yellow"
-                    onclick="mais(${index})">
-                    +
-                </button>
-
-                <span>
-                    ${item.quantidade}
-                </span>
-
-                <button
-                    class="gray"
-                    onclick="menos(${index})">
-                    −
-                </button>
-
-                <button
-                    class="red"
-                    onclick="remover(${index})">
-                    🗑️
-                </button>
-
-            </div>
-
-            <div class="price">
-                Subtotal:
-                R$ ${dinheiro(subtotal)}
-            </div>
-
-        `;
-
-        area.appendChild(div);
-
-    });
-
-    document.getElementById("total")
-        .innerText=dinheiro(total);
-
-}
-
-
-/* =====================================================
-   QUANTIDADE
-===================================================== */
-
-function mais(index){
-
-    carrinho[index].quantidade++;
-
-    mostrarCarrinho();
-
-}
-
-
-function menos(index){
-
-    carrinho[index].quantidade--;
-
-    if(carrinho[index].quantidade<=0){
-
-        carrinho.splice(index,1);
-
-    }
-
-    mostrarCarrinho();
-
-}
-
-
-function remover(index){
-
-    carrinho.splice(index,1);
-
-    mostrarCarrinho();
-
-}
-
-
-/* =====================================================
-   TOTAL
-===================================================== */
-
-function totalPedido(){
-
-    return carrinho.reduce(
-
-        (total,item)=>
-            total +
-            item.preco *
-            item.quantidade,
-
-        0
-
-    );
-
-}
-
-
-/* =====================================================
-   WHATSAPP
-===================================================== */
-
-function enviarPedido(){
-
-    if(carrinho.length===0){
-
-        alert(
-            "Adicione uma quentinha ou bebida."
-        );
-
-        return;
-
-    }
-
-    const nome =
-        document.getElementById("nome")
-        .value.trim();
-
-    const endereco =
-        document.getElementById("endereco")
-        .value.trim();
-
-    const observacao =
-        document.getElementById("observacao")
-        .value.trim();
-
-    const pagamento =
-        document.getElementById("pagamento")
-        .value;
-
-    if(!nome){
-
-        alert("Digite seu nome.");
-
-        return;
-
-    }
-
-    if(!endereco){
-
-        alert("Digite seu endereço.");
-
-        return;
-
-    }
-
-    if(!pagamento){
-
-        alert("Escolha a forma de pagamento.");
-
-        return;
-
-    }
-
-
-    let texto =
-`🍽️ *NOVO PEDIDO*
-
-👤 Nome: ${nome}
-📍 Endereço: ${endereco}
-
-🛒 *PEDIDO:*
-`;
-
-
-    carrinho.forEach(item=>{
-
-        texto +=
-`• ${item.nome} x${item.quantidade} — R$ ${dinheiro(item.preco * item.quantidade)}
-`;
-
-    });
-
-
-    texto +=
+  mensagem +=
 `
-💰 *TOTAL: R$ ${dinheiro(totalPedido())}*
-💳 Pagamento: ${pagamento}
-`;
+
+*TOTAL: R$ ${dinheiro(total)}*
+Pagamento: ${pagamento}`;
 
 
-    if(observacao){
+  if(observacao){
 
-        texto +=
-`\n📝 Observação: ${observacao}`;
+    mensagem +=
+`\nObservação: ${observacao}`;
 
-    }
-
-
-    texto +=
-`\n\n✅ Pedido confirmado!`;
+  }
 
 
-    const url =
-        "https://wa.me/" +
-        WHATSAPP +
-        "?text=" +
-        encodeURIComponent(texto);
+  if(pagamento === "PIX"){
+
+    mensagem +=
+`
+
+*PAGAMENTO PIX*
+Chave: ${dados.pix}
+
+⚠️ *Vou enviar o comprovante do PIX pelo WhatsApp junto com este pedido.*`;
+
+  }
 
 
-    window.location.href=url;
+  mensagem +=
+`
 
-}
+Aguardando confirmação do pedido.`;
 
-
-/* =====================================================
-   ADM
-===================================================== */
-
-function abrirLogin(){
-
-    document
-        .getElementById("loginModal")
-        .classList.remove("hidden");
-
-}
+  const numero =
+    String(dados.whatsapp || WHATSAPP_PADRAO)
+      .replace(/\D/g,"");
 
 
-function fecharLogin(){
+  if(!numero){
 
-    document
-        .getElementById("loginModal")
-        .classList.add("hidden");
-
-}
+    alert("Cadastre o WhatsApp da loja no painel ADM.");
+    return;
+  }
 
 
-function login(){
+  const url =
+    "https://wa.me/" +
+    numero +
+    "?text=" +
+    encodeURIComponent(mensagem);
 
-    const senha =
-        document.getElementById("senha")
-        .value;
 
-    if(senha!==SENHA_ADM){
-
-        alert("Senha incorreta.");
-
-        return;
-
-    }
-
-    fecharLogin();
-
-    abrirAdm();
+  window.open(url,"_blank");
 
 }
 
 
-function abrirAdm(){
+function abrirAdmin(){
 
-    document
-        .getElementById("adminModal")
-        .classList.remove("hidden");
+  esconder("inicio");
+  esconder("pedido");
+  esconder("painelAdmin");
 
-    carregarAdm();
+  mostrar("admin");
 
-}
-
-
-function fecharAdm(){
-
-    document
-        .getElementById("adminModal")
-        .classList.add("hidden");
+  document.getElementById("senhaAdmin").value = "";
 
 }
 
 
-/* =====================================================
-   CARREGAR ADM
-===================================================== */
+function entrarAdmin(){
 
-function carregarAdm(){
+  const senha =
+    document.getElementById("senhaAdmin").value;
 
-    document.getElementById("peqNome").value =
-        quentinhas.pequena.nome;
+  /*
+    ALTERE A SENHA AQUI.
+    Senha atual: 1234
+  */
 
-    document.getElementById("peqPreco").value =
-        quentinhas.pequena.preco;
+  if(senha !== "1234"){
 
-    document.getElementById("graNome").value =
-        quentinhas.grande.nome;
+    alert("Senha incorreta.");
+    return;
 
-    document.getElementById("graPreco").value =
-        quentinhas.grande.preco;
+  }
 
-    document.getElementById("proNome").value =
-        quentinhas.promocao.nome;
+  esconder("admin");
+  mostrar("painelAdmin");
 
-    document.getElementById("proPreco").value =
-        quentinhas.promocao.preco;
-
-    mostrarAdminBebidas();
+  carregarAdmin();
 
 }
 
 
-/* =====================================================
-   SALVAR QUENTINHAS
-===================================================== */
+function carregarAdmin(){
 
-function salvarQuentinhas(){
+  document.getElementById("adminPix").value =
+    dados.pix || "";
 
-    quentinhas.pequena={
-
-        nome:
-            document.getElementById("peqNome")
-            .value.trim(),
-
-        preco:
-            Number(
-                document.getElementById("peqPreco")
-                .value
-            )
-
-    };
+  document.getElementById("adminWhats").value =
+    dados.whatsapp || WHATSAPP_PADRAO;
 
 
-    quentinhas.grande={
+  const q =
+    document.getElementById("adminQuentinhas");
 
-        nome:
-            document.getElementById("graNome")
-            .value.trim(),
+  q.innerHTML = "";
 
-        preco:
-            Number(
-                document.getElementById("graPreco")
-                .value
-            )
+  dados.quentinhas.forEach(item => {
 
-    };
+    q.innerHTML += `
+      <div class="item">
+
+        <input
+          id="qn${item.id}"
+          value="${escapeAttr(item.nome)}">
+
+        <input
+          id="qp${item.id}"
+          type="number"
+          step="0.01"
+          value="${Number(item.preco)}">
+
+        <button
+          class="btn"
+          onclick="editarQuentinha(${item.id})">
+          💾 SALVAR
+        </button>
+
+        <button
+          class="remove"
+          onclick="excluirQuentinha(${item.id})">
+          Excluir
+        </button>
+
+      </div>
+    `;
+
+  });
 
 
-    quentinhas.promocao={
+  const b =
+    document.getElementById("adminBebidas");
 
-        nome:
-            document.getElementById("proNome")
-            .value.trim(),
+  b.innerHTML = "";
 
-        preco:
-            Number(
-                document.getElementById("proPreco")
-                .value
-            )
+  dados.bebidas.forEach(item => {
 
-    };
+    b.innerHTML += `
+      <div class="item">
+
+        <input
+          id="bn${item.id}"
+          value="${escapeAttr(item.nome)}">
+
+        <input
+          id="bp${item.id}"
+          type="number"
+          step="0.01"
+          value="${Number(item.preco)}">
+
+        <button
+          class="btn"
+          onclick="editarBebida(${item.id})">
+          💾 SALVAR
+        </button>
+
+        <button
+          class="remove"
+          onclick="excluirBebida(${item.id})">
+          Excluir
+        </button>
+
+      </div>
+    `;
+
+  });
+
+}
 
 
-    localStorage.setItem(
-        "quentinhas",
-        JSON.stringify(quentinhas)
+function salvarConfig(){
+
+  dados.pix =
+    document.getElementById("adminPix")
+      .value.trim();
+
+  dados.whatsapp =
+    document.getElementById("adminWhats")
+      .value.trim();
+
+  salvarDados();
+
+  alert("Configurações salvas!");
+
+}
+
+
+function adicionarQuentinha(){
+
+  const nome =
+    document.getElementById("novaQNome")
+      .value.trim();
+
+  const preco =
+    Number(
+      document.getElementById("novaQPreco")
+        .value
     );
 
 
-    mostrarQuentinhas();
+  if(!nome){
 
-    alert("Quentinhas salvas!");
+    alert("Digite o nome.");
+    return;
+
+  }
+
+
+  if(!preco || preco < 0){
+
+    alert("Digite um preço válido.");
+    return;
+
+  }
+
+
+  dados.quentinhas.push({
+
+    id:Date.now(),
+    nome:nome,
+    preco:preco
+
+  });
+
+
+  salvarDados();
+
+  document.getElementById("novaQNome").value = "";
+  document.getElementById("novaQPreco").value = "";
+
+  carregarAdmin();
 
 }
 
-
-/* =====================================================
-   CADASTRAR BEBIDA
-===================================================== */
 
 function adicionarBebida(){
 
-    const nome =
-        document.getElementById("bebidaNome")
-        .value.trim();
+  const nome =
+    document.getElementById("novaBNome")
+      .value.trim();
 
-    const preco =
-        Number(
-            document.getElementById("bebidaPreco")
-            .value
-        );
-
-
-    if(!nome){
-
-        alert("Digite o nome da bebida.");
-
-        return;
-
-    }
+  const preco =
+    Number(
+      document.getElementById("novaBPreco")
+        .value
+    );
 
 
-    if(preco<=0){
+  if(!nome){
 
-        alert("Digite um preço válido.");
+    alert("Digite o nome da bebida.");
+    return;
 
-        return;
-
-    }
-
-
-    bebidas.push({
-
-        id:Date.now(),
-
-        nome:nome,
-
-        preco:preco
-
-    });
+  }
 
 
-    salvarBebidas();
+  if(preco < 0 || isNaN(preco)){
 
-    mostrarBebidas();
+    alert("Digite um preço válido.");
+    return;
 
-    mostrarAdminBebidas();
-
-
-    document.getElementById("bebidaNome")
-        .value="";
-
-    document.getElementById("bebidaPreco")
-        .value="";
+  }
 
 
-    alert("Bebida cadastrada!");
+  dados.bebidas.push({
+
+    id:Date.now(),
+    nome:nome,
+    preco:preco
+
+  });
+
+
+  salvarDados();
+
+  document.getElementById("novaBNome").value = "";
+  document.getElementById("novaBPreco").value = "";
+
+  carregarAdmin();
 
 }
 
 
-/* =====================================================
-   EDITAR BEBIDA
-===================================================== */
+function editarQuentinha(id){
+
+  const item =
+    dados.quentinhas.find(
+      x => x.id === id
+    );
+
+  if(!item) return;
+
+  item.nome =
+    document.getElementById("qn"+id).value.trim();
+
+  item.preco =
+    Number(
+      document.getElementById("qp"+id).value
+    );
+
+  salvarDados();
+
+  alert("Quentinha atualizada!");
+
+  carregarAdmin();
+
+}
+
 
 function editarBebida(id){
 
-    const b =
-        bebidas.find(x=>x.id===id);
+  const item =
+    dados.bebidas.find(
+      x => x.id === id
+    );
 
-    if(!b)return;
+  if(!item) return;
 
+  item.nome =
+    document.getElementById("bn"+id).value.trim();
 
-    const nome =
-        prompt(
-            "Nome da bebida:",
-            b.nome
-        );
+  item.preco =
+    Number(
+      document.getElementById("bp"+id).value
+    );
 
-    if(nome===null)return;
+  salvarDados();
 
+  alert("Bebida atualizada!");
 
-    const preco =
-        prompt(
-            "Preço:",
-            b.preco
-        );
-
-    if(preco===null)return;
-
-
-    b.nome =
-        nome.trim() || b.nome;
-
-    b.preco =
-        Number(preco);
-
-
-    salvarBebidas();
-
-    mostrarBebidas();
-
-    mostrarAdminBebidas();
+  carregarAdmin();
 
 }
 
 
-/* =====================================================
-   EXCLUIR BEBIDA
-===================================================== */
+function excluirQuentinha(id){
+
+  if(!confirm("Excluir esta quentinha?"))
+    return;
+
+  dados.quentinhas =
+    dados.quentinhas.filter(
+      x => x.id !== id
+    );
+
+  salvarDados();
+  carregarAdmin();
+
+}
+
 
 function excluirBebida(id){
 
-    if(!confirm(
-        "Excluir esta bebida?"
-    ))return;
+  if(!confirm("Excluir esta bebida?"))
+    return;
 
-
-    bebidas =
-        bebidas.filter(
-            b=>b.id!==id
-        );
-
-
-    salvarBebidas();
-
-    mostrarBebidas();
-
-    mostrarAdminBebidas();
-
-}
-
-
-/* =====================================================
-   SALVAR BEBIDAS
-===================================================== */
-
-function salvarBebidas(){
-
-    localStorage.setItem(
-        "bebidas",
-        JSON.stringify(bebidas)
+  dados.bebidas =
+    dados.bebidas.filter(
+      x => x.id !== id
     );
 
-}
-
-
-/* =====================================================
-   BEBIDAS NO ADM
-===================================================== */
-
-function mostrarAdminBebidas(){
-
-    const area =
-        document.getElementById("listaAdmin");
-
-    area.innerHTML="";
-
-
-    bebidas.forEach(b=>{
-
-        const div =
-            document.createElement("div");
-
-        div.className="itemAdmin";
-
-
-        div.innerHTML=`
-
-            <strong>${b.nome}</strong>
-
-            <p>
-                R$ ${dinheiro(b.preco)}
-            </p>
-
-            <button
-                class="yellow"
-                onclick="editarBebida(${b.id})">
-                ✏️ EDITAR
-            </button>
-
-            <button
-                class="red"
-                onclick="excluirBebida(${b.id})">
-                🗑️ EXCLUIR
-            </button>
-
-        `;
-
-
-        area.appendChild(div);
-
-    });
+  salvarDados();
+  carregarAdmin();
 
 }
 
 
-/* =====================================================
-   INICIAR
-===================================================== */
+function escapeHTML(text){
 
-mostrarQuentinhas();
-mostrarBebidas();
-mostrarCarrinho();
+  return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeAttr(text){
+
+  return escapeHTML(text);
+
+}
+
+
+/* INICIALIZAÇÃO */
+carregarInicio();
 
 </script>
 
 </body>
-</html>
+    </html>
