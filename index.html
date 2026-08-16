@@ -2,1171 +2,912 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nosso Cardápio</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Cardápio - Pedidos</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:Arial,sans-serif;
-}
-
+*{box-sizing:border-box}
 body{
-    background:#fff8e8;
-    color:#222;
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f5f5f5;
+  color:#222;
 }
-
 header{
-    background:linear-gradient(110deg,#f00000,#ffb000);
-    color:white;
-    text-align:center;
-    padding:65px 15px 65px;
+  background:#111;
+  color:white;
+  padding:18px;
+  text-align:center;
 }
-
-header h1{
-    font-size:42px;
-    font-weight:800;
-}
-
-header p{
-    font-size:28px;
-    margin-top:28px;
-}
-
+header h1{margin:0 0 6px}
 .container{
-    width:92%;
-    max-width:680px;
-    margin:55px auto;
+  max-width:900px;
+  margin:auto;
+  padding:15px;
 }
-
 .card{
-    background:white;
-    border-radius:45px;
-    padding:42px 38px;
-    box-shadow:0 8px 30px rgba(0,0,0,.07);
+  background:white;
+  border-radius:14px;
+  padding:18px;
+  margin:15px 0;
+  box-shadow:0 2px 10px #0001;
 }
-
-.titulo{
-    color:#d90000;
-    font-size:42px;
-    font-weight:800;
-    margin-bottom:60px;
+button{
+  border:0;
+  border-radius:10px;
+  padding:13px 16px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
 }
-
-.categoria{
-    font-size:42px;
-    font-weight:800;
-    margin:35px 0;
+.btn{
+  background:#111;
+  color:white;
+  width:100%;
+  margin-top:8px;
 }
-
-.botao{
-    width:100%;
-    border:0;
-    border-radius:30px;
-    padding:25px 15px;
-    background:#ed0000;
-    color:white;
-    font-size:29px;
-    font-weight:800;
-    cursor:pointer;
-    margin:25px 0 55px;
+.btn-red{
+  background:#e00000;
+  color:white;
+  width:100%;
+  margin-top:12px;
 }
-
-.botao:active{
-    transform:scale(.98);
+.btn-green{
+  background:#16a34a;
+  color:white;
+  width:100%;
+  margin-top:8px;
 }
-
-.botao-secundario{
-    width:100%;
-    border:0;
-    border-radius:25px;
-    padding:20px;
-    background:#f1f1f1;
-    color:#222;
-    font-size:23px;
-    font-weight:700;
-    cursor:pointer;
-    margin-top:15px;
+.btn-blue{
+  background:#2563eb;
+  color:white;
+  width:100%;
+  margin-top:8px;
 }
-
-.admin-link{
-    display:block;
-    text-align:center;
-    color:#777;
-    text-decoration:underline;
-    font-size:20px;
-    cursor:pointer;
-    margin-top:10px;
-}
-
-.tela{
-    display:none;
-}
-
-.tela.ativa{
-    display:block;
-}
-
-.item{
-    background:#fff;
-    border:2px solid #eee;
-    border-radius:22px;
-    padding:20px;
-    margin:15px 0;
-}
-
-.item h3{
-    font-size:25px;
-    margin-bottom:8px;
-}
-
-.item p{
-    font-size:20px;
-    color:#555;
-}
-
-.item button{
-    margin-top:15px;
-    width:100%;
-    padding:15px;
-    border:0;
-    border-radius:15px;
-    background:#e90000;
-    color:#fff;
-    font-size:19px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
 input,select,textarea{
-    width:100%;
-    padding:16px;
-    margin:8px 0 15px;
-    border:2px solid #ddd;
-    border-radius:14px;
-    font-size:18px;
+  width:100%;
+  padding:13px;
+  margin:7px 0 12px;
+  border:1px solid #ccc;
+  border-radius:9px;
+  font-size:16px;
 }
-
-label{
-    font-size:18px;
-    font-weight:bold;
+.food{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:12px 0;
+  border-bottom:1px solid #eee;
 }
-
-.voltar{
-    background:#333;
-    color:white;
-    border:0;
-    padding:15px 22px;
-    border-radius:15px;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
-    margin-bottom:20px;
+.food:last-child{border-bottom:0}
+.food button{
+  width:auto;
+  padding:9px 13px;
 }
-
-.resumo{
-    background:#fff5d6;
-    border-radius:20px;
-    padding:20px;
-    margin:20px 0;
+.price{font-weight:bold}
+.hidden{display:none!important}
+.badge{
+  background:#eee;
+  padding:4px 8px;
+  border-radius:20px;
+  font-size:13px;
 }
-
-.resumo h3{
-    margin-bottom:12px;
-    font-size:24px;
+.item{
+  background:#f8f8f8;
+  padding:12px;
+  border-radius:9px;
+  margin:7px 0;
 }
-
-.pix{
-    background:#eaffea;
-    border:2px solid #32a852;
-    border-radius:20px;
-    padding:20px;
-    margin:20px 0;
+.total{
+  font-size:22px;
+  font-weight:bold;
+  text-align:right;
+  margin-top:15px;
 }
-
-.pix button{
-    background:#32a852;
-    color:#fff;
-    border:0;
-    padding:14px;
-    border-radius:12px;
-    font-size:17px;
-    font-weight:bold;
-    cursor:pointer;
-    margin-top:10px;
+.small{
+  font-size:13px;
+  color:#666;
 }
-
-.admin-box{
-    background:#fff;
-    padding:22px;
-    border-radius:25px;
-    margin-bottom:20px;
-    box-shadow:0 4px 15px rgba(0,0,0,.06);
-}
-
-.admin-box h2{
-    margin-bottom:20px;
-    color:#d90000;
-}
-
-.admin-item{
-    border:1px solid #ddd;
-    padding:15px;
-    border-radius:15px;
-    margin:10px 0;
-}
-
-.admin-item button{
-    padding:10px 15px;
-    border:0;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:bold;
-    margin-right:5px;
-}
-
-.editar{
-    background:#ffc400;
-}
-
-.excluir{
-    background:#e00000;
-    color:white;
-}
-
-.adicionar{
-    background:#16a34a;
-    color:white;
-    width:100%;
-    padding:15px;
-    border:0;
-    border-radius:12px;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.whatsapp{
-    background:#25d366;
-    color:white;
-    width:100%;
-    padding:20px;
-    border:0;
-    border-radius:18px;
-    font-size:21px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.oculto{
-    display:none;
-}
-
-@media(max-width:500px){
-    header h1{
-        font-size:38px;
-    }
-
-    header p{
-        font-size:26px;
-    }
-
-    .card{
-        padding:35px 30px;
-    }
-
-    .titulo{
-        font-size:38px;
-    }
-
-    .categoria{
-        font-size:38px;
-    }
-
-    .botao{
-        font-size:25px;
-    }
-}
+h2{margin-top:0}
+.admin-title{color:#d00}
 </style>
 </head>
 
 <body>
 
 <header>
-    <h1>🍴 Nosso Cardápio</h1>
-    <p>Faça seu pedido</p>
+  <h1>🍽️ Meu Cardápio</h1>
+  <div>Faça seu pedido pelo WhatsApp</div>
 </header>
 
-<!-- ================= HOME ================= -->
+<div class="container">
 
-<div id="home" class="tela ativa">
-    <div class="container">
-        <div class="card">
+<!-- TELA INICIAL -->
+<section id="home">
 
-            <div class="titulo">🍲 Nosso Cardápio</div>
+  <div class="card">
+    <h2>🍴 Cardápio</h2>
+    <p>Escolha seus pratos e faça seu pedido.</p>
+    <button class="btn" onclick="abrirPedido()">
+      ➕ ADICIONAR PEDIDO
+    </button>
+  </div>
 
-            <div class="categoria">🍲 Comidas</div>
+  <div class="card">
+    <h2>🍛 Comidas</h2>
+    <div id="comidasHome"></div>
+    <button class="btn" onclick="abrirPedido()">
+      ➕ ADICIONAR PEDIDO
+    </button>
+  </div>
 
-            <button class="botao" onclick="abrirPedido()">
-                ➕ ADICIONAR PEDIDO
-            </button>
+  <div class="card">
+    <h2>🥤 Bebidas</h2>
+    <div id="bebidasHome"></div>
+  </div>
 
-            <div class="categoria">🥤 Bebidas</div>
+  <!-- BOTÃO ADMINISTRATIVO -->
+  <div class="card">
+    <button class="btn-red" onclick="abrirAdmin()">
+      🔴 ÁREA ADMINISTRATIVA
+    </button>
+  </div>
 
-            <button class="botao" onclick="abrirPedidoBebidas()">
-                🥤 VER BEBIDAS
-            </button>
+</section>
 
-            <div class="admin-link" onclick="abrirAdmin()">
-                Área Administrativa
-            </div>
 
-        </div>
+<!-- PEDIDO -->
+<section id="pedido" class="hidden">
+
+  <div class="card">
+    <h2>🛒 Seu Pedido</h2>
+
+    <h3>🍛 Escolha a quentinha</h3>
+
+    <div class="food">
+      <div>
+        <b>Quentinha Grande</b><br>
+        <span class="price">R$ 21,00</span>
+      </div>
+      <button class="btn-green" onclick="adicionarQuentinha('Quentinha Grande',21)">
+        ADICIONAR
+      </button>
     </div>
-</div>
 
-
-<!-- ================= PEDIDO ================= -->
-
-<div id="pedido" class="tela">
-    <div class="container">
-
-        <button class="voltar" onclick="voltarHome()">
-            ← Voltar
-        </button>
-
-        <div class="card">
-
-            <h1 class="titulo">🍲 Fazer Pedido</h1>
-
-            <div id="listaComidas"></div>
-
-            <h2 class="categoria">🥤 Bebidas</h2>
-
-            <div id="listaBebidas"></div>
-
-            <div class="resumo">
-                <h3>🛒 Seu pedido</h3>
-                <div id="resumoPedido">
-                    Nenhum item adicionado.
-                </div>
-                <br>
-                <strong>Total: R$ <span id="total">0,00</span></strong>
-            </div>
-
-            <h2 class="categoria">👤 Seus dados</h2>
-
-            <label>Nome</label>
-            <input id="nomeCliente" type="text" placeholder="Digite seu nome">
-
-            <label>Endereço</label>
-            <textarea id="enderecoCliente" placeholder="Digite seu endereço"></textarea>
-
-            <label>Forma de pagamento</label>
-
-            <select id="pagamento" onchange="alterarPagamento()">
-                <option value="">Selecione</option>
-                <option value="Pix">Pix</option>
-                <option value="Dinheiro">Dinheiro</option>
-                <option value="Cartão">Cartão</option>
-            </select>
-
-            <div id="areaPix" class="pix oculto">
-                <h3>💠 Pagamento via Pix</h3>
-
-                <p>
-                    Chave Pix:
-                    <strong id="chavePixTexto"></strong>
-                </p>
-
-                <button onclick="copiarPix()">
-                    📋 COPIAR CHAVE PIX
-                </button>
-
-                <p style="margin-top:15px;">
-                    Depois de pagar, envie o comprovante pelo WhatsApp junto com o pedido.
-                </p>
-            </div>
-
-            <button class="whatsapp" onclick="finalizarPedido()">
-                📲 ENVIAR PEDIDO PELO WHATSAPP
-            </button>
-
-        </div>
+    <div class="food">
+      <div>
+        <b>Quentinha Pequena</b><br>
+        <span class="price">R$ 18,00</span>
+      </div>
+      <button class="btn-green" onclick="adicionarQuentinha('Quentinha Pequena',18)">
+        ADICIONAR
+      </button>
     </div>
-</div>
 
+    <h3>🍽️ Comidas</h3>
+    <div id="comidasPedido"></div>
 
-<!-- ================= ADMIN LOGIN ================= -->
+    <h3>🥤 Bebidas</h3>
+    <div id="bebidasPedido"></div>
 
-<div id="loginAdmin" class="tela">
-    <div class="container">
+    <div id="listaPedido"></div>
 
-        <button class="voltar" onclick="voltarHome()">
-            ← Voltar
-        </button>
-
-        <div class="card">
-
-            <h1 class="titulo">🔐 Administrador</h1>
-
-            <label>Senha</label>
-            <input id="senhaAdmin" type="password" placeholder="Digite a senha">
-
-            <button class="botao" onclick="entrarAdmin()">
-                ENTRAR
-            </button>
-
-        </div>
+    <div class="total">
+      Total: R$ <span id="total">0,00</span>
     </div>
-</div>
 
+    <hr>
 
-<!-- ================= ADMIN ================= -->
+    <h3>👤 Seus dados</h3>
 
-<div id="admin" class="tela">
+    <input id="nome" placeholder="Seu nome">
+    <input id="endereco" placeholder="Endereço">
+    <input id="telefone" placeholder="Telefone">
 
-    <div class="container">
+    <h3>💳 Forma de pagamento</h3>
 
-        <button class="voltar" onclick="voltarHome()">
-            ← Sair
-        </button>
+    <select id="pagamento" onchange="mostrarPix()">
+      <option value="">Selecione</option>
+      <option value="Pix">Pix</option>
+      <option value="Dinheiro">Dinheiro</option>
+      <option value="Cartão">Cartão</option>
+    </select>
 
-        <div class="card">
-
-            <h1 class="titulo">⚙️ Área Administrativa</h1>
-
-            <!-- COMIDAS -->
-
-            <div class="admin-box">
-
-                <h2>🍲 Comidas / Quentinhas</h2>
-
-                <div id="adminComidas"></div>
-
-                <button class="adicionar" onclick="novaComida()">
-                    ➕ ADICIONAR COMIDA
-                </button>
-
-            </div>
-
-            <!-- BEBIDAS -->
-
-            <div class="admin-box">
-
-                <h2>🥤 Bebidas</h2>
-
-                <div id="adminBebidas"></div>
-
-                <button class="adicionar" onclick="novaBebida()">
-                    ➕ ADICIONAR BEBIDA
-                </button>
-
-            </div>
-
-            <!-- CONFIGURAÇÕES -->
-
-            <div class="admin-box">
-
-                <h2>💠 Configurações</h2>
-
-                <label>Chave Pix</label>
-
-                <input
-                    id="configPix"
-                    type="text"
-                    placeholder="Digite sua chave Pix"
-                >
-
-                <label>WhatsApp da loja</label>
-
-                <input
-                    id="configWhats"
-                    type="text"
-                    placeholder="Ex: 5521974967664"
-                >
-
-                <button class="adicionar" onclick="salvarConfiguracoes()">
-                    💾 SALVAR CONFIGURAÇÕES
-                </button>
-
-            </div>
-
-        </div>
+    <div id="pixBox" class="hidden card">
+      <b>🔑 Chave Pix:</b>
+      <p id="chavePix"></p>
+      <p class="small">
+        Após pagar, envie o comprovante pelo WhatsApp junto com o pedido.
+      </p>
     </div>
+
+    <button class="btn-green" onclick="finalizarPedido()">
+      ✅ FINALIZAR PEDIDO
+    </button>
+
+    <button class="btn" onclick="voltarInicio()">
+      ⬅️ VOLTAR
+    </button>
+  </div>
+
+</section>
+
+
+<!-- LOGIN ADMIN -->
+<section id="loginAdmin" class="hidden">
+
+  <div class="card">
+    <h2 class="admin-title">🔴 Área Administrativa</h2>
+
+    <input
+      type="password"
+      id="senhaAdmin"
+      placeholder="Digite a senha"
+    >
+
+    <button class="btn-red" onclick="entrarAdmin()">
+      🔐 ENTRAR
+    </button>
+
+    <button class="btn" onclick="voltarInicio()">
+      ⬅️ VOLTAR
+    </button>
+  </div>
+
+</section>
+
+
+<!-- ADMIN -->
+<section id="admin" class="hidden">
+
+  <div class="card">
+    <h2 class="admin-title">🔴 PAINEL ADMINISTRATIVO</h2>
+
+    <h3>💳 Configuração do Pix</h3>
+
+    <input id="pixAdmin" placeholder="Digite sua chave Pix">
+
+    <button class="btn-green" onclick="salvarPix()">
+      💾 SALVAR PIX
+    </button>
+  </div>
+
+
+  <div class="card">
+    <h2>🍛 Adicionar comida</h2>
+
+    <input id="novaComidaNome" placeholder="Nome da comida">
+    <input
+      id="novaComidaPreco"
+      type="number"
+      step="0.01"
+      placeholder="Preço"
+    >
+
+    <button class="btn-green" onclick="adicionarComidaAdmin()">
+      ➕ ADICIONAR COMIDA
+    </button>
+
+    <div id="adminComidas"></div>
+  </div>
+
+
+  <div class="card">
+    <h2>🥤 Adicionar bebida</h2>
+
+    <input id="novaBebidaNome" placeholder="Nome da bebida">
+    <input
+      id="novaBebidaPreco"
+      type="number"
+      step="0.01"
+      placeholder="Preço"
+    >
+
+    <button class="btn-green" onclick="adicionarBebidaAdmin()">
+      ➕ ADICIONAR BEBIDA
+    </button>
+
+    <div id="adminBebidas"></div>
+  </div>
+
+
+  <div class="card">
+    <button class="btn" onclick="voltarInicio()">
+      🏠 VOLTAR PARA O INÍCIO
+    </button>
+  </div>
+
+</section>
+
 </div>
 
 
 <script>
 
-/* =====================================================
-   DADOS
-===================================================== */
+/* =========================
+   CONFIGURAÇÕES
+========================= */
 
-const dadosPadrao = {
+const WHATSAPP = "5521974967664";
 
-    comidas:[
-        {
-            id:1,
-            nome:"Quentinha Grande",
-            preco:21
-        },
-        {
-            id:2,
-            nome:"Quentinha Pequena",
-            preco:18
-        }
-    ],
+let comidas = JSON.parse(localStorage.getItem("comidas")) || [
+  {nome:"Prato do dia",preco:0}
+];
 
-    bebidas:[
-        {
-            id:101,
-            nome:"Coca Cola 2LT",
-            preco:15
-        },
-        {
-            id:102,
-            nome:"Fanta Laranja 2LT",
-            preco:12
-        },
-        {
-            id:103,
-            nome:"Tobi 2LT",
-            preco:7
-        },
-        {
-            id:104,
-            nome:"Coca Cola Lata",
-            preco:6
-        },
-        {
-            id:105,
-            nome:"Guaraná Antarctica Lata",
-            preco:6
-        },
-        {
-            id:106,
-            nome:"Fanta Laranja Lata",
-            preco:6
-        },
-        {
-            id:107,
-            nome:"Coca Cola 600 ML",
-            preco:8
-        },
-        {
-            id:108,
-            nome:"Ativ Plus Uva",
-            preco:0
-        }
-    ],
+let bebidas = JSON.parse(localStorage.getItem("bebidas")) || [
+  {nome:"Coca Cola 2LT",preco:15},
+  {nome:"Fanta Laranja 2LT",preco:12},
+  {nome:"Tobi 2LT",preco:7},
+  {nome:"Coca Cola Lata",preco:6},
+  {nome:"Guaraná Antarctica Lata",preco:6},
+  {nome:"Fanta Laranja Lata",preco:6},
+  {nome:"Coca Cola 600 ML",preco:8},
+  {nome:"Activ Plus Uva",preco:0}
+];
 
-    pix:"",
-    whatsapp:"5521974967664"
-};
+let pix = localStorage.getItem("pix") || "";
+
+let pedidoAtual = [];
 
 
-let dados = JSON.parse(
-    localStorage.getItem("cardapioDados")
-) || dadosPadrao;
+/* =========================
+   UTILITÁRIOS
+========================= */
 
+function dinheiro(valor){
+  return Number(valor).toFixed(2).replace(".",",");
+}
 
-let carrinho = [];
-
-
-/* =====================================================
-   SALVAR
-===================================================== */
-
-function salvarDados(){
-
-    localStorage.setItem(
-        "cardapioDados",
-        JSON.stringify(dados)
-    );
-
+function esconderTudo(){
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("pedido").classList.add("hidden");
+  document.getElementById("loginAdmin").classList.add("hidden");
+  document.getElementById("admin").classList.add("hidden");
 }
 
 
-/* =====================================================
-   TELAS
-===================================================== */
+/* =========================
+   NAVEGAÇÃO
+========================= */
 
-function mostrarTela(id){
-
-    document.querySelectorAll(".tela").forEach(function(tela){
-
-        tela.classList.remove("ativa");
-
-    });
-
-    document.getElementById(id).classList.add("ativa");
-
-    window.scrollTo(0,0);
+function voltarInicio(){
+  esconderTudo();
+  document.getElementById("home").classList.remove("hidden");
+  renderHome();
 }
-
-
-function voltarHome(){
-
-    mostrarTela("home");
-
-}
-
-
-/* =====================================================
-   PEDIDO
-===================================================== */
 
 function abrirPedido(){
+  esconderTudo();
+  document.getElementById("pedido").classList.remove("hidden");
+  renderPedidoProdutos();
+  renderPedido();
+}
 
-    carrinho=[];
+function abrirAdmin(){
+  esconderTudo();
+  document.getElementById("loginAdmin").classList.remove("hidden");
+  document.getElementById("senhaAdmin").value="";
+}
 
-    mostrarTela("pedido");
+function entrarAdmin(){
 
-    carregarPedido();
+  const senha = document.getElementById("senhaAdmin").value;
 
+  if(senha !== "1234"){
+    alert("Senha incorreta!");
+    return;
+  }
+
+  esconderTudo();
+  document.getElementById("admin").classList.remove("hidden");
+
+  document.getElementById("pixAdmin").value = pix;
+
+  renderAdmin();
 }
 
 
-function abrirPedidoBebidas(){
+/* =========================
+   HOME
+========================= */
 
-    carrinho=[];
+function renderHome(){
 
-    mostrarTela("pedido");
+  const comidasHome = document.getElementById("comidasHome");
+  const bebidasHome = document.getElementById("bebidasHome");
 
-    carregarPedido();
+  comidasHome.innerHTML="";
+  bebidasHome.innerHTML="";
 
+  comidas.forEach((item)=>{
+    const div=document.createElement("div");
+    div.className="food";
+
+    div.innerHTML=`
+      <div>
+        <b>${escapeHTML(item.nome)}</b>
+        ${item.preco > 0
+          ? `<br><span class="price">R$ ${dinheiro(item.preco)}</span>`
+          : ""}
+      </div>
+    `;
+
+    comidasHome.appendChild(div);
+  });
+
+  bebidas.forEach((item)=>{
+    const div=document.createElement("div");
+    div.className="food";
+
+    div.innerHTML=`
+      <div>
+        <b>${escapeHTML(item.nome)}</b>
+        ${item.preco > 0
+          ? `<br><span class="price">R$ ${dinheiro(item.preco)}</span>`
+          : ""}
+      </div>
+    `;
+
+    bebidasHome.appendChild(div);
+  });
 }
 
 
-function carregarPedido(){
+/* =========================
+   PRODUTOS DO PEDIDO
+========================= */
 
-    let comidas =
-        document.getElementById("listaComidas");
+function renderPedidoProdutos(){
 
-    let bebidas =
-        document.getElementById("listaBebidas");
+  const comidasPedido=document.getElementById("comidasPedido");
+  const bebidasPedido=document.getElementById("bebidasPedido");
 
+  comidasPedido.innerHTML="";
+  bebidasPedido.innerHTML="";
 
-    comidas.innerHTML="";
+  comidas.forEach((item,index)=>{
 
-    bebidas.innerHTML="";
+    const div=document.createElement("div");
+    div.className="food";
 
+    div.innerHTML=`
+      <div>
+        <b>${escapeHTML(item.nome)}</b>
+        ${
+          item.preco > 0
+          ? `<br><span class="price">R$ ${dinheiro(item.preco)}</span>`
+          : `<br><span class="small">Preço informado no cadastro</span>`
+        }
+      </div>
 
-    dados.comidas.forEach(function(item){
+      <button class="btn-green"
+        onclick="adicionarProduto('comida',${index})">
+        +
+      </button>
+    `;
 
-        comidas.innerHTML += `
-
-        <div class="item">
-
-            <h3>${item.nome}</h3>
-
-            <p>
-                R$ ${Number(item.preco)
-                    .toFixed(2)
-                    .replace(".",",")}
-            </p>
-
-            <button onclick="adicionarItem('comida',${item.id})">
-                ➕ ADICIONAR
-            </button>
-
-        </div>
-
-        `;
-
-    });
+    comidasPedido.appendChild(div);
+  });
 
 
-    dados.bebidas.forEach(function(item){
+  bebidas.forEach((item,index)=>{
 
-        bebidas.innerHTML += `
+    const div=document.createElement("div");
+    div.className="food";
 
-        <div class="item">
+    div.innerHTML=`
+      <div>
+        <b>${escapeHTML(item.nome)}</b>
+        ${
+          item.preco > 0
+          ? `<br><span class="price">R$ ${dinheiro(item.preco)}</span>`
+          : `<br><span class="small">Preço não cadastrado</span>`
+        }
+      </div>
 
-            <h3>${item.nome}</h3>
+      <button class="btn-green"
+        onclick="adicionarProduto('bebida',${index})">
+        +
+      </button>
+    `;
 
-            <p>
-                ${
-                    Number(item.preco)>0
-                    ? "R$ "+Number(item.preco)
-                        .toFixed(2)
-                        .replace(".",",")
-                    : "Preço não cadastrado"
-                }
-            </p>
-
-            <button onclick="adicionarItem('bebida',${item.id})">
-                ➕ ADICIONAR
-            </button>
-
-        </div>
-
-        `;
-
-    });
-
-
-    atualizarCarrinho();
-
+    bebidasPedido.appendChild(div);
+  });
 }
 
 
-/* =====================================================
-   CARRINHO
-===================================================== */
+/* =========================
+   PEDIDO
+========================= */
 
-function adicionarItem(tipo,id){
+function adicionarQuentinha(nome,preco){
 
-    let lista =
-        tipo==="comida"
-        ? dados.comidas
-        : dados.bebidas;
+  pedidoAtual.push({
+    nome:nome,
+    preco:preco
+  });
 
+  renderPedido();
 
-    let item =
-        lista.find(function(x){
-            return x.id===id;
-        });
-
-
-    if(!item) return;
+  alert(nome+" adicionada ao pedido!");
+}
 
 
-    let existente =
-        carrinho.find(function(x){
-            return x.id===id && x.tipo===tipo;
-        });
+function adicionarProduto(tipo,index){
 
+  let item;
 
-    if(existente){
+  if(tipo==="comida"){
+    item=comidas[index];
+  }else{
+    item=bebidas[index];
+  }
 
-        existente.quantidade++;
+  if(!item){
+    alert("Produto não encontrado.");
+    return;
+  }
 
-    }else{
+  if(Number(item.preco)<=0){
+    alert("Esse produto ainda não possui preço cadastrado.");
+    return;
+  }
 
-        carrinho.push({
+  pedidoAtual.push({
+    nome:item.nome,
+    preco:Number(item.preco)
+  });
 
-            tipo:tipo,
-            id:id,
-            nome:item.nome,
-            preco:Number(item.preco),
-            quantidade:1
-
-        });
-
-    }
-
-
-    atualizarCarrinho();
-
+  renderPedido();
 }
 
 
 function removerItem(index){
 
-    carrinho.splice(index,1);
+  pedidoAtual.splice(index,1);
 
-    atualizarCarrinho();
-
+  renderPedido();
 }
 
 
-function atualizarCarrinho(){
+function renderPedido(){
 
-    let resumo =
-        document.getElementById("resumoPedido");
+  const lista=document.getElementById("listaPedido");
+  const totalEl=document.getElementById("total");
 
-    let total=0;
+  lista.innerHTML="";
 
+  let total=0;
 
-    if(carrinho.length===0){
+  pedidoAtual.forEach((item,index)=>{
 
-        resumo.innerHTML="Nenhum item adicionado.";
+    total += Number(item.preco);
 
-        document.getElementById("total").innerText="0,00";
+    const div=document.createElement("div");
+    div.className="item";
 
-        return;
+    div.innerHTML=`
+      <b>${escapeHTML(item.nome)}</b>
+      <br>
+      R$ ${dinheiro(item.preco)}
 
-    }
+      <button
+        onclick="removerItem(${index})"
+        style="float:right;background:#dc2626;color:white;padding:6px 9px">
+        ✕
+      </button>
+    `;
 
+    lista.appendChild(div);
+  });
 
-    let html="";
-
-
-    carrinho.forEach(function(item,index){
-
-        let subtotal =
-            item.preco * item.quantidade;
-
-        total += subtotal;
-
-
-        html += `
-
-        <div style="
-            margin-bottom:12px;
-            padding-bottom:12px;
-            border-bottom:1px solid #ddd;
-        ">
-
-            <strong>
-                ${item.quantidade}x ${item.nome}
-            </strong>
-
-            <br>
-
-            R$ ${subtotal.toFixed(2).replace(".",",")}
-
-            <br>
-
-            <button
-                onclick="removerItem(${index})"
-                style="
-                    margin-top:7px;
-                    padding:6px 10px;
-                    border:0;
-                    border-radius:8px;
-                    background:#ddd;
-                    cursor:pointer;
-                "
-            >
-                Remover
-            </button>
-
-        </div>
-
-        `;
-
-    });
-
-
-    resumo.innerHTML=html;
-
-
-    document.getElementById("total")
-        .innerText=
-        total.toFixed(2).replace(".",",");
-
+  totalEl.textContent=dinheiro(total);
 }
 
 
-/* =====================================================
-   PAGAMENTO
-===================================================== */
+/* =========================
+   PIX
+========================= */
 
-function alterarPagamento(){
+function mostrarPix(){
 
-    let pagamento =
-        document.getElementById("pagamento").value;
+  const pagamento=document.getElementById("pagamento").value;
+  const box=document.getElementById("pixBox");
+  const chave=document.getElementById("chavePix");
 
-    let areaPix =
-        document.getElementById("areaPix");
+  if(pagamento==="Pix"){
 
+    box.classList.remove("hidden");
 
-    if(pagamento==="Pix"){
+    chave.textContent =
+      pix || "A chave Pix ainda não foi cadastrada no painel administrativo.";
 
-        areaPix.classList.remove("oculto");
+  }else{
 
-        document.getElementById("chavePixTexto")
-            .innerText =
-            dados.pix || "Chave Pix não cadastrada";
-
-    }else{
-
-        areaPix.classList.add("oculto");
-
-    }
-
+    box.classList.add("hidden");
+  }
 }
 
 
-function copiarPix(){
-
-    if(!dados.pix){
-
-        alert("A chave Pix ainda não foi cadastrada.");
-
-        return;
-
-    }
-
-
-    navigator.clipboard.writeText(dados.pix)
-        .then(function(){
-
-            alert("Chave Pix copiada!");
-
-        })
-        .catch(function(){
-
-            alert("Chave Pix: "+dados.pix);
-
-        });
-
-}
-
-
-/* =====================================================
-   WHATSAPP
-===================================================== */
+/* =========================
+   FINALIZAR
+========================= */
 
 function finalizarPedido(){
 
-    if(carrinho.length===0){
+  if(pedidoAtual.length===0){
+    alert("Adicione pelo menos um item ao pedido.");
+    return;
+  }
 
-        alert("Adicione pelo menos um item ao pedido.");
+  const nome=document.getElementById("nome").value.trim();
+  const endereco=document.getElementById("endereco").value.trim();
+  const telefone=document.getElementById("telefone").value.trim();
+  const pagamento=document.getElementById("pagamento").value;
 
-        return;
+  if(!nome){
+    alert("Digite seu nome.");
+    return;
+  }
 
-    }
+  if(!endereco){
+    alert("Digite seu endereço.");
+    return;
+  }
 
+  if(!telefone){
+    alert("Digite seu telefone.");
+    return;
+  }
 
-    let nome =
-        document.getElementById("nomeCliente")
-            .value.trim();
+  if(!pagamento){
+    alert("Escolha a forma de pagamento.");
+    return;
+  }
 
+  let total=0;
 
-    let endereco =
-        document.getElementById("enderecoCliente")
-            .value.trim();
+  let texto=
+`🍽️ *NOVO PEDIDO*
 
+👤 *Nome:* ${nome}
+📍 *Endereço:* ${endereco}
+📞 *Telefone:* ${telefone}
 
-    let pagamento =
-        document.getElementById("pagamento")
-            .value;
+🛒 *PEDIDO:*
+`;
 
+  pedidoAtual.forEach(item=>{
+    total+=Number(item.preco);
 
-    if(!nome){
+    texto +=
+`\n• ${item.nome} — R$ ${dinheiro(item.preco)}`;
+  });
 
-        alert("Digite seu nome.");
+  texto +=
+`\n\n💰 *TOTAL: R$ ${dinheiro(total)}*
+💳 *Pagamento:* ${pagamento}`;
 
-        return;
+  if(pagamento==="Pix"){
 
-    }
+    texto +=
+`\n\n🔑 *Chave Pix:* ${pix || "Não cadastrada"}
 
+📸 O cliente enviará o comprovante pelo WhatsApp.`;
+  }
 
-    if(!endereco){
+  texto +=
+`\n\n✅ Pedido confirmado!`;
 
-        alert("Digite seu endereço.");
+  const url=
+    "https://wa.me/"+WHATSAPP+
+    "?text="+encodeURIComponent(texto);
 
-        return;
-
-    }
-
-
-    if(!pagamento){
-
-        alert("Escolha a forma de pagamento.");
-
-        return;
-
-    }
-
-
-    let total=0;
-
-    let mensagem =
-        "🍲 *NOVO PEDIDO*%0A%0A";
-
-
-    mensagem +=
-        "👤 *Nome:* "+
-        encodeURIComponent(nome)+
-        "%0A";
-
-
-    mensagem +=
-        "📍 *Endereço:* "+
-        encodeURIComponent(endereco)+
-        "%0A";
-
-
-    mensagem +=
-        "💳 *Pagamento:* "+
-        encodeURIComponent(pagamento)+
-        "%0A%0A";
-
-
-    mensagem +=
-        "🛒 *Itens:*%0A";
-
-
-    carrinho.forEach(function(item){
-
-        let subtotal =
-            item.preco * item.quantidade;
-
-        total += subtotal;
-
-
-        mensagem +=
-            encodeURIComponent(
-                item.quantidade+
-                "x "+
-                item.nome+
-                " - R$ "+
-                subtotal.toFixed(2)
-            )+
-            "%0A";
-
-    });
-
-
-    mensagem += "%0A";
-
-
-    mensagem +=
-        "💰 *TOTAL: R$ "+
-        encodeURIComponent(
-            total.toFixed(2)
-        )+
-        "*%0A";
-
-
-    if(pagamento==="Pix"){
-
-        mensagem +=
-            "%0A📎 Enviarei o comprovante do Pix por aqui.";
-
-    }
-
-
-    let numero =
-        String(dados.whatsapp)
-            .replace(/\D/g,"");
-
-
-    if(!numero){
-
-        alert("Configure o WhatsApp no painel administrativo.");
-
-        return;
-
-    }
-
-
-    let url =
-        "https://wa.me/"+
-        numero+
-        "?text="+
-        mensagem;
-
-
-    window.location.href=url;
-
+  window.open(url,"_blank");
 }
 
 
-/* =====================================================
-   ADMIN
-===================================================== */
+/* =========================
+   ADMIN - PIX
+========================= */
 
-function abrirAdmin(){
+function salvarPix(){
 
-    mostrarTela("loginAdmin");
+  pix=document.getElementById("pixAdmin").value.trim();
 
-    document.getElementById("senhaAdmin").value="";
+  localStorage.setItem("pix",pix);
 
+  alert("Chave Pix salva com sucesso!");
 }
 
 
-function entrarAdmin(){
+/* =========================
+   ADMIN - COMIDAS
+========================= */
 
-    let senha =
-        document.getElementById("senhaAdmin").value;
+function adicionarComidaAdmin(){
 
+  const nome=document.getElementById("novaComidaNome").value.trim();
+  const preco=Number(
+    document.getElementById("novaComidaPreco").value
+  );
 
-    if(senha==="1234"){
+  if(!nome){
+    alert("Digite o nome da comida.");
+    return;
+  }
 
-        mostrarTela("admin");
+  if(preco<=0){
+    alert("Digite um preço válido.");
+    return;
+  }
 
-        carregarAdmin();
+  comidas.push({
+    nome:nome,
+    preco:preco
+  });
 
-    }else{
+  localStorage.setItem("comidas",JSON.stringify(comidas));
 
-        alert("Senha incorreta.");
+  document.getElementById("novaComidaNome").value="";
+  document.getElementById("novaComidaPreco").value="";
 
-    }
+  renderAdmin();
+  renderHome();
 
+  alert("Comida adicionada!");
 }
 
 
-/* =====================================================
-   ADMIN - CARREGAR
-===================================================== */
+function excluirComida(index){
 
-function carregarAdmin(){
+  if(!confirm("Excluir esta comida?")) return;
 
-    let comidas =
-        document.getElementById("adminComidas");
+  comidas.splice(index,1);
 
-    let bebidas =
-        document.getElementById("adminBebidas");
+  localStorage.setItem("comidas",JSON.stringify(comidas));
 
-
-    comidas.innerHTML="";
-
-    bebidas.innerHTML="";
+  renderAdmin();
+  renderHome();
+}
 
 
-    dados.comidas.forEach(function(item){
+/* =========================
+   ADMIN - BEBIDAS
+========================= */
 
-        comidas.innerHTML += `
+function adicionarBebidaAdmin(){
 
-        <div class="admin-item">
+  const nome=document.getElementById("novaBebidaNome").value.trim();
+  const preco=Number(
+    document.getElementById("novaBebidaPreco").value
+  );
 
-            <strong>${item.nome}</strong>
+  if(!nome){
+    alert("Digite o nome da bebida.");
+    return;
+  }
 
-            <br>
+  if(preco<=0){
+    alert("Digite um preço válido.");
+    return;
+  }
 
-            R$ ${Number(item.preco)
-                .toFixed(2)
-                .replace(".",",")}
+  bebidas.push({
+    nome:nome,
+    preco:preco
+  });
 
-            <br><br>
+  localStorage.setItem("bebidas",JSON.stringify(bebidas));
 
-            <button
-                class="editar"
-                onclick="editarComida(${item.id})"
-            >
-                ✏️ EDITAR
-            </button>
+  document.getElementById("novaBebidaNome").value="";
+  document.getElementById("novaBebidaPreco").value="";
 
-            <button
-                class="excluir"
-                onclick="excluirComida(${item.id})"
-            >
-                🗑️ EXCLUIR
-            </button>
+  renderAdmin();
+  renderHome();
 
-        </div>
-
-        `;
-
-    });
+  alert("Bebida adicionada!");
+}
 
 
-    dados.bebidas.forEach(function(item){
+function excluirBebida(index){
 
-        bebidas.innerHTML += `
+  if(!confirm("Excluir esta bebida?")) return;
 
-        <div class="admin-item">
+  bebidas.splice(index,1);
 
-            <strong>${item.nome}</strong>
+  localStorage.setItem("bebidas",JSON.stringify(bebidas));
 
-            <br>
+  renderAdmin();
+  renderHome();
+}
 
-            R$ ${Number(item.preco)
-                .toFixed(2)
-                .replace(".",",")}
 
-            <br><br>
+/* =========================
+   RENDER ADMIN
+========================= */
 
-            <button
-                class="editar"
-                onclick="editarBebida(${item.id})"
-            >
-            
+function renderAdmin(){
+
+  const adminComidas=document.getElementById("adminComidas");
+  const adminBebidas=document.getElementById("adminBebidas");
+
+  adminComidas.innerHTML="<h3>Comidas cadastradas</h3>";
+
+  comidas.forEach((item,index)=>{
+
+    const div=document.createElement("div");
+    div.className="item";
+
+    div.innerHTML=`
+      <b>${escapeHTML(item.nome)}</b>
+      <br>
+      R$ ${dinheiro(item.preco)}
+
+      <button
+        onclick="excluirComida(${index})"
+        style="float:right;background:#dc2626;color:white;padding:7px">
+        EXCLUIR
+      </button>
+    `;
+
+    adminComidas.appendChild(div);
+  });
+
+
+  adminBebidas.innerHTML="<h3>Bebidas cadastradas</h3>";
+
+  bebidas.forEach((item,index)=>{
+
+    const div=document.createElement("div");
+    div.className="item";
+
+    div.innerHTML=`
+      <b>${escapeHTML(item.nome)}</b>
+      <br>
+      R$ ${dinheiro(item.preco)}
+
+      <button
+        onclick="excluirBebida(${index})"
+        style="float:right;background:#dc2626;color:white;padding:7px">
+        EXCLUIR
+      </button>
+    `;
+
+    adminBebidas.appendChild(div);
+  });
+}
+
+
+/* =========================
+   SEGURANÇA DE TEXTO
+========================= */
+
+function escapeHTML(text){
+
+  return String(text)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+
+/* =========================
+   INICIALIZAÇÃO
+========================= */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+  renderHome();
+
+  document.getElementById("home").classList.remove("hidden");
+
+});
+
+</script>
+
+</body>
+</html>
