@@ -6,227 +6,288 @@
 <title>Nosso Cardápio</title>
 
 <style>
-*{box-sizing:border-box}
-body{
+*{
+    box-sizing:border-box;
     margin:0;
-    font-family:Arial,Helvetica,sans-serif;
-    background:#fff8e8;
-    color:#292929;
+    padding:0;
+    font-family:Arial,sans-serif;
 }
+
+body{
+    background:#fff8e8;
+    color:#222;
+}
+
 header{
-    background:linear-gradient(110deg,#ed0000,#ffb000);
+    background:linear-gradient(110deg,#f00000,#ffb000);
     color:white;
     text-align:center;
-    padding:38px 15px;
+    padding:65px 15px 65px;
 }
+
 header h1{
-    margin:0;
-    font-size:38px;
+    font-size:42px;
+    font-weight:800;
 }
+
 header p{
-    margin:14px 0 0;
-    font-size:27px;
+    font-size:28px;
+    margin-top:28px;
 }
+
 .container{
-    max-width:720px;
-    margin:32px auto;
-    padding:0 16px;
+    width:92%;
+    max-width:680px;
+    margin:55px auto;
 }
+
 .card{
     background:white;
-    border-radius:28px;
-    padding:30px;
-    box-shadow:0 5px 22px #00000012;
+    border-radius:45px;
+    padding:42px 38px;
+    box-shadow:0 8px 30px rgba(0,0,0,.07);
 }
+
 .titulo{
-    color:#df0000;
-    font-size:38px;
-    margin:0 0 35px;
+    color:#d90000;
+    font-size:42px;
+    font-weight:800;
+    margin-bottom:60px;
 }
-.section-title{
-    font-size:31px;
-    margin:28px 0 20px;
+
+.categoria{
+    font-size:42px;
+    font-weight:800;
+    margin:35px 0;
 }
-.item{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-    padding:20px 0;
-    border-bottom:1px solid #eee;
-}
-.item-info{
-    min-width:0;
-}
-.item-name{
-    font-size:25px;
-    font-weight:bold;
-}
-.item-price{
-    font-size:23px;
-    margin-top:4px;
-}
-.btn{
-    border:0;
-    border-radius:17px;
-    padding:16px 24px;
-    background:#e00000;
-    color:#fff;
-    font-size:21px;
-    font-weight:bold;
-    cursor:pointer;
-}
-.btn:active{transform:scale(.98)}
-.btn-yellow{
-    background:#ffb000;
-    color:#111;
-}
-.btn-full{
+
+.botao{
     width:100%;
-    margin-top:20px;
-}
-.add-order{
-    margin:25px 0 15px;
-}
-.empty{
-    color:#777;
-    font-size:21px;
-    padding:10px 0 20px;
-}
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:#00000080;
-    z-index:1000;
-    overflow:auto;
-    padding:20px;
-}
-.modal-content{
-    max-width:700px;
-    margin:20px auto;
-    background:#fff;
-    border-radius:25px;
-    padding:25px;
-}
-.close{
-    float:right;
-    font-size:34px;
-    cursor:pointer;
-}
-label{
-    display:block;
-    font-weight:bold;
-    font-size:18px;
-    margin:15px 0 7px;
-}
-input,select,textarea{
-    width:100%;
-    padding:15px;
-    border:1px solid #ccc;
-    border-radius:12px;
-    font-size:17px;
-}
-textarea{min-height:90px;resize:vertical}
-.choice{
-    border:2px solid #eee;
-    border-radius:15px;
-    padding:15px;
-    margin:10px 0;
-    cursor:pointer;
-}
-.choice.selected{
-    border-color:#e00000;
-    background:#fff1f1;
-}
-.choice strong{
-    font-size:20px;
-}
-.qty{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-top:8px;
-}
-.qty button{
-    width:38px;
-    height:38px;
     border:0;
-    border-radius:10px;
-    background:#e00000;
+    border-radius:30px;
+    padding:25px 15px;
+    background:#ed0000;
     color:white;
-    font-size:22px;
-    font-weight:bold;
+    font-size:29px;
+    font-weight:800;
+    cursor:pointer;
+    margin:25px 0 55px;
 }
-.qty span{
-    min-width:30px;
-    text-align:center;
-    font-size:20px;
-    font-weight:bold;
+
+.botao:active{
+    transform:scale(.98);
 }
-.total{
-    background:#fff5d8;
-    border-radius:15px;
-    padding:18px;
-    margin:20px 0;
-    font-size:25px;
-    font-weight:bold;
-}
-.pix-box{
-    display:none;
-    background:#fff5d8;
-    border:2px solid #ffb000;
-    border-radius:15px;
-    padding:18px;
+
+.botao-secundario{
+    width:100%;
+    border:0;
+    border-radius:25px;
+    padding:20px;
+    background:#f1f1f1;
+    color:#222;
+    font-size:23px;
+    font-weight:700;
+    cursor:pointer;
     margin-top:15px;
 }
-.pix-key{
-    font-size:19px;
-    word-break:break-all;
-    font-weight:bold;
-}
-.admin-login{
-    margin-top:35px;
+
+.admin-link{
+    display:block;
     text-align:center;
-}
-.admin-btn{
-    background:transparent;
-    border:0;
     color:#777;
     text-decoration:underline;
+    font-size:20px;
     cursor:pointer;
+    margin-top:10px;
 }
-.admin-panel{
+
+.tela{
     display:none;
 }
+
+.tela.ativa{
+    display:block;
+}
+
+.item{
+    background:#fff;
+    border:2px solid #eee;
+    border-radius:22px;
+    padding:20px;
+    margin:15px 0;
+}
+
+.item h3{
+    font-size:25px;
+    margin-bottom:8px;
+}
+
+.item p{
+    font-size:20px;
+    color:#555;
+}
+
+.item button{
+    margin-top:15px;
+    width:100%;
+    padding:15px;
+    border:0;
+    border-radius:15px;
+    background:#e90000;
+    color:#fff;
+    font-size:19px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+input,select,textarea{
+    width:100%;
+    padding:16px;
+    margin:8px 0 15px;
+    border:2px solid #ddd;
+    border-radius:14px;
+    font-size:18px;
+}
+
+label{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.voltar{
+    background:#333;
+    color:white;
+    border:0;
+    padding:15px 22px;
+    border-radius:15px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-bottom:20px;
+}
+
+.resumo{
+    background:#fff5d6;
+    border-radius:20px;
+    padding:20px;
+    margin:20px 0;
+}
+
+.resumo h3{
+    margin-bottom:12px;
+    font-size:24px;
+}
+
+.pix{
+    background:#eaffea;
+    border:2px solid #32a852;
+    border-radius:20px;
+    padding:20px;
+    margin:20px 0;
+}
+
+.pix button{
+    background:#32a852;
+    color:#fff;
+    border:0;
+    padding:14px;
+    border-radius:12px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.admin-box{
+    background:#fff;
+    padding:22px;
+    border-radius:25px;
+    margin-bottom:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.06);
+}
+
+.admin-box h2{
+    margin-bottom:20px;
+    color:#d90000;
+}
+
 .admin-item{
     border:1px solid #ddd;
-    border-radius:15px;
     padding:15px;
+    border-radius:15px;
     margin:10px 0;
 }
-.admin-row{
-    display:grid;
-    grid-template-columns:1fr 130px auto;
-    gap:8px;
-    align-items:center;
+
+.admin-item button{
+    padding:10px 15px;
+    border:0;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-right:5px;
 }
-.small-btn{
-    padding:10px 14px;
-    font-size:16px;
+
+.editar{
+    background:#ffc400;
 }
-.danger{background:#555}
-.success{background:#198754}
-@media(max-width:550px){
-    header h1{font-size:31px}
-    header p{font-size:23px}
-    .card{padding:22px}
-    .titulo{font-size:32px}
-    .section-title{font-size:27px}
-    .item-name{font-size:22px}
-    .item-price{font-size:20px}
-    .btn{font-size:18px;padding:14px 17px}
-    .admin-row{grid-template-columns:1fr}
+
+.excluir{
+    background:#e00000;
+    color:white;
+}
+
+.adicionar{
+    background:#16a34a;
+    color:white;
+    width:100%;
+    padding:15px;
+    border:0;
+    border-radius:12px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.whatsapp{
+    background:#25d366;
+    color:white;
+    width:100%;
+    padding:20px;
+    border:0;
+    border-radius:18px;
+    font-size:21px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.oculto{
+    display:none;
+}
+
+@media(max-width:500px){
+    header h1{
+        font-size:38px;
+    }
+
+    header p{
+        font-size:26px;
+    }
+
+    .card{
+        padding:35px 30px;
+    }
+
+    .titulo{
+        font-size:38px;
+    }
+
+    .categoria{
+        font-size:38px;
+    }
+
+    .botao{
+        font-size:25px;
+    }
 }
 </style>
 </head>
@@ -238,635 +299,874 @@ textarea{min-height:90px;resize:vertical}
     <p>Faça seu pedido</p>
 </header>
 
-<div class="container">
+<!-- ================= HOME ================= -->
 
-    <!-- TELA INICIAL -->
-    <div class="card" id="home">
-        <h2 class="titulo">🍲 Nosso Cardápio</h2>
+<div id="home" class="tela ativa">
+    <div class="container">
+        <div class="card">
 
-        <!-- COMIDAS -->
-        <h3 class="section-title">🍲 Comidas</h3>
-        <div id="comidasLista"></div>
+            <div class="titulo">🍲 Nosso Cardápio</div>
 
-        <!-- BOTÃO DE ADICIONAR PEDIDO FICA ABAIXO DAS COMIDAS -->
-        <button class="btn btn-full add-order" onclick="abrirPedido()">
-            ➕ ADICIONAR PEDIDO
-        </button>
+            <div class="categoria">🍲 Comidas</div>
 
-        <!-- BEBIDAS -->
-        <h3 class="section-title">🥤 Bebidas</h3>
-        <div id="bebidasLista"></div>
-
-        <div class="admin-login">
-            <button class="admin-btn" onclick="abrirLoginAdmin()">
-                Área Administrativa
+            <button class="botao" onclick="abrirPedido()">
+                ➕ ADICIONAR PEDIDO
             </button>
+
+            <div class="categoria">🥤 Bebidas</div>
+
+            <button class="botao" onclick="abrirPedidoBebidas()">
+                🥤 VER BEBIDAS
+            </button>
+
+            <div class="admin-link" onclick="abrirAdmin()">
+                Área Administrativa
+            </div>
+
         </div>
-    </div>
-
-    <!-- PAINEL ADMIN -->
-    <div class="card admin-panel" id="adminPanel">
-        <h2 class="titulo">⚙️ Administração</h2>
-
-        <h3 class="section-title">🍲 Cadastrar Comida</h3>
-
-        <label>Nome da comida</label>
-        <input id="novaComidaNome" placeholder="Ex: Frango assado">
-
-        <button class="btn btn-full" onclick="adicionarComida()">
-            Adicionar Comida
-        </button>
-
-        <div id="adminComidas"></div>
-
-        <h3 class="section-title">🥤 Cadastrar Bebida</h3>
-
-        <label>Nome da bebida</label>
-        <input id="novaBebidaNome" placeholder="Ex: Coca-Cola 2LT">
-
-        <label>Preço</label>
-        <input id="novaBebidaPreco" type="number" step="0.01" placeholder="15">
-
-        <button class="btn btn-full" onclick="adicionarBebida()">
-            Adicionar Bebida
-        </button>
-
-        <div id="adminBebidas"></div>
-
-        <h3 class="section-title">🍱 Preços das Quentinhas</h3>
-
-        <label>Quentinha Grande</label>
-        <input id="precoGrande" type="number" step="0.01">
-
-        <label>Quentinha Pequena</label>
-        <input id="precoPequena" type="number" step="0.01">
-
-        <button class="btn btn-full" onclick="salvarPrecos()">
-            Salvar Preços
-        </button>
-
-        <h3 class="section-title">💳 Pix</h3>
-
-        <label>Chave Pix</label>
-        <input id="pixKey" placeholder="Digite a chave Pix">
-
-        <button class="btn btn-full" onclick="salvarPix()">
-            Salvar Chave Pix
-        </button>
-
-        <h3 class="section-title">📱 WhatsApp da Loja</h3>
-
-        <label>Número com DDD</label>
-        <input id="whatsapp" placeholder="5521999999999">
-
-        <button class="btn btn-full" onclick="salvarWhatsapp()">
-            Salvar WhatsApp
-        </button>
-
-        <button class="btn btn-full danger" onclick="voltarInicio()">
-            Voltar para o Cardápio
-        </button>
     </div>
 </div>
 
 
-<!-- MODAL DO PEDIDO -->
-<div class="modal" id="pedidoModal">
-    <div class="modal-content">
+<!-- ================= PEDIDO ================= -->
 
-        <span class="close" onclick="fecharPedido()">×</span>
+<div id="pedido" class="tela">
+    <div class="container">
 
-        <h2 class="titulo">🍲 Adicionar Pedido</h2>
-
-        <!-- QUENTINHAS SÓ APARECEM AQUI -->
-        <h3 class="section-title">🍱 Escolha sua Quentinha</h3>
-
-        <div class="choice" id="grandeChoice" onclick="selecionarQuentinha('grande')">
-            <strong>Quentinha Grande</strong>
-            <div id="grandePreco"></div>
-        </div>
-
-        <div class="choice" id="pequenaChoice" onclick="selecionarQuentinha('pequena')">
-            <strong>Quentinha Pequena</strong>
-            <div id="pequenaPreco"></div>
-        </div>
-
-
-        <h3 class="section-title">🍲 Comidas</h3>
-        <div id="pedidoComidas"></div>
-
-
-        <h3 class="section-title">🥤 Bebidas</h3>
-        <div id="pedidoBebidas"></div>
-
-
-        <h3 class="section-title">👤 Seus Dados</h3>
-
-        <label>Nome</label>
-        <input id="clienteNome" placeholder="Digite seu nome">
-
-        <label>Endereço</label>
-        <input id="clienteEndereco" placeholder="Rua, número, bairro">
-
-        <label>Observação</label>
-        <textarea id="clienteObs" placeholder="Alguma observação?"></textarea>
-
-
-        <h3 class="section-title">💳 Forma de Pagamento</h3>
-
-        <select id="pagamento" onchange="mostrarPix()">
-            <option value="">Selecione</option>
-            <option value="Pix">Pix</option>
-            <option value="Dinheiro">Dinheiro</option>
-            <option value="Cartão">Cartão</option>
-        </select>
-
-        <div class="pix-box" id="pixBox">
-            <strong>💳 Pague pelo Pix</strong>
-            <p>Chave Pix:</p>
-            <div class="pix-key" id="pixExibido">Chave não cadastrada</div>
-
-            <button class="btn btn-yellow btn-full" onclick="copiarPix()">
-                📋 COPIAR CHAVE PIX
-            </button>
-
-            <p>
-                Após pagar, envie o comprovante pelo WhatsApp junto com o pedido.
-            </p>
-        </div>
-
-
-        <div class="total">
-            Total: <span id="totalPedido">R$ 0,00</span>
-        </div>
-
-        <button class="btn btn-full" onclick="finalizarPedido()">
-            📱 ENVIAR PEDIDO NO WHATSAPP
+        <button class="voltar" onclick="voltarHome()">
+            ← Voltar
         </button>
 
+        <div class="card">
+
+            <h1 class="titulo">🍲 Fazer Pedido</h1>
+
+            <div id="listaComidas"></div>
+
+            <h2 class="categoria">🥤 Bebidas</h2>
+
+            <div id="listaBebidas"></div>
+
+            <div class="resumo">
+                <h3>🛒 Seu pedido</h3>
+                <div id="resumoPedido">
+                    Nenhum item adicionado.
+                </div>
+                <br>
+                <strong>Total: R$ <span id="total">0,00</span></strong>
+            </div>
+
+            <h2 class="categoria">👤 Seus dados</h2>
+
+            <label>Nome</label>
+            <input id="nomeCliente" type="text" placeholder="Digite seu nome">
+
+            <label>Endereço</label>
+            <textarea id="enderecoCliente" placeholder="Digite seu endereço"></textarea>
+
+            <label>Forma de pagamento</label>
+
+            <select id="pagamento" onchange="alterarPagamento()">
+                <option value="">Selecione</option>
+                <option value="Pix">Pix</option>
+                <option value="Dinheiro">Dinheiro</option>
+                <option value="Cartão">Cartão</option>
+            </select>
+
+            <div id="areaPix" class="pix oculto">
+                <h3>💠 Pagamento via Pix</h3>
+
+                <p>
+                    Chave Pix:
+                    <strong id="chavePixTexto"></strong>
+                </p>
+
+                <button onclick="copiarPix()">
+                    📋 COPIAR CHAVE PIX
+                </button>
+
+                <p style="margin-top:15px;">
+                    Depois de pagar, envie o comprovante pelo WhatsApp junto com o pedido.
+                </p>
+            </div>
+
+            <button class="whatsapp" onclick="finalizarPedido()">
+                📲 ENVIAR PEDIDO PELO WHATSAPP
+            </button>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- ================= ADMIN LOGIN ================= -->
+
+<div id="loginAdmin" class="tela">
+    <div class="container">
+
+        <button class="voltar" onclick="voltarHome()">
+            ← Voltar
+        </button>
+
+        <div class="card">
+
+            <h1 class="titulo">🔐 Administrador</h1>
+
+            <label>Senha</label>
+            <input id="senhaAdmin" type="password" placeholder="Digite a senha">
+
+            <button class="botao" onclick="entrarAdmin()">
+                ENTRAR
+            </button>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- ================= ADMIN ================= -->
+
+<div id="admin" class="tela">
+
+    <div class="container">
+
+        <button class="voltar" onclick="voltarHome()">
+            ← Sair
+        </button>
+
+        <div class="card">
+
+            <h1 class="titulo">⚙️ Área Administrativa</h1>
+
+            <!-- COMIDAS -->
+
+            <div class="admin-box">
+
+                <h2>🍲 Comidas / Quentinhas</h2>
+
+                <div id="adminComidas"></div>
+
+                <button class="adicionar" onclick="novaComida()">
+                    ➕ ADICIONAR COMIDA
+                </button>
+
+            </div>
+
+            <!-- BEBIDAS -->
+
+            <div class="admin-box">
+
+                <h2>🥤 Bebidas</h2>
+
+                <div id="adminBebidas"></div>
+
+                <button class="adicionar" onclick="novaBebida()">
+                    ➕ ADICIONAR BEBIDA
+                </button>
+
+            </div>
+
+            <!-- CONFIGURAÇÕES -->
+
+            <div class="admin-box">
+
+                <h2>💠 Configurações</h2>
+
+                <label>Chave Pix</label>
+
+                <input
+                    id="configPix"
+                    type="text"
+                    placeholder="Digite sua chave Pix"
+                >
+
+                <label>WhatsApp da loja</label>
+
+                <input
+                    id="configWhats"
+                    type="text"
+                    placeholder="Ex: 5521974967664"
+                >
+
+                <button class="adicionar" onclick="salvarConfiguracoes()">
+                    💾 SALVAR CONFIGURAÇÕES
+                </button>
+
+            </div>
+
+        </div>
     </div>
 </div>
 
 
 <script>
 
-const DEFAULT_DATA = {
-    comidas: [],
-    bebidas: [
-        {id:1,nome:"Coca-Cola 2LT",preco:15},
-        {id:2,nome:"Fanta Laranja 2LT",preco:12},
-        {id:3,nome:"Tobi 2LT",preco:7},
-        {id:4,nome:"Coca-Cola Lata",preco:6},
-        {id:5,nome:"Guaraná Antarctica Lata",preco:6},
-        {id:6,nome:"Fanta Laranja Lata",preco:6},
-        {id:7,nome:"Coca-Cola 600 ML",preco:8},
-        {id:8,nome:"Ativ Plus Uva",preco:0}
+/* =====================================================
+   DADOS
+===================================================== */
+
+const dadosPadrao = {
+
+    comidas:[
+        {
+            id:1,
+            nome:"Quentinha Grande",
+            preco:21
+        },
+        {
+            id:2,
+            nome:"Quentinha Pequena",
+            preco:18
+        }
     ],
-    grande:21,
-    pequena:18,
+
+    bebidas:[
+        {
+            id:101,
+            nome:"Coca Cola 2LT",
+            preco:15
+        },
+        {
+            id:102,
+            nome:"Fanta Laranja 2LT",
+            preco:12
+        },
+        {
+            id:103,
+            nome:"Tobi 2LT",
+            preco:7
+        },
+        {
+            id:104,
+            nome:"Coca Cola Lata",
+            preco:6
+        },
+        {
+            id:105,
+            nome:"Guaraná Antarctica Lata",
+            preco:6
+        },
+        {
+            id:106,
+            nome:"Fanta Laranja Lata",
+            preco:6
+        },
+        {
+            id:107,
+            nome:"Coca Cola 600 ML",
+            preco:8
+        },
+        {
+            id:108,
+            nome:"Ativ Plus Uva",
+            preco:0
+        }
+    ],
+
     pix:"",
     whatsapp:"5521974967664"
 };
 
-let dados = JSON.parse(localStorage.getItem("cardapioDados"));
 
-if(!dados){
-    dados = DEFAULT_DATA;
-    salvarDados();
-}
+let dados = JSON.parse(
+    localStorage.getItem("cardapioDados")
+) || dadosPadrao;
 
-let pedido = {
-    quentinha:null,
-    comidas:{},
-    bebidas:{}
-};
 
+let carrinho = [];
+
+
+/* =====================================================
+   SALVAR
+===================================================== */
 
 function salvarDados(){
-    localStorage.setItem("cardapioDados",JSON.stringify(dados));
+
+    localStorage.setItem(
+        "cardapioDados",
+        JSON.stringify(dados)
+    );
+
 }
 
 
-function dinheiro(valor){
-    return Number(valor || 0).toLocaleString("pt-BR",{
-        style:"currency",
-        currency:"BRL"
+/* =====================================================
+   TELAS
+===================================================== */
+
+function mostrarTela(id){
+
+    document.querySelectorAll(".tela").forEach(function(tela){
+
+        tela.classList.remove("ativa");
+
     });
+
+    document.getElementById(id).classList.add("ativa");
+
+    window.scrollTo(0,0);
 }
 
 
-/* =========================
-   TELA INICIAL
-========================= */
+function voltarHome(){
 
-function renderHome(){
+    mostrarTela("home");
 
-    const comidas = document.getElementById("comidasLista");
-    const bebidas = document.getElementById("bebidasLista");
-
-    if(dados.comidas.length === 0){
-        comidas.innerHTML = '<div class="empty">Nenhuma comida cadastrada.</div>';
-    }else{
-        comidas.innerHTML = dados.comidas.map(c => `
-            <div class="item">
-                <div class="item-info">
-                    <div class="item-name">${esc(c.nome)}</div>
-                </div>
-            </div>
-        `).join("");
-    }
-
-    bebidas.innerHTML = dados.bebidas.length === 0
-        ? '<div class="empty">Nenhuma bebida cadastrada.</div>'
-        : dados.bebidas.map(b => `
-            <div class="item">
-                <div class="item-info">
-                    <div class="item-name">${esc(b.nome)}</div>
-                    ${Number(b.preco)>0 ? `<div class="item-price">${dinheiro(b.preco)}</div>` : ""}
-                </div>
-            </div>
-        `).join("");
 }
 
 
-/* =========================
+/* =====================================================
    PEDIDO
-========================= */
+===================================================== */
 
 function abrirPedido(){
 
-    pedido = {
-        quentinha:null,
-        comidas:{},
-        bebidas:{}
-    };
+    carrinho=[];
 
-    document.getElementById("pedidoModal").style.display="block";
+    mostrarTela("pedido");
 
-    document.getElementById("clienteNome").value="";
-    document.getElementById("clienteEndereco").value="";
-    document.getElementById("clienteObs").value="";
-    document.getElementById("pagamento").value="";
-    document.getElementById("pixBox").style.display="none";
+    carregarPedido();
 
-    document.getElementById("grandePreco").innerText = dinheiro(dados.grande);
-    document.getElementById("pequenaPreco").innerText = dinheiro(dados.pequena);
-
-    renderPedidoComidas();
-    renderPedidoBebidas();
-    atualizarTotal();
 }
 
 
-function fecharPedido(){
-    document.getElementById("pedidoModal").style.display="none";
+function abrirPedidoBebidas(){
+
+    carrinho=[];
+
+    mostrarTela("pedido");
+
+    carregarPedido();
+
 }
 
 
-function selecionarQuentinha(tipo){
+function carregarPedido(){
 
-    pedido.quentinha = tipo;
+    let comidas =
+        document.getElementById("listaComidas");
 
-    document.getElementById("grandeChoice").classList.toggle(
-        "selected",tipo==="grande"
-    );
-
-    document.getElementById("pequenaChoice").classList.toggle(
-        "selected",tipo==="pequena"
-    );
-
-    atualizarTotal();
-}
+    let bebidas =
+        document.getElementById("listaBebidas");
 
 
-function renderPedidoComidas(){
+    comidas.innerHTML="";
 
-    const el = document.getElementById("pedidoComidas");
+    bebidas.innerHTML="";
 
-    if(dados.comidas.length===0){
-        el.innerHTML='<div class="empty">Nenhuma comida cadastrada.</div>';
-        return;
-    }
 
-    el.innerHTML = dados.comidas.map(c => {
+    dados.comidas.forEach(function(item){
 
-        const qtd = pedido.comidas[c.id] || 0;
+        comidas.innerHTML += `
 
-        return `
-            <div class="choice">
-                <strong>${esc(c.nome)}</strong>
+        <div class="item">
 
-                <div class="qty">
-                    <button onclick="alterarComida(${c.id},-1)">−</button>
-                    <span>${qtd}</span>
-                    <button onclick="alterarComida(${c.id},1)">+</button>
-                </div>
-            </div>
+            <h3>${item.nome}</h3>
+
+            <p>
+                R$ ${Number(item.preco)
+                    .toFixed(2)
+                    .replace(".",",")}
+            </p>
+
+            <button onclick="adicionarItem('comida',${item.id})">
+                ➕ ADICIONAR
+            </button>
+
+        </div>
+
         `;
-    }).join("");
-}
 
-
-function alterarComida(id,valor){
-
-    pedido.comidas[id] = Math.max(
-        0,
-        (pedido.comidas[id] || 0) + valor
-    );
-
-    renderPedidoComidas();
-}
-
-
-function renderPedidoBebidas(){
-
-    const el = document.getElementById("pedidoBebidas");
-
-    if(dados.bebidas.length===0){
-        el.innerHTML='<div class="empty">Nenhuma bebida cadastrada.</div>';
-        return;
-    }
-
-    el.innerHTML = dados.bebidas.map(b => {
-
-        const qtd = pedido.bebidas[b.id] || 0;
-
-        return `
-            <div class="choice">
-                <strong>${esc(b.nome)}</strong>
-                <div>${Number(b.preco)>0 ? dinheiro(b.preco) : "Preço não informado"}</div>
-
-                <div class="qty">
-                    <button onclick="alterarBebida(${b.id},-1)">−</button>
-                    <span>${qtd}</span>
-                    <button onclick="alterarBebida(${b.id},1)">+</button>
-                </div>
-            </div>
-        `;
-    }).join("");
-}
-
-
-function alterarBebida(id,valor){
-
-    pedido.bebidas[id] = Math.max(
-        0,
-        (pedido.bebidas[id] || 0) + valor
-    );
-
-    renderPedidoBebidas();
-    atualizarTotal();
-}
-
-
-function atualizarTotal(){
-
-    let total = 0;
-
-    if(pedido.quentinha==="grande"){
-        total += Number(dados.grande);
-    }
-
-    if(pedido.quentinha==="pequena"){
-        total += Number(dados.pequena);
-    }
-
-    dados.bebidas.forEach(b=>{
-        total += (pedido.bebidas[b.id] || 0) * Number(b.preco || 0);
     });
 
-    document.getElementById("totalPedido").innerText = dinheiro(total);
+
+    dados.bebidas.forEach(function(item){
+
+        bebidas.innerHTML += `
+
+        <div class="item">
+
+            <h3>${item.nome}</h3>
+
+            <p>
+                ${
+                    Number(item.preco)>0
+                    ? "R$ "+Number(item.preco)
+                        .toFixed(2)
+                        .replace(".",",")
+                    : "Preço não cadastrado"
+                }
+            </p>
+
+            <button onclick="adicionarItem('bebida',${item.id})">
+                ➕ ADICIONAR
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+
+    atualizarCarrinho();
+
 }
 
 
-function mostrarPix(){
+/* =====================================================
+   CARRINHO
+===================================================== */
 
-    const pagamento = document.getElementById("pagamento").value;
-    const box = document.getElementById("pixBox");
+function adicionarItem(tipo,id){
+
+    let lista =
+        tipo==="comida"
+        ? dados.comidas
+        : dados.bebidas;
+
+
+    let item =
+        lista.find(function(x){
+            return x.id===id;
+        });
+
+
+    if(!item) return;
+
+
+    let existente =
+        carrinho.find(function(x){
+            return x.id===id && x.tipo===tipo;
+        });
+
+
+    if(existente){
+
+        existente.quantidade++;
+
+    }else{
+
+        carrinho.push({
+
+            tipo:tipo,
+            id:id,
+            nome:item.nome,
+            preco:Number(item.preco),
+            quantidade:1
+
+        });
+
+    }
+
+
+    atualizarCarrinho();
+
+}
+
+
+function removerItem(index){
+
+    carrinho.splice(index,1);
+
+    atualizarCarrinho();
+
+}
+
+
+function atualizarCarrinho(){
+
+    let resumo =
+        document.getElementById("resumoPedido");
+
+    let total=0;
+
+
+    if(carrinho.length===0){
+
+        resumo.innerHTML="Nenhum item adicionado.";
+
+        document.getElementById("total").innerText="0,00";
+
+        return;
+
+    }
+
+
+    let html="";
+
+
+    carrinho.forEach(function(item,index){
+
+        let subtotal =
+            item.preco * item.quantidade;
+
+        total += subtotal;
+
+
+        html += `
+
+        <div style="
+            margin-bottom:12px;
+            padding-bottom:12px;
+            border-bottom:1px solid #ddd;
+        ">
+
+            <strong>
+                ${item.quantidade}x ${item.nome}
+            </strong>
+
+            <br>
+
+            R$ ${subtotal.toFixed(2).replace(".",",")}
+
+            <br>
+
+            <button
+                onclick="removerItem(${index})"
+                style="
+                    margin-top:7px;
+                    padding:6px 10px;
+                    border:0;
+                    border-radius:8px;
+                    background:#ddd;
+                    cursor:pointer;
+                "
+            >
+                Remover
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+
+    resumo.innerHTML=html;
+
+
+    document.getElementById("total")
+        .innerText=
+        total.toFixed(2).replace(".",",");
+
+}
+
+
+/* =====================================================
+   PAGAMENTO
+===================================================== */
+
+function alterarPagamento(){
+
+    let pagamento =
+        document.getElementById("pagamento").value;
+
+    let areaPix =
+        document.getElementById("areaPix");
+
 
     if(pagamento==="Pix"){
-        box.style.display="block";
-        document.getElementById("pixExibido").innerText =
-            dados.pix || "Chave Pix ainda não cadastrada";
+
+        areaPix.classList.remove("oculto");
+
+        document.getElementById("chavePixTexto")
+            .innerText =
+            dados.pix || "Chave Pix não cadastrada";
+
     }else{
-        box.style.display="none";
+
+        areaPix.classList.add("oculto");
+
     }
+
 }
 
 
 function copiarPix(){
 
     if(!dados.pix){
+
         alert("A chave Pix ainda não foi cadastrada.");
+
         return;
+
     }
 
+
     navigator.clipboard.writeText(dados.pix)
-        .then(()=>alert("Chave Pix copiada!"))
-        .catch(()=>alert("Não foi possível copiar automaticamente."));
+        .then(function(){
+
+            alert("Chave Pix copiada!");
+
+        })
+        .catch(function(){
+
+            alert("Chave Pix: "+dados.pix);
+
+        });
+
 }
 
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
 
 function finalizarPedido(){
 
-    if(!pedido.quentinha){
-        alert("Escolha uma quentinha.");
+    if(carrinho.length===0){
+
+        alert("Adicione pelo menos um item ao pedido.");
+
         return;
+
     }
 
-    const nome = document.getElementById("clienteNome").value.trim();
-    const endereco = document.getElementById("clienteEndereco").value.trim();
-    const obs = document.getElementById("clienteObs").value.trim();
-    const pagamento = document.getElementById("pagamento").value;
+
+    let nome =
+        document.getElementById("nomeCliente")
+            .value.trim();
+
+
+    let endereco =
+        document.getElementById("enderecoCliente")
+            .value.trim();
+
+
+    let pagamento =
+        document.getElementById("pagamento")
+            .value;
+
 
     if(!nome){
+
         alert("Digite seu nome.");
+
         return;
+
     }
+
 
     if(!endereco){
+
         alert("Digite seu endereço.");
+
         return;
+
     }
+
 
     if(!pagamento){
+
         alert("Escolha a forma de pagamento.");
+
         return;
+
     }
 
-    let texto = "🍱 *NOVO PEDIDO*%0A%0A";
-
-    texto += "👤 *Nome:* " + encodeURIComponent(nome) + "%0A";
-    texto += "📍 *Endereço:* " + encodeURIComponent(endereco) + "%0A%0A";
-
-    texto += "🍱 *Quentinha:*%0A";
-
-    if(pedido.quentinha==="grande"){
-        texto += "1x Quentinha Grande - " +
-            encodeURIComponent(dinheiro(dados.grande)) + "%0A";
-    }else{
-        texto += "1x Quentinha Pequena - " +
-            encodeURIComponent(dinheiro(dados.pequena)) + "%0A";
-    }
-
-    let temComida=false;
-
-    dados.comidas.forEach(c=>{
-        const qtd = pedido.comidas[c.id] || 0;
-
-        if(qtd>0){
-            temComida=true;
-            texto += encodeURIComponent(
-                qtd+"x "+c.nome
-            )+"%0A";
-        }
-    });
-
-    if(temComida){
-        texto += "%0A🍲 *Comidas:*%0A";
-
-        dados.comidas.forEach(c=>{
-            const qtd = pedido.comidas[c.id] || 0;
-
-            if(qtd>0){
-                texto += encodeURIComponent(
-                    qtd+"x "+c.nome
-                )+"%0A";
-            }
-        });
-    }
-
-    let temBebida=false;
-
-    dados.bebidas.forEach(b=>{
-        const qtd = pedido.bebidas[b.id] || 0;
-
-        if(qtd>0){
-            temBebida=true;
-        }
-    });
-
-    if(temBebida){
-
-        texto += "%0A🥤 *Bebidas:*%0A";
-
-        dados.bebidas.forEach(b=>{
-            const qtd = pedido.bebidas[b.id] || 0;
-
-            if(qtd>0){
-                texto += encodeURIComponent(
-                    qtd+"x "+b.nome+" - "+dinheiro(b.preco)
-                )+"%0A";
-            }
-        });
-    }
-
-    if(obs){
-        texto += "%0A📝 *Observação:* " +
-            encodeURIComponent(obs) + "%0A";
-    }
-
-    texto += "%0A💳 *Pagamento:* " +
-        encodeURIComponent(pagamento) + "%0A";
 
     let total=0;
 
-    if(pedido.quentinha==="grande"){
-        total += Number(dados.grande);
-    }else{
-        total += Number(dados.pequena);
-    }
+    let mensagem =
+        "🍲 *NOVO PEDIDO*%0A%0A";
 
-    dados.bebidas.forEach(b=>{
-        total += (pedido.bebidas[b.id] || 0) * Number(b.preco || 0);
+
+    mensagem +=
+        "👤 *Nome:* "+
+        encodeURIComponent(nome)+
+        "%0A";
+
+
+    mensagem +=
+        "📍 *Endereço:* "+
+        encodeURIComponent(endereco)+
+        "%0A";
+
+
+    mensagem +=
+        "💳 *Pagamento:* "+
+        encodeURIComponent(pagamento)+
+        "%0A%0A";
+
+
+    mensagem +=
+        "🛒 *Itens:*%0A";
+
+
+    carrinho.forEach(function(item){
+
+        let subtotal =
+            item.preco * item.quantidade;
+
+        total += subtotal;
+
+
+        mensagem +=
+            encodeURIComponent(
+                item.quantidade+
+                "x "+
+                item.nome+
+                " - R$ "+
+                subtotal.toFixed(2)
+            )+
+            "%0A";
+
     });
 
-    texto += "💰 *TOTAL:* " +
-        encodeURIComponent(dinheiro(total)) + "%0A";
+
+    mensagem += "%0A";
+
+
+    mensagem +=
+        "💰 *TOTAL: R$ "+
+        encodeURIComponent(
+            total.toFixed(2)
+        )+
+        "*%0A";
+
 
     if(pagamento==="Pix"){
-        texto += "%0A📸 *Vou enviar o comprovante do Pix pelo WhatsApp.*";
+
+        mensagem +=
+            "%0A📎 Enviarei o comprovante do Pix por aqui.";
+
     }
 
-    let numero = String(dados.whatsapp || "")
-        .replace(/\D/g,"");
+
+    let numero =
+        String(dados.whatsapp)
+            .replace(/\D/g,"");
+
 
     if(!numero){
-        alert("O WhatsApp da loja não foi cadastrado.");
+
+        alert("Configure o WhatsApp no painel administrativo.");
+
         return;
+
     }
 
-    if(numero.length===11){
-        numero="55"+numero;
-    }
 
-    const url =
-        "https://wa.me/"+numero+"?text="+texto;
+    let url =
+        "https://wa.me/"+
+        numero+
+        "?text="+
+        mensagem;
 
-    window.open(url,"_blank");
+
+    window.location.href=url;
+
 }
 
 
-/* =========================
+/* =====================================================
    ADMIN
-========================= */
+===================================================== */
 
-function abrirLoginAdmin(){
+function abrirAdmin(){
 
-    const senha = prompt("Digite a senha do administrador:");
+    mostrarTela("loginAdmin");
+
+    document.getElementById("senhaAdmin").value="";
+
+}
+
+
+function entrarAdmin(){
+
+    let senha =
+        document.getElementById("senhaAdmin").value;
+
 
     if(senha==="1234"){
-        document.getElementById("home").style.display="none";
-        document.getElementById("adminPanel").style.display="block";
+
+        mostrarTela("admin");
+
         carregarAdmin();
-    }else if(senha!==null){
+
+    }else{
+
         alert("Senha incorreta.");
+
     }
+
 }
 
+
+/* =====================================================
+   ADMIN - CARREGAR
+===================================================== */
 
 function carregarAdmin(){
 
-    document.getElementById("precoGrande").value=dados.grande;
-    document.getElementById("precoPequena").value=dados.pequena;
-    document.getElementById("pixKey").value=dados.pix;
-    document.getElementById("whatsapp").value=dados.whatsapp;
+    let comidas =
+        document.getElementById("adminComidas");
 
-    renderAdminComidas();
-    renderAdminBebidas();
-}
+    let bebidas =
+        document.getElementById("adminBebidas");
 
 
-function renderAdminComidas(){
+    comidas.innerHTML="";
 
-    const el=document.getElementById("adminComidas");
+    bebidas.innerHTML="";
 
-    if(dados.comidas.length===0){
-        el.innerHTML='<div class="empty">Nenhuma comida cadastrada.</div>';
-        return;
-    }
 
-    el.innerHTML=dados.comidas.map(c=>`
+    dados.comidas.forEach(function(item){
+
+        comidas.innerHTML += `
+
         <div class="admin-item">
-            <div class="admin-row">
-                <input id="comida_${c.id}" value="${escAttr(c.nome)}">
-                <button class="btn small-btn" onclick="editarComida(${c.id})">
-                    Salvar
-                </button>
-                <button class="btn small-btn danger" onclick="excluirComida(${c.id})">
-                    Excluir
-                </button>
-            </div>
+
+            <strong>${item.nome}</strong>
+
+            <br>
+
+            R$ ${Number(item.preco)
+                .toFixed(2)
+                .replace(".",",")}
+
+            <br><br>
+
+            <button
+                class="editar"
+                onclick="editarComida(${item.id})"
+            >
+                ✏️ EDITAR
+            </button>
+
+            <button
+                class="excluir"
+                onclick="excluirComida(${item.id})"
+            >
+                🗑️ EXCLUIR
+            </button>
+
         </div>
-    `).join("");
-}
+
+        `;
+
+    });
 
 
-function adicionarComida(){
+    dados.bebidas.forEach(function(item){
 
-    const input=document.getElementById("novaComidaNome");
-    const nome=input.value.trim();
+        bebidas.innerHTML += `
 
-    if(!nome){
-        alert("Digite o nome da comida.");
-        
+        <div class="admin-item">
+
+            <strong>${item.nome}</strong>
+
+            <br>
+
+            R$ ${Number(item.preco)
+                .toFixed(2)
+                .replace(".",",")}
+
+            <br><br>
+
+            <button
+                class="editar"
+                onclick="editarBebida(${item.id})"
+            >
+            
