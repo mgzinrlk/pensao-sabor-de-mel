@@ -3,13 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Cardápio do Dia</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <style>
-
 *{
   box-sizing:border-box;
   margin:0;
@@ -86,8 +84,6 @@ header p{
 }
 
 .carrinho-btn{
-  position:sticky;
-  bottom:15px;
   width:100%;
   background:#d71920;
   color:white;
@@ -97,21 +93,23 @@ header p{
   padding:15px;
   border-radius:10px;
   font-weight:bold;
-  box-shadow:0 4px 15px rgba(0,0,0,.25);
   cursor:pointer;
 }
 
 .admin-link{
-  text-align:center;
-  margin:30px 0;
+  margin:25px 0 40px;
 }
 
 .admin-link button{
-  background:transparent;
-  color:#999;
-  border:0;
+  width:100%;
+  background:#d71920;
+  color:white;
+  border:3px solid #ffc400;
+  padding:16px;
+  border-radius:12px;
+  font-size:18px;
+  font-weight:bold;
   cursor:pointer;
-  font-size:14px;
 }
 
 .modal{
@@ -150,10 +148,6 @@ header p{
   padding:16px;
   margin:10px 0;
   cursor:pointer;
-}
-
-.opcao:hover{
-  border-color:#d71920;
 }
 
 .opcao strong{
@@ -199,7 +193,6 @@ header p{
   color:white;
   border:0;
   border-radius:7px;
-  cursor:pointer;
 }
 
 .total{
@@ -242,7 +235,6 @@ textarea{
   padding:14px;
   border-radius:10px;
   font-weight:bold;
-  cursor:pointer;
 }
 
 .cancelar{
@@ -252,7 +244,6 @@ textarea{
   padding:13px;
   border:0;
   border-radius:10px;
-  cursor:pointer;
 }
 
 .pix{
@@ -296,7 +287,6 @@ textarea{
   border:0;
   border-radius:8px;
   font-weight:bold;
-  cursor:pointer;
 }
 
 .salvar-prato{
@@ -317,7 +307,6 @@ textarea{
   border:2px solid #e0a900;
   border-radius:10px;
   font-weight:bold;
-  cursor:pointer;
 }
 
 .salvar{
@@ -329,7 +318,6 @@ textarea{
   padding:14px;
   border-radius:10px;
   font-weight:bold;
-  cursor:pointer;
 }
 
 .senha-btn{
@@ -341,7 +329,6 @@ textarea{
   border:0;
   border-radius:10px;
   font-weight:bold;
-  cursor:pointer;
 }
 
 .aviso{
@@ -362,235 +349,123 @@ textarea{
   border:2px solid #ffd43b;
   color:#777;
 }
-
 </style>
 </head>
 
 <body>
 
 <header>
-
-<h1>🍽️ CARDÁPIO DO DIA</h1>
-
-<p>
-Escolha seu prato e faça seu pedido
-</p>
-
+  <h1>🍽️ CARDÁPIO DO DIA</h1>
+  <p>Escolha seu prato e faça seu pedido</p>
 </header>
-
 
 <div class="container">
 
-<h2 class="titulo">
-🍛 Pratos de Hoje
-</h2>
+<h2 class="titulo">🍛 Pratos de Hoje</h2>
 
 <div id="cardapio"></div>
 
-
-<button
-class="carrinho-btn"
-onclick="abrirPedido()">
-
+<button class="carrinho-btn" onclick="abrirPedido()">
 🛒 VER MEU PEDIDO
-
 </button>
-
 
 <div class="admin-link">
-
 <button onclick="abrirLogin()">
-
-Área administrativa
-
+🔐 ENTRAR NO PAINEL ADMINISTRATIVO
 </button>
-
 </div>
 
 </div>
 
 
-<!-- ==================================================
-ESCOLHA DA QUENTINHA
-================================================== -->
+<!-- QUENTINHA -->
 
-<div
-class="modal"
-id="modalQuentinha">
+<div class="modal" id="modalQuentinha">
 
 <div class="modal-content">
 
-<button
-class="fechar"
-onclick="fecharQuentinha()">
+<button class="fechar" onclick="fecharQuentinha()">✕</button>
 
-✕
-
-</button>
-
-<h2>
-🥡 Escolha sua quentinha
-</h2>
+<h2>🥡 Escolha sua quentinha</h2>
 
 <p style="margin-top:8px;color:#666;">
-
 Escolha o tamanho:
-
 </p>
 
 <br>
 
-
-<div
-class="opcao"
-onclick="escolherQuentinha(10)">
-
-<strong>
-🥡 Quentinha Econômica
-</strong>
-
-<span>
-R$ 10,00
-</span>
-
+<div class="opcao" onclick="escolherQuentinha(10)">
+<strong>🥡 Quentinha Econômica</strong>
+<span>R$ 10,00</span>
 </div>
 
-
-<div
-class="opcao"
-onclick="escolherQuentinha(18)">
-
-<strong>
-🥡 Quentinha Pequena
-</strong>
-
-<span>
-R$ 18,00
-</span>
-
+<div class="opcao" onclick="escolherQuentinha(18)">
+<strong>🥡 Quentinha Pequena</strong>
+<span>R$ 18,00</span>
 </div>
 
-
-<div
-class="opcao"
-onclick="escolherQuentinha(21)">
-
-<strong>
-🥡 Quentinha Grande
-</strong>
-
-<span>
-R$ 21,00
-</span>
-
+<div class="opcao" onclick="escolherQuentinha(21)">
+<strong>🥡 Quentinha Grande</strong>
+<span>R$ 21,00</span>
 </div>
 
 </div>
 </div>
 
 
-<!-- ==================================================
-PEDIDO
-================================================== -->
+<!-- PEDIDO -->
 
-<div
-class="modal"
-id="modalPedido">
+<div class="modal" id="modalPedido">
 
 <div class="modal-content">
 
-<button
-class="fechar"
-onclick="fecharPedido()">
+<button class="fechar" onclick="fecharPedido()">✕</button>
 
-✕
-
-</button>
-
-<h2>
-🛒 Seu pedido
-</h2>
+<h2>🛒 Seu pedido</h2>
 
 <br>
 
 <div id="listaCarrinho"></div>
 
-
 <div class="total">
-
-Total: R$
-
-<span id="total">
-0,00
-</span>
-
+Total: R$ <span id="total">0,00</span>
 </div>
 
-
-<label>
-📝 Observação
-</label>
+<label>📝 Observação</label>
 
 <textarea
 id="observacao"
 placeholder="Ex: sem cebola, pouco sal..."
 ></textarea>
 
-
-<label>
-👤 Nome
-</label>
+<label>👤 Nome</label>
 
 <input
 id="nome"
 placeholder="Digite seu nome"
 >
 
-
-<label>
-📍 Endereço
-</label>
+<label>📍 Endereço</label>
 
 <textarea
 id="endereco"
 placeholder="Rua, número, complemento..."
 ></textarea>
 
+<label>💳 Forma de pagamento</label>
 
-<label>
-💳 Forma de pagamento
-</label>
+<select id="pagamento" onchange="mostrarPagamento()">
 
-<select
-id="pagamento"
-onchange="mostrarPagamento()">
-
-<option value="">
-Selecione
-</option>
-
-<option value="Pix">
-Pix
-</option>
-
-<option value="Dinheiro">
-Dinheiro
-</option>
-
-<option value="Cartão">
-Cartão
-</option>
+<option value="">Selecione</option>
+<option value="Pix">Pix</option>
+<option value="Dinheiro">Dinheiro</option>
+<option value="Cartão">Cartão</option>
 
 </select>
 
+<div id="trocoArea" style="display:none;">
 
-<div
-id="trocoArea"
-style="display:none;">
-
-<label>
-💵 Troco para quanto?
-</label>
+<label>💵 Troco para quanto?</label>
 
 <input
 type="number"
@@ -600,14 +475,9 @@ placeholder="Ex: 50"
 
 </div>
 
+<div class="pix" id="pixBox">
 
-<div
-class="pix"
-id="pixBox">
-
-<strong>
-📱 PAGAMENTO PIX
-</strong>
+<strong>📱 PAGAMENTO PIX</strong>
 
 <div id="qrcode"></div>
 
@@ -615,46 +485,27 @@ id="pixBox">
 
 </div>
 
-
-<button
-class="confirmar"
-onclick="finalizarPedido()">
-
+<button class="confirmar" onclick="finalizarPedido()">
 ✅ CONFIRMAR PEDIDO
-
 </button>
 
-
-<button
-class="cancelar"
-onclick="fecharPedido()">
-
+<button class="cancelar" onclick="fecharPedido()">
 Voltar
-
 </button>
 
 </div>
 </div>
 
 
-<!-- ==================================================
-LOGIN
-================================================== -->
+<!-- LOGIN -->
 
-<div
-class="modal"
-id="modalLogin">
+<div class="modal" id="modalLogin">
 
 <div class="modal-content">
 
-<h2>
-🔐 Área Administrativa
-</h2>
+<h2>🔐 Área Administrativa</h2>
 
-
-<label>
-Senha
-</label>
+<label>Senha</label>
 
 <input
 type="password"
@@ -662,120 +513,72 @@ id="senhaAdmin"
 placeholder="Digite sua senha"
 >
 
-
-<button
-class="confirmar"
-onclick="entrarAdmin()">
-
+<button class="confirmar" onclick="entrarAdmin()">
 ENTRAR
-
 </button>
 
-
-<button
-class="cancelar"
-onclick="fecharLogin()">
-
+<button class="cancelar" onclick="fecharLogin()">
 Cancelar
-
 </button>
 
 </div>
 </div>
 
 
-<!-- ==================================================
-PAINEL ADMIN
-================================================== -->
+<!-- PAINEL ADMIN -->
 
-<div
-class="modal"
-id="modalAdmin">
+<div class="modal" id="modalAdmin">
 
 <div class="modal-content">
 
-<button
-class="fechar"
-onclick="fecharAdmin()">
+<button class="fechar" onclick="fecharAdmin()">✕</button>
 
-✕
-
-</button>
-
-
-<h2>
-⚙️ PAINEL ADMINISTRATIVO
-</h2>
+<h2>⚙️ PAINEL ADMINISTRATIVO</h2>
 
 <br>
 
-
-<label>
-📱 WhatsApp da loja
-</label>
+<label>📱 WhatsApp da loja</label>
 
 <input
 id="adminWhatsApp"
 placeholder="Ex: 5511999999999"
 >
 
-
-<label>
-💳 Chave Pix
-</label>
+<label>💳 Chave Pix</label>
 
 <input
 id="adminPix"
 placeholder="Digite sua chave Pix"
 >
 
+<br>
 
-<br><br>
-
-
-<h3>
-🍛 CARDÁPIO DO DIA
-</h3>
-
+<h3>🍛 CARDÁPIO DO DIA</h3>
 
 <div id="adminCardapio"></div>
 
-
-<button
-class="novo"
-onclick="novoPrato()">
-
+<button class="novo" onclick="novoPrato()">
 ➕ CADASTRAR NOVO PRATO
-
 </button>
 
-
-<button
-class="salvar"
-onclick="salvarConfiguracoes()">
-
+<button class="salvar" onclick="salvarConfiguracoes()">
 💾 SALVAR WHATSAPP E PIX
-
 </button>
 
-
-<button
-class="senha-btn"
-onclick="abrirMudarSenha()">
-
+<button class="senha-btn" onclick="abrirMudarSenha()">
 🔐 MUDAR SENHA DO ADMINISTRADOR
-
 </button>
-
 
 <div class="aviso">
 
-⚠️ <strong>Importante:</strong><br><br>
+<strong>Como funciona:</strong><br><br>
 
-Nenhum prato é criado automaticamente.
-<br><br>
+1. Clique em cadastrar novo prato.<br>
+2. Coloque o nome e a descrição.<br>
+3. Marque "Mostrar para os clientes".<br>
+4. Clique em salvar.<br><br>
 
-O cliente só verá os pratos que a equipe cadastrar e ativar.
+⚠️ Nenhum prato é criado automaticamente.
 
 </div>
 
@@ -783,75 +586,43 @@ O cliente só verá os pratos que a equipe cadastrar e ativar.
 </div>
 
 
-<!-- ==================================================
-MUDAR SENHA
-================================================== -->
+<!-- MUDAR SENHA -->
 
-<div
-class="modal"
-id="modalSenha">
+<div class="modal" id="modalSenha">
 
 <div class="modal-content">
 
-<button
-class="fechar"
-onclick="fecharMudarSenha()">
+<button class="fechar" onclick="fecharMudarSenha()">✕</button>
 
-✕
+<h2>🔐 Mudar senha</h2>
 
-</button>
-
-
-<h2>
-🔐 Mudar senha
-</h2>
-
-
-<label>
-Senha atual
-</label>
+<label>Senha atual</label>
 
 <input
 type="password"
 id="senhaAtual"
 >
 
-
-<label>
-Nova senha
-</label>
+<label>Nova senha</label>
 
 <input
 type="password"
 id="novaSenha"
 >
 
-
-<label>
-Confirmar nova senha
-</label>
+<label>Confirmar nova senha</label>
 
 <input
 type="password"
 id="confirmarSenha"
 >
 
-
-<button
-class="confirmar"
-onclick="mudarSenha()">
-
+<button class="confirmar" onclick="mudarSenha()">
 💾 ALTERAR SENHA
-
 </button>
 
-
-<button
-class="cancelar"
-onclick="fecharMudarSenha()">
-
+<button class="cancelar" onclick="fecharMudarSenha()">
 Cancelar
-
 </button>
 
 </div>
@@ -860,100 +631,59 @@ Cancelar
 
 <script>
 
-/* ==================================================
-CONFIGURAÇÃO
-================================================== */
+/* =========================
+CONFIGURAÇÕES
+========================= */
 
 let config =
-JSON.parse(
-localStorage.getItem("configLoja")
-) || {
-
+JSON.parse(localStorage.getItem("configLoja"))
+|| {
   whatsapp:"",
   pix:"",
   senha:"1234"
-
 };
 
 
-/* ==================================================
-IMPORTANTE
-
-NÃO EXISTE NENHUM PRATO PADRÃO.
-
-A versão 10 limpa os pratos de exemplo
-dos códigos anteriores UMA ÚNICA VEZ.
-
-Depois disso, os pratos cadastrados pela
-equipe continuam salvos normalmente.
-================================================== */
-
-const VERSAO_DADOS = "10";
-
-
-if(
-localStorage.getItem("versaoDados") !==
-VERSAO_DADOS
-){
-
-localStorage.removeItem("cardapio");
-
-localStorage.setItem(
-"versaoDados",
-VERSAO_DADOS
-);
-
-}
-
+/*
+NENHUM PRATO É CRIADO AQUI.
+*/
 
 let cardapio =
-JSON.parse(
-localStorage.getItem("cardapio")
-) || [];
-
+JSON.parse(localStorage.getItem("cardapio"))
+|| [];
 
 let carrinho=[];
 
 let pratoSelecionado=null;
 
 
-/* ==================================================
-CARDÁPIO DO CLIENTE
-================================================== */
+/* =========================
+CARDÁPIO
+========================= */
 
 function mostrarCardapio(){
 
-const div =
-document.getElementById(
-"cardapio"
-);
+const div=document.getElementById("cardapio");
 
 div.innerHTML="";
 
-
-const pratos =
-cardapio.filter(
+const pratos=cardapio.filter(
 p =>
 p.ativo === true &&
 p.nome &&
 p.nome.trim() !== ""
 );
 
-
-if(pratos.length === 0){
+if(pratos.length===0){
 
 div.innerHTML=`
 
 <div class="vazio">
 
-<h2>
-🍽️ Cardápio em preparação
-</h2>
+<h2>🍽️ Cardápio em preparação</h2>
 
 <p style="margin-top:10px;">
-
-Os pratos de hoje ainda não foram cadastrados.
-
+A equipe ainda não cadastrou os pratos de hoje.
 </p>
 
 </div>
@@ -961,9 +691,7 @@ Os pratos de hoje ainda não foram cadastrados.
 `;
 
 return;
-
 }
-
 
 pratos.forEach(prato=>{
 
@@ -996,9 +724,9 @@ onclick="abrirQuentinha(${prato.id})">
 }
 
 
-/* ==================================================
-ESCAPAR TEXTO
-================================================== */
+/* =========================
+SEGURANÇA
+========================= */
 
 function escapar(texto){
 
@@ -1012,31 +740,22 @@ return String(texto || "")
 }
 
 
-/* ==================================================
+/* =========================
 QUENTINHA
-================================================== */
+========================= */
 
 function abrirQuentinha(id){
 
-pratoSelecionado =
-cardapio.find(
-p => p.id === id
-);
+pratoSelecionado=
+cardapio.find(p=>p.id===id);
 
-
-if(!pratoSelecionado){
-
-return;
-
-}
-
+if(!pratoSelecionado)return;
 
 document.getElementById(
 "modalQuentinha"
 ).style.display="block";
 
 }
-
 
 function fecharQuentinha(){
 
@@ -1046,46 +765,23 @@ document.getElementById(
 
 }
 
-
 function escolherQuentinha(preco){
 
-if(!pratoSelecionado){
-
-return;
-
-}
-
+if(!pratoSelecionado)return;
 
 let tamanho="";
 
+if(preco===10)tamanho="Econômica";
 
-if(preco === 10){
+if(preco===18)tamanho="Pequena";
 
-tamanho="Econômica";
-
-}
-
-
-if(preco === 18){
-
-tamanho="Pequena";
-
-}
-
-
-if(preco === 21){
-
-tamanho="Grande";
-
-}
-
+if(preco===21)tamanho="Grande";
 
 carrinho.push({
 
 id:Date.now(),
 
-prato:
-pratoSelecionado.nome,
+prato:pratoSelecionado.nome,
 
 tamanho:tamanho,
 
@@ -1095,7 +791,6 @@ qtd:1
 
 });
 
-
 fecharQuentinha();
 
 abrirPedido();
@@ -1103,9 +798,9 @@ abrirPedido();
 }
 
 
-/* ==================================================
+/* =========================
 CARRINHO
-================================================== */
+========================= */
 
 function abrirPedido(){
 
@@ -1117,7 +812,6 @@ atualizarCarrinho();
 
 }
 
-
 function fecharPedido(){
 
 document.getElementById(
@@ -1126,41 +820,32 @@ document.getElementById(
 
 }
 
-
 function atualizarCarrinho(){
 
-const div =
-document.getElementById(
+const div=document.getElementById(
 "listaCarrinho"
 );
 
 div.innerHTML="";
 
+if(carrinho.length===0){
 
-if(carrinho.length === 0){
+div.innerHTML="<p>Seu pedido está vazio.</p>";
 
-div.innerHTML=
-"<p>Seu pedido está vazio.</p>";
-
-document.getElementById(
-"total"
-).innerText="0,00";
+document.getElementById("total")
+.innerText="0,00";
 
 return;
 
 }
 
-
 let total=0;
-
 
 carrinho.forEach(item=>{
 
-const subtotal =
-item.preco * item.qtd;
+let subtotal=item.preco*item.qtd;
 
-total += subtotal;
-
+total+=subtotal;
 
 div.innerHTML+=`
 
@@ -1178,33 +863,20 @@ ${escapar(item.tamanho)}
 
 <br>
 
-R$ ${item.preco
-.toFixed(2)
-.replace(".",",")}
+R$ ${item.preco.toFixed(2).replace(".",",")}
 
 </div>
 
-
 <div class="qtd">
 
-<button
-onclick="diminuir(${item.id})">
-
+<button onclick="diminuir(${item.id})">
 -
-
 </button>
 
+<strong>${item.qtd}</strong>
 
-<strong>
-${item.qtd}
-</strong>
-
-
-<button
-onclick="aumentar(${item.id})">
-
+<button onclick="aumentar(${item.id})">
 +
-
 </button>
 
 </div>
@@ -1215,118 +887,71 @@ onclick="aumentar(${item.id})">
 
 });
 
-
-document.getElementById(
-"total"
-).innerText =
-total
-.toFixed(2)
-.replace(".",",");
+document.getElementById("total")
+.innerText=
+total.toFixed(2).replace(".",",");
 
 }
-
 
 function aumentar(id){
 
-const item =
-carrinho.find(
-i => i.id === id
-);
+let item=carrinho.find(i=>i.id===id);
 
-
-if(item){
-
-item.qtd++;
-
-}
-
+if(item)item.qtd++;
 
 atualizarCarrinho();
 
 }
-
 
 function diminuir(id){
 
-const item =
-carrinho.find(
-i => i.id === id
-);
+let item=carrinho.find(i=>i.id===id);
 
-
-if(!item){
-
-return;
-
-}
-
+if(!item)return;
 
 item.qtd--;
 
+if(item.qtd<=0){
 
-if(item.qtd <= 0){
-
-carrinho =
-carrinho.filter(
-i => i.id !== id
+carrinho=carrinho.filter(
+i=>i.id!==id
 );
 
 }
-
 
 atualizarCarrinho();
 
 }
 
 
-/* ==================================================
+/* =========================
 PAGAMENTO
-================================================== */
+========================= */
 
 function mostrarPagamento(){
 
-const pagamento =
-document.getElementById(
-"pagamento"
-).value;
+let pagamento=
+document.getElementById("pagamento").value;
 
+let pix=document.getElementById("pixBox");
 
-const pix =
-document.getElementById(
-"pixBox"
-);
-
-
-const troco =
-document.getElementById(
-"trocoArea"
-);
-
+let troco=document.getElementById("trocoArea");
 
 pix.style.display="none";
 
 troco.style.display="none";
 
-
-if(pagamento === "Pix"){
+if(pagamento==="Pix"){
 
 pix.style.display="block";
 
+document.getElementById("chavePix")
+.innerText=
+"Chave Pix: "+
+(config.pix||"Não cadastrada");
 
-document.getElementById(
-"chavePix"
-).innerText =
-"Chave Pix: " +
-(
-config.pix ||
-"Não cadastrada"
-);
-
-
-document.getElementById(
-"qrcode"
-).innerHTML="";
-
+document.getElementById("qrcode")
+.innerHTML="";
 
 if(config.pix){
 
@@ -1343,8 +968,7 @@ height:180
 
 }
 
-
-if(pagamento === "Dinheiro"){
+if(pagamento==="Dinheiro"){
 
 troco.style.display="block";
 
@@ -1353,52 +977,39 @@ troco.style.display="block";
 }
 
 
-/* ==================================================
+/* =========================
 FINALIZAR PEDIDO
-================================================== */
+========================= */
 
 function finalizarPedido(){
 
-if(carrinho.length === 0){
+if(carrinho.length===0){
 
-alert(
-"Adicione algum item ao pedido."
-);
+alert("Adicione algum item.");
 
 return;
 
 }
 
+let nome=
+document.getElementById("nome")
+.value.trim();
 
-const nome =
-document.getElementById(
-"nome"
-).value.trim();
+let endereco=
+document.getElementById("endereco")
+.value.trim();
 
+let observacao=
+document.getElementById("observacao")
+.value.trim();
 
-const endereco =
-document.getElementById(
-"endereco"
-).value.trim();
+let pagamento=
+document.getElementById("pagamento")
+.value;
 
-
-const observacao =
-document.getElementById(
-"observacao"
-).value.trim();
-
-
-const pagamento =
-document.getElementById(
-"pagamento"
-).value;
-
-
-const troco =
-document.getElementById(
-"troco"
-).value;
-
+let troco=
+document.getElementById("troco")
+.value;
 
 if(!nome){
 
@@ -1408,7 +1019,6 @@ return;
 
 }
 
-
 if(!endereco){
 
 alert("Digite seu endereço.");
@@ -1417,22 +1027,18 @@ return;
 
 }
 
-
 if(!pagamento){
 
-alert(
-"Escolha a forma de pagamento."
-);
+alert("Escolha o pagamento.");
 
 return;
 
 }
-
 
 if(!config.whatsapp){
 
 alert(
-"O WhatsApp da loja ainda não foi cadastrado no Painel ADM."
+"O WhatsApp ainda não foi cadastrado no ADM."
 );
 
 return;
@@ -1440,62 +1046,46 @@ return;
 }
 
 
-let numero =
-Number(
-localStorage.getItem(
-"numeroPedido"
-)
-) || 0;
+/* NÚMERO DO PEDIDO */
 
+let numero=
+Number(
+localStorage.getItem("numeroPedido")
+)||0;
 
 numero++;
-
 
 localStorage.setItem(
 "numeroPedido",
 numero
 );
 
-
-const numeroFormatado =
-String(numero)
-.padStart(4,"0");
+let numeroFormatado=
+String(numero).padStart(4,"0");
 
 
 let total=0;
 
 let itens="";
 
-
 carrinho.forEach(item=>{
 
-const subtotal =
-item.preco * item.qtd;
+let subtotal=item.preco*item.qtd;
 
+total+=subtotal;
 
-total += subtotal;
-
-
-itens +=
+itens+=
 `
-
 🥡 ${item.tamanho}
-
 🍛 ${item.prato}
-
 🔢 Quantidade: ${item.qtd}
-
-💵 R$ ${subtotal
-.toFixed(2)
-.replace(".",",")}
-
+💵 R$ ${subtotal.toFixed(2).replace(".",",")}
 `;
 
 });
 
 
-let mensagem =
-
+let mensagem=
 `✅ *PEDIDO CONFIRMADO*
 
 🔢 *PEDIDO #${numeroFormatado}*
@@ -1505,23 +1095,18 @@ let mensagem =
 📍 *ENDEREÇO:* ${endereco}
 
 🛒 *PEDIDO:*
-
 ${itens}
 
 📝 *OBSERVAÇÃO:*
-${observacao || "Nenhuma"}
+${observacao||"Nenhuma"}
 
 💳 *PAGAMENTO:* ${pagamento}`;
 
 
-if(
-pagamento === "Dinheiro" &&
-troco
-){
+if(pagamento==="Dinheiro" && troco){
 
-mensagem +=
+mensagem+=
 `
-
 💵 *TROCO PARA:* R$ ${
 Number(troco)
 .toFixed(2)
@@ -1531,69 +1116,41 @@ Number(troco)
 }
 
 
-mensagem +=
+mensagem+=
 `
 
 💰 *TOTAL: R$ ${
-total
-.toFixed(2)
+total.toFixed(2)
 .replace(".",",")
 }*
 
 📲 Pedido realizado pelo site.`;
 
 
-const url =
-"https://wa.me/" +
-config.whatsapp +
-"?text=" +
-encodeURIComponent(
-mensagem
-);
+let url=
+"https://wa.me/"+
+config.whatsapp+
+"?text="+
+encodeURIComponent(mensagem);
 
-
-window.open(
-url,
-"_blank"
-);
-
+window.open(url,"_blank");
 
 carrinho=[];
 
-
-document.getElementById(
-"nome"
-).value="";
-
-
-document.getElementById(
-"endereco"
-).value="";
-
-
-document.getElementById(
-"observacao"
-).value="";
-
-
-document.getElementById(
-"pagamento"
-).value="";
-
-
-document.getElementById(
-"troco"
-).value="";
-
+document.getElementById("nome").value="";
+document.getElementById("endereco").value="";
+document.getElementById("observacao").value="";
+document.getElementById("pagamento").value="";
+document.getElementById("troco").value="";
 
 fecharPedido();
 
 }
 
 
-/* ==================================================
+/* =========================
 LOGIN ADMIN
-================================================== */
+========================= */
 
 function abrirLogin(){
 
@@ -1603,7 +1160,6 @@ document.getElementById(
 
 }
 
-
 function fecharLogin(){
 
 document.getElementById(
@@ -1612,32 +1168,24 @@ document.getElementById(
 
 }
 
-
 function entrarAdmin(){
 
-const senha =
+let senha=
 document.getElementById(
 "senhaAdmin"
 ).value;
 
+if(senha!==config.senha){
 
-if(
-senha !== config.senha
-){
-
-alert(
-"❌ Senha incorreta!"
-);
+alert("❌ Senha incorreta!");
 
 return;
 
 }
 
-
 document.getElementById(
 "senhaAdmin"
 ).value="";
-
 
 fecharLogin();
 
@@ -1646,9 +1194,9 @@ abrirAdmin();
 }
 
 
-/* ==================================================
-ABRIR ADMIN
-================================================== */
+/* =========================
+ADMIN
+========================= */
 
 function abrirAdmin(){
 
@@ -1656,23 +1204,17 @@ document.getElementById(
 "modalAdmin"
 ).style.display="block";
 
-
 document.getElementById(
 "adminWhatsApp"
-).value =
-config.whatsapp;
-
+).value=config.whatsapp;
 
 document.getElementById(
 "adminPix"
-).value =
-config.pix;
-
+).value=config.pix;
 
 mostrarAdminCardapio();
 
 }
-
 
 function fecharAdmin(){
 
@@ -1683,35 +1225,34 @@ document.getElementById(
 }
 
 
-/* ==================================================
-ADMIN CARDÁPIO
-================================================== */
+/* =========================
+CARDÁPIO ADMIN
+========================= */
 
 function mostrarAdminCardapio(){
 
-const div =
+const div=
 document.getElementById(
 "adminCardapio"
 );
 
 div.innerHTML="";
 
-
-if(cardapio.length === 0){
+if(cardapio.length===0){
 
 div.innerHTML=`
 
 <div class="aviso">
 
-Nenhum prato cadastrado ainda.
+<strong>
+Nenhum prato cadastrado.
+</strong>
 
 <br><br>
 
 Clique em
-<strong>
 "Cadastrar novo prato"
-</strong>
-para adicionar o cardápio de hoje.
+para colocar o cardápio de hoje.
 
 </div>
 
@@ -1721,18 +1262,15 @@ return;
 
 }
 
+cardapio.forEach((prato,index)=>{
 
-cardapio.forEach(
-(prato,index)=>{
-
-div.innerHTML += `
+div.innerHTML+=`
 
 <div class="admin-card">
 
 <h3>
 🍛 Prato ${index+1}
 </h3>
-
 
 <label>
 Nome do prato
@@ -1744,16 +1282,14 @@ value="${escapar(prato.nome)}"
 placeholder="Ex: Frango assado"
 >
 
-
 <label>
 Descrição
 </label>
 
 <textarea
 id="descPrato${prato.id}"
-placeholder="Ex: Arroz, feijão, frango e salada"
+placeholder="Ex: Arroz, feijão e frango"
 >${escapar(prato.descricao)}</textarea>
-
 
 <label>
 
@@ -1767,7 +1303,6 @@ ${prato.ativo ? "checked" : ""}
 
 </label>
 
-
 <div class="admin-buttons">
 
 <button
@@ -1777,7 +1312,6 @@ onclick="salvarPrato(${prato.id})">
 💾 SALVAR
 
 </button>
-
 
 <button
 class="excluir"
@@ -1798,13 +1332,13 @@ onclick="excluirPrato(${prato.id})">
 }
 
 
-/* ==================================================
+/* =========================
 NOVO PRATO
-================================================== */
+========================= */
 
 function novoPrato(){
 
-const novo = {
+cardapio.push({
 
 id:Date.now(),
 
@@ -1814,51 +1348,227 @@ descricao:"",
 
 ativo:false
 
-};
-
-
-cardapio.push(novo);
-
+});
 
 localStorage.setItem(
 "cardapio",
 JSON.stringify(cardapio)
 );
 
+mostrarAdminCardapio();
+
+}
+
+
+/* =========================
+SALVAR PRATO
+========================= */
+
+function salvarPrato(id){
+
+let prato=
+cardapio.find(p=>p.id===id);
+
+if(!prato)return;
+
+let nome=
+document.getElementById(
+"nomePrato"+id
+).value.trim();
+
+let descricao=
+document.getElementById(
+"descPrato"+id
+).value.trim();
+
+let ativo=
+document.getElementById(
+"ativo"+id
+).checked;
+
+if(!nome){
+
+alert("Digite o nome do prato.");
+
+return;
+
+}
+
+prato.nome=nome;
+
+prato.descricao=descricao;
+
+prato.ativo=ativo;
+
+localStorage.setItem(
+"cardapio",
+JSON.stringify(cardapio)
+);
+
+mostrarCardapio();
+
+mostrarAdminCardapio();
+
+alert("✅ Prato salvo!");
+
+}
+
+
+/* =========================
+EXCLUIR
+========================= */
+
+function excluirPrato(id){
+
+if(!confirm(
+"Tem certeza que deseja excluir?"
+))return;
+
+cardapio=
+cardapio.filter(p=>p.id!==id);
+
+localStorage.setItem(
+"cardapio",
+JSON.stringify(cardapio)
+);
+
+mostrarCardapio();
 
 mostrarAdminCardapio();
 
 }
 
 
-/* ==================================================
-SALVAR PRATO
-================================================== */
+/* =========================
+WHATSAPP / PIX
+========================= */
 
-function salvarPrato(id){
+function salvarConfiguracoes(){
 
-const prato =
-cardapio.find(
-p => p.id === id
+config.whatsapp=
+document.getElementById(
+"adminWhatsApp"
+).value.trim();
+
+config.pix=
+document.getElementById(
+"adminPix"
+).value.trim();
+
+localStorage.setItem(
+"configLoja",
+JSON.stringify(config)
 );
 
+alert(
+"✅ WhatsApp e Pix salvos!"
+);
 
-if(!prato){
+}
+
+
+/* =========================
+MUDAR SENHA
+========================= */
+
+function abrirMudarSenha(){
+
+document.getElementById(
+"modalSenha"
+).style.display="block";
+
+}
+
+function fecharMudarSenha(){
+
+document.getElementById(
+"modalSenha"
+).style.display="none";
+
+document.getElementById(
+"senhaAtual"
+).value="";
+
+document.getElementById(
+"novaSenha"
+).value="";
+
+document.getElementById(
+"confirmarSenha"
+).value="";
+
+}
+
+function mudarSenha(){
+
+let atual=
+document.getElementById(
+"senhaAtual"
+).value;
+
+let nova=
+document.getElementById(
+"novaSenha"
+).value;
+
+let confirmar=
+document.getElementById(
+"confirmarSenha"
+).value;
+
+if(atual!==config.senha){
+
+alert(
+"❌ Senha atual incorreta."
+);
 
 return;
 
 }
 
+if(nova.length<4){
 
-const nome =
-document.getElementById(
-"nomePrato"+id
-).value.trim();
+alert(
+"A nova senha precisa ter pelo menos 4 caracteres."
+);
+
+return;
+
+}
+
+if(nova!==confirmar){
+
+alert(
+"As senhas não são iguais."
+);
+
+return;
+
+}
+
+config.senha=nova;
+
+localStorage.setItem(
+"configLoja",
+JSON.stringify(config)
+);
+
+alert(
+"✅ Senha alterada com sucesso!"
+);
+
+fecharMudarSenha();
+
+}
 
 
-const descricao =
-document.getElementById(
-"descPrato"+id
-).value.trim();
+/* =========================
+INICIAR
+========================= */
 
-  
+mostrarCardapio();
+
+</script>
+
+</body>
+  </html>
